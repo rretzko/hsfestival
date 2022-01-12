@@ -27,7 +27,8 @@ use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/login');
+//Route::redirect('/', '/login');
+Route::view('/', 'welcome');
 
 Auth::routes(['register' => false]);
 
@@ -106,4 +107,21 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth'
     if (file_exists(app_path('Http/Controllers/Auth/UserProfileController.php'))) {
         Route::get('/', [UserProfileController::class, 'show'])->name('show');
     }
+});
+
+Route::group([
+    'prefix' => 'user',
+    'as' => 'user.',
+    'namespace' => 'User',
+    'middleware' => ['auth']
+], function(){
+
+   Route::get('/', [\App\Http\Controllers\Users\HomeController::class, 'index'])
+    ->name('home');
+
+   /** OPTIONS */
+    Route::get('/options', [\App\Http\Controllers\Users\OptionController::class, 'index'])
+        ->name('options');
+    Route::post('/options/update', [\App\Http\Controllers\Users\OptionController::class, 'update'])
+        ->name('options.update');
 });

@@ -2,6 +2,11 @@ const plugin = require("tailwindcss/plugin")
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+  content: [
+      "./resources/**/*.blade.php",
+      "./resources/**/*.js",
+      "./resources/**/*.vue",
+  ],
   mode: 'jit',
   purge: {
     enabled: false,

@@ -45,6 +45,8 @@ class Option extends Model
         'label_alternate',
     ];
 
+    protected $with=['optiontype'];
+
     public function optiontype()
     {
         return $this->belongsTo(Optiontype::class);

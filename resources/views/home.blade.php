@@ -7,4 +7,8 @@
              width="60%" style="margin: auto;">
     </div>
 
+    <div>
+        User Home Page
+    </div>
+
 @endsection

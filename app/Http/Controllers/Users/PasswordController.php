@@ -79,7 +79,7 @@ class PasswordController extends Controller
 
         if(
             ($inputs['password'] === $request['password_confirmation']) &&
-            (Hash::check('passwordToCheck',$inputs['password']))
+            (Hash::check($inputs['current'],auth()->user()->getAuthPassword()))
             ){
                 auth()->user()->update(['password' => Hash::make($inputs['password'])]);
             }

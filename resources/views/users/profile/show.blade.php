@@ -6,7 +6,7 @@
 
         <x-menus.sidebar active=""/>
 
-        <style>input{color: black;}</style>
+        <style>input,select{color: black;}</style>
         <div id="page content" class="bg-indigo-500 w-full h-full ml-6 py-10 px-4 text-xl">
             <header class="uppercase" style="margin-bottom: 2rem;">
                 Your Profile
@@ -248,7 +248,8 @@
                             <input type="text" name="org" id="org"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="org-error">
+                                   value="@if(auth()->user()->membership) {{ auth()->user()->membership->org }} @endif"
+                                   aria-invalid="true" aria-describedby="org-error">
                         </div>
                         @error('org')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -259,9 +260,21 @@
                         <label for="membershiptype_id" class="block text-sm font-medium text-white">Membership Type</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
                             <select id="membershiptype_id" name="membershiptype_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                <option>United States</option>
-                                <option selected>Canada</option>
-                                <option>Mexico</option>
+                                <option value="1"
+                                    @if(auth()->user()->membership && (auth()->user()->membership->membershiptype_id === 1)) selected @endif
+                                >
+                                    Active
+                                </option>
+                                <option value="3"
+                                        @if(auth()->user()->membership && (auth()->user()->membership->membershiptype_id === 3)) selected @endif
+                                >
+                                    Life
+                                </option>
+                                <option value="5"
+                                        @if(auth()->user()->membership && (auth()->user()->membership->membershiptype_id === 5)) selected @endif
+                                >
+                                    Retiree
+                                </option>
                             </select>
                         </div>
                         @error('membershiptype_id')
@@ -275,7 +288,8 @@
                             <input type="date" name="expiration_date" id="expiration_date"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="expiration_date-error">
+                                   value="{{ (auth()->user()->membership) ? auth()->user()->membership->expiration_date : ''}}"
+                                   aria-invalid="true" aria-describedby="expiration_date-error">
                         </div>
                         @error('expiration_date')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -303,7 +317,7 @@
                             <input type="password" name="current" id="current"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="org-error">
+                                   value="" aria-invalid="true" aria-describedby="current-error">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -312,7 +326,7 @@
                             </div>
                         </div>
                         @error('current')
-                        <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600" id="current-error">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -322,7 +336,7 @@
                             <input type="password" name="password" id="password"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="org-error">
+                                   value="" aria-invalid="true" aria-describedby="password-error">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -331,17 +345,17 @@
                             </div>
                         </div>
                         @error('password')
-                        <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600" id="password-error">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="max-w-3xl mx-auto mb-2">
-                        <label for="confirmpassword" class="block text-sm font-medium text-white">Confirm Password</label>
+                        <label for="password_confirmation" class="block text-sm font-medium text-white">Confirm Password</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
-                            <input type="confirmpassword" name="confirmpassword" id="password"
+                            <input type="password" name="password_confirmation" id="password_confirmation"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="org-error">
+                                   value="" aria-invalid="true" aria-describedby="password_confirmation-error">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -349,8 +363,8 @@
                                 </svg>
                             </div>
                         </div>
-                        @error('confirmpassword')
-                        <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                        @error('password_confirmation')
+                        <p class="mt-2 text-sm text-red-600" id="password_confirmation-error">{{ $message }}</p>
                         @enderror
                     </div>
 

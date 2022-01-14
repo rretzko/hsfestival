@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             OptiontypeSeeder::class,
             PhonetypeSeeder::class,
+            MembershiptypeSeeder::class,
         ]);
     }
 }

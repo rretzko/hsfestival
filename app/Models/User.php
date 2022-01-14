@@ -83,16 +83,21 @@ class User extends Authenticatable implements HasLocalePreference
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
     }
 
-    public function setPasswordAttribute($input)
+    public function membership()
     {
-        if ($input) {
-            $this->attributes['password'] = Hash::needsRehash($input) ? Hash::make($input) : $input;
-        }
+        return $this->hasOne(Membership::class);
     }
 
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function setPasswordAttribute($input)
+    {
+        if ($input) {
+            $this->attributes['password'] = Hash::needsRehash($input) ? Hash::make($input) : $input;
+        }
     }
 
     public function school()

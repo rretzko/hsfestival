@@ -9,7 +9,7 @@
     <title>{{ __('panel.site_title') }}</title>
 </head>
 
-<body class="h-auto text-blueGray-700 bg-blueGray-800 antialiased pt-3 pb-3 pb-4">
+<body class="h-auto text-blueGray-700 bg-blueGray-800 antialiased pt-3 pb-3 pb-4 h-full">
 
     <main>
         @yield('content')

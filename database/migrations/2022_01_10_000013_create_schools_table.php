@@ -10,6 +10,7 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();

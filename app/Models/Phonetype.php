@@ -36,6 +36,10 @@ class Phonetype extends Model
         'deleted_at',
     ];
 
+    const HOME = 3;
+    const MOBILE = 1;
+    const WORK = 2;
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

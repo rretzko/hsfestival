@@ -42,6 +42,24 @@ class Phone extends Model
         'deleted_at',
     ];
 
+    static function formatString($str) : string
+    {
+        //early exit
+        if(! strlen($str)){ return '';}
+
+        //strip non-numerics
+        $raw = '';
+        foreach(str_split($str) AS $char){if(is_numeric($char)){ $raw .= $char;}}
+
+        $formatted = '('.substr($raw, 0,3).') ';
+        $formatted .= substr($raw, 3,3, ).'-'.substr($raw,6,4);
+        if(strlen($raw) > 10){
+            $formatted .= ' x'.substr($raw,10);
+        }
+
+        return $formatted;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

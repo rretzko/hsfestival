@@ -80,7 +80,8 @@
                             <input type="tel" name="phonecell" id="phonecell"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="phonecell-error">
+                                   value="@if(auth()->user()->phones->where('phonetype_id', 1)->first())  {{auth()->user()->phones->where('phonetype_id', 1)->first()->phone}} @endif"
+                                   aria-invalid="true" aria-describedby="phonecell-error">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -99,7 +100,8 @@
                             <input type="tel" name="phonework" id="phonework"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="phonework-error">
+                                   value="@if(auth()->user()->phones->where('phonetype_id', 2)->first())  {{auth()->user()->phones->where('phonetype_id', 2)->first()->phone}} @endif"
+                                   aria-invalid="true" aria-describedby="phonework-error">
                         </div>
                         @error('phonework')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -112,10 +114,11 @@
                             <input type="tel" name="phonehome" id="phonehome"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="phonehome-error">
+                                   value="@if(auth()->user()->phones->where('phonetype_id', 3)->first())  {{auth()->user()->phones->where('phonetype_id', 3)->first()->phone}} @endif"
+                                   aria-invalid="true" aria-describedby="phonehome-error">
                         </div>
                         @error('phonehome')
-                        <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600" id="phonehome-error">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -140,7 +143,8 @@
                             <input type="text" name="schoolname" id="schoolname"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="schoolname-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->name }} @endif"
+                                   aria-invalid="true" aria-describedby="schoolname-error">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -159,7 +163,8 @@
                             <input type="text" name="address1" id="address1"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="address1-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->address_1 }} @endif"
+                                   aria-invalid="true" aria-describedby="address1-error">
                         </div>
                         @error('address1')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -172,7 +177,8 @@
                             <input type="text" name="address2" id="address2"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="address2-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->address_2 }} @endif"
+                                   aria-invalid="true" aria-describedby="address2-error">
                         </div>
                         @error('address2')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -185,7 +191,8 @@
                             <input type="text" name="city" id="city"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="city-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->city }} @endif"
+                                   aria-invalid="true" aria-describedby="city-error">
                         </div>
                         @error('city')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -198,7 +205,8 @@
                             <input type="text" name="stateabbr" id="stateabbr"
                                    class="block pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="NJ" aria-invalid="true" aria-describedby="stateabbr-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->state_abbr }} @else NJ @endif "
+                                   aria-invalid="true" aria-describedby="stateabbr-error">
                         </div>
                         @error('stateabbr')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -211,7 +219,8 @@
                             <input type="text" name="postal_code" id="postal_code"
                                    class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                    placeholder=""
-                                   value="" aria-invalid="true" aria-describedby="postal_code-error">
+                                   value="@if(auth()->user()->school) {{ auth()->user()->school->postal_code }} @endif"
+                                   aria-invalid="true" aria-describedby="postal_code-error">
                         </div>
                         @error('postal_code')
                         <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>

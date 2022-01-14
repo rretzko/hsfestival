@@ -68,6 +68,11 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }
 
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
+
     public function preferredLocale()
     {
         return $this->locale;
@@ -88,6 +93,11 @@ class User extends Authenticatable implements HasLocalePreference
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function school()
+    {
+        return $this->hasOne(School::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

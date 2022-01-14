@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Useroption;
-use Illuminate\Http\Request;
+use App\Models\Useroptions;
+use App\Http\Requests\StoreUseroptionsRequest;
+use App\Http\Requests\UpdateUseroptionsRequest;
 
-class HomeController extends Controller
+class UseroptionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.home',
-            [
-                'useroptions' => Useroption::where('user_id', auth()->id())->get(),
-            ]
-        );
+        //
     }
 
     /**
@@ -35,10 +31,10 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUseroptionsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUseroptionsRequest $request)
     {
         //
     }
@@ -46,10 +42,10 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Useroptions  $useroptions
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Useroptions $useroptions)
     {
         //
     }
@@ -57,10 +53,10 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Useroptions  $useroptions
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Useroptions $useroptions)
     {
         //
     }
@@ -68,11 +64,11 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateUseroptionsRequest  $request
+     * @param  \App\Models\Useroptions  $useroptions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUseroptionsRequest $request, Useroptions $useroptions)
     {
         //
     }
@@ -80,10 +76,10 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Useroptions  $useroptions
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Useroptions $useroptions)
     {
         //
     }

@@ -119,9 +119,47 @@ Route::group([
    Route::get('/', [\App\Http\Controllers\Users\HomeController::class, 'index'])
     ->name('home');
 
-   /** OPTIONS */
+    /** LOG OUT */
+    Route::get('/logout', [\App\Http\Controllers\Users\LogoutController::class, 'index'])
+        ->name('logout');
+
+   /** MEMBERSHIP */
+    Route::get('/membership', [\App\Http\Controllers\Users\MembershipController::class, 'index'])
+        ->name('membership');
+    Route::post('/membership/update', [\App\Http\Controllers\Users\MembershipController::class, 'update'])
+        ->name('membership.update');
+
+    /** OPTIONS */
     Route::get('/options', [\App\Http\Controllers\Users\OptionController::class, 'index'])
         ->name('options');
     Route::post('/options/update', [\App\Http\Controllers\Users\OptionController::class, 'update'])
         ->name('options.update');
+
+    /** PASSWORD */
+    Route::get('/password', [\App\Http\Controllers\UsersPasswordpController::class, 'index'])
+        ->name('password');
+    Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
+        ->name('password.update');
+
+    /** PHONES */
+    Route::get('/phones', [\App\Http\Controllers\Users\PhoneController::class, 'index'])
+        ->name('phones');
+    Route::post('/phones/update', [\App\Http\Controllers\Users\PhoneController::class, 'update'])
+        ->name('phones.update');
+
+    /** PROFILE */
+    Route::get('/profile', [\App\Http\Controllers\Users\ProfileController::class, 'index'])
+        ->name('profile');
+    Route::post('/profile/update', [\App\Http\Controllers\Users\ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    /** SCHOOL */
+    Route::get('/school', [\App\Http\Controllers\Users\SchoolController::class, 'index'])
+        ->name('school');
+    Route::post('/school/update', [\App\Http\Controllers\Users\SchoolController::class, 'update'])
+        ->name('school.update');
+
+    /** BROKEN SVG */
+    Route::view('brokensvg', 'tailwinduiTemplate')->name('brokensvg');
+
 });

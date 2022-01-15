@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-3">
-            <a href="{{ route('user.ensembles') }}"
+            <a href="#"
                class="{{ ($active==='ensembles') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
                 Ensembles
             </a>

@@ -119,18 +119,6 @@ Route::group([
    Route::get('/', [\App\Http\Controllers\Users\HomeController::class, 'index'])
     ->name('home');
 
-    /** ENSEMBLES */
-    Route::get('/ensembles', [\App\Http\Controllers\Users\EnsembleController::class, 'index'])
-        ->name('ensembles');
-    Route::post('/ensembles/update', [\App\Http\Controllers\Users\EnsembleController::class, 'update'])
-        ->name('ensembles.update');
-
-    /** PHONES */
-    Route::get('/phones', [\App\Http\Controllers\Users\PhoneController::class, 'index'])
-        ->name('phones');
-    Route::post('/phones/update', [\App\Http\Controllers\Users\PhoneController::class, 'update'])
-        ->name('phones.update');
-
     /** LOG OUT */
     Route::get('/logout', [\App\Http\Controllers\Users\LogoutController::class, 'index'])
         ->name('logout');

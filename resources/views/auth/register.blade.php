@@ -9,7 +9,7 @@
                     <div class="rounded-t mb-0 px-6 py-6">
                         <div class="text-center mb-3">
                             <h6 class="text-blueGray-500 text-sm font-bold">
-                                {{ __('global.register') }}
+                                {{ __('global.register') }} <br /><span style="color: red">All fields are required!</span>
                             </h6>
                         </div>
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -32,7 +32,7 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="email">
                                     {{ __('global.login_email') }}
                                 </label>
-                                <input id="email" name="email" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" value="{{ old('email') }}" />
+                                <input id="email" name="email" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="" required autocomplete="email" value="{{ old('email') }}" />
                                 @error('email')
                                     <div class="text-red-500">
                                         <small>{{ $message }}</small>
@@ -68,7 +68,7 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="password">
                                     {{ __('global.login_password') }}
                                 </label>
-                                <input id="password" name="password" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('password') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_password') }}" required autocomplete="new-password" />
+                                <input id="password" name="password" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('password') ? ' ring ring-red-300' : '' }}" placeholder="" required autocomplete="new-password" />
                                 @error('password')
                                     <div class="text-red-500">
                                         <small>{{ $message }}</small>
@@ -79,7 +79,7 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="password_confirmation">
                                     {{ __('global.confirm_password') }}
                                 </label>
-                                <input id="password_confirmation" name="password_confirmation" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="{{ __('global.confirm_password') }}" required autocomplete="new-password" />
+                                <input id="password_confirmation" name="password_confirmation" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="" required autocomplete="new-password" />
                             </div>
                             <div class="text-center mt-6">
                                 <button class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">

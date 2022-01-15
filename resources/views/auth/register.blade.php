@@ -44,7 +44,7 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="school">
                                     {{ __('school name') }}
                                 </label>
-                                <input id="school" name="school" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" value="{{ old('email') }}" />
+                                <input id="school" name="school" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('school') ? ' ring ring-red-300' : '' }}" placeholder="" required autocomplete="" value="{{ old('school') }}" />
                                 @error('school')
                                 <div class="text-red-500">
                                     <small>{{ $message }}</small>
@@ -56,7 +56,7 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="phone">
                                     {{ __('cell phone') }}
                                 </label>
-                                <input id="phone" name="phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" value="{{ old('email') }}" />
+                                <input id="phone" name="phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('phone') ? ' ring ring-red-300' : '' }}" placeholder="" required autocomplete="" value="{{ old('phone') }}" />
                                 @error('phone')
                                 <div class="text-red-500">
                                     <small>{{ $message }}</small>

@@ -81,7 +81,7 @@ class RegisterController extends Controller
         Phone::create([
            'user_id' => $user->id,
            'phonetype_id' => Phonetype::MOBILE,
-           'phone' => $data['phone'],
+           'phone' => Phone::formatString($data['phone']),
         ]);
 
         return $user;

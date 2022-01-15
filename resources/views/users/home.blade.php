@@ -45,6 +45,18 @@
                     <div class="pl-3">
                         <ul class=list-disc">
                             <li class="flex mb-2">
+                                <div class="font-bold min-w-48 mr-2">Email</div>
+                                <div>
+                                    <a href="{{ route('user.profile') }}" title="Change on Profile page">
+                                        {{ auth()->user()->email ? auth()->user()->email : 'No email found'}}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pl-3">
+                        <ul class=list-disc">
+                            <li class="flex mb-2">
                                 <div class="font-bold min-w-48 mr-2">Cell Phone</div>
                                 <div>
                                     <a href="{{ route('user.profile') }}" title="Change on Profile page">

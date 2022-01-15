@@ -73,8 +73,9 @@ class RegisterController extends Controller
         ]);
 
         School::create([
-           'name' => $data['school'],
+            'name' => $data['school'],
             'state_abbr' => 'NJ',
+            'user_id' => $user->id,
         ]);
 
         Phone::create([

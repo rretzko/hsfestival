@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 //Route::redirect('/', '/login');
 Route::view('/', 'welcome');
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');

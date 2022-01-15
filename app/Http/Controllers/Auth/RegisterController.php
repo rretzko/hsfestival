@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Phone;
+use App\Models\Phonetype;
+use App\Models\School;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -29,7 +32,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::USERHOME;
 
     /**
      * Create a new controller instance.
@@ -49,6 +53,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'school' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -60,10 +66,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        School::create([
+           'name' => $data['school'],
+            'state_abbr' => 'NJ',
+        ]);
+
+        Phone::create([
+           'user_id' => $user->id,
+           'phonetype_id' => Phonetype::MOBILE,
+           'phone' => $data['phone'],
+        ]);
+
+        return $user;
     }
 }

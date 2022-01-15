@@ -4,7 +4,11 @@
             Login
         </a>
     </div>
-    <div class="ml-2">Register</div>
+    <div class="ml-2">
+        <a href="{{ route('register') }}">
+            Register
+        </a>
+    </div>
 </menu>
 
 <header>

@@ -21,14 +21,14 @@
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="name">
                                     {{ __('global.user_name') }}
                                 </label>
-                                <input id="name" name="name" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('name') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.user_name') }}" required autofocus autocomplete="name" value="{{ old('name') }}" />
+                                <input id="name" name="name" type="text" placeholder="Firsname Lastname" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('name') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.user_name') }}" required autofocus autocomplete="name" value="{{ old('name') }}" />
                                 @error('name')
                                     <div class="text-red-500">
                                         <small>{{ $message }}</small>
                                     </div>
                                 @enderror
                             </div>
-                            <div class="relative w-full mb-3">
+                            <div class="relative w-full mb-6">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="email">
                                     {{ __('global.login_email') }}
                                 </label>
@@ -39,6 +39,31 @@
                                     </div>
                                 @enderror
                             </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="school">
+                                    {{ __('school name') }}
+                                </label>
+                                <input id="school" name="school" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" value="{{ old('email') }}" />
+                                @error('school')
+                                <div class="text-red-500">
+                                    <small>{{ $message }}</small>
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="phone">
+                                    {{ __('cell phone') }}
+                                </label>
+                                <input id="phone" name="phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" value="{{ old('email') }}" />
+                                @error('phone')
+                                <div class="text-red-500">
+                                    <small>{{ $message }}</small>
+                                </div>
+                                @enderror
+                            </div>
+
                             <div class="relative w-full mb-3">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="password">
                                     {{ __('global.login_password') }}

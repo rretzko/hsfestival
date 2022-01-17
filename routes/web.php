@@ -123,6 +123,14 @@ Route::group([
     Route::get('/logout', [\App\Http\Controllers\Users\LogoutController::class, 'index'])
         ->name('logout');
 
+    /** ENSEMBLES */
+    Route::get('/ensembles', [\App\Http\Controllers\Users\EnsembleController::class, 'index'])
+        ->name('ensembles');
+    Route::get('/ensembles/create', [\App\Http\Controllers\Users\EnsembleController::class, 'create'])
+        ->name('ensembles.create');
+    Route::post('/ensembles/store', [\App\Http\Controllers\Users\EnsembleController::class, 'store'])
+        ->name('ensembles.store');
+
    /** MEMBERSHIP */
     Route::get('/membership', [\App\Http\Controllers\Users\MembershipController::class, 'index'])
         ->name('membership');

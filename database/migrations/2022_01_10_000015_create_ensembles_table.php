@@ -15,6 +15,7 @@ class CreateEnsemblesTable extends Migration
             $table->boolean('auditioned')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->unique(['name','school_id']);
         });
     }
 }

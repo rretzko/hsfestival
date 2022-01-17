@@ -48,6 +48,13 @@ class Event extends Model
         'deleted_at',
     ];
 
+    public static function currentEvent()
+    {
+        return Event::where('start_datetime', '<=', Carbon::now())
+            ->where('end_datetime', '>=', Carbon::now())
+            ->first();
+    }
+
     public function getStartDatetimeAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;

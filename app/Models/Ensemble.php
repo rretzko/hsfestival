@@ -48,13 +48,13 @@ class Ensemble extends Model
     ];
 
     protected $fillable = [
-        'user_id',
-        'school_id',
-        'event_id',
-        'name',
+        'auditioned',
         'conductor',
         'ensembletype_id',
-        'auditioned',
+        'event_id',
+        'name',
+        'school_id',
+        'user_id',
     ];
 
     public function user()

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             OptiontypeSeeder::class,
             PhonetypeSeeder::class,
             MembershiptypeSeeder::class,
+            EnsembletypeSeeder::class,
         ]);
     }
 }

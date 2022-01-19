@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ensemble;
 use App\Models\Useroption;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,9 @@ class HomeController extends Controller
     {
         return view('users.home',
             [
+                'ensembles' => Ensemble::where('user_id', auth()->id())
+                    ->where('school_id', auth()->user()->school->id)
+                    ->get(),
                 'useroptions' => Useroption::where('user_id', auth()->id())->get(),
             ]
         );

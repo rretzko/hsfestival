@@ -57,14 +57,9 @@ class Ensemble extends Model
         'user_id',
     ];
 
-    public function user()
+    public function ensembletype()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function school()
-    {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(Ensembletype::class);
     }
 
     public function event()
@@ -72,13 +67,25 @@ class Ensemble extends Model
         return $this->belongsTo(Event::class);
     }
 
-    public function ensembletype()
+    public function repertoire()
     {
-        return $this->belongsTo(Ensembletype::class);
+        return $this->hasMany(Repertoire::class)
+            ->where('event_id', Event::currentEvent()->first()->id);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

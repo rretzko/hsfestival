@@ -32,7 +32,8 @@ class EnsembleController extends Controller
         return view('users.ensembles.create',
             [
                 'ensembletypes' => Ensembletype::all(),
-            ]);
+            ]
+        );
     }
 
     /**
@@ -43,14 +44,7 @@ class EnsembleController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->validate(
-            [
-                'auditioned' => ['nullable', 'numeric'],
-                'name' => ['required', 'string', 'min:4','max:255'],
-                'ensembletype_id' => ['required', 'numeric'],
-                'conductor' => ['nullable', 'string'],
-            ]
-        );
+        $input = $this->validateRequest($request);
 
         $school_id = auth()->user()->school->id;
 
@@ -92,34 +86,70 @@ class EnsembleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Ensemble $ensemble
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ensemble $ensemble)
     {
-        //
+        return view('users.ensembles.edit',
+            ['ensemble' => $ensemble,
+             'ensembletypes' => Ensembletype::all(),
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Ensemble $ensemble
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ensemble $ensemble)
     {
-        //
+        $input = $this->validateRequest($request);
+
+        $school_id = auth()->user()->school->id;
+
+        $ensemble->update(
+            [
+                'name' => $input['name'],
+                'conductor' => strlen($input['conductor']) ? $input['conductor'] : auth()->user()->name,
+                'auditioned' => isset($input['auditioned']) ?: 0,
+                'user_id' => auth()->id(),
+                'school_id' => $school_id,
+                'event_id' => Event::currentEvent()->id,
+                'ensembletype_id' => $input['ensembletype_id'],
+            ]
+        );
+
+        $request->session()->flash('warning', $input['name'].' has been updated.');
+
+        return $this->index();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Ensemble $ensemble
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ensemble $ensemble)
     {
-        //
+        $ensemble->delete();
+
+        return $this->index();
+    }
+
+    private function validateRequest(Request $request)
+    {
+        return $request->validate(
+            [
+                'auditioned' => ['nullable', 'numeric'],
+                'name' => ['required', 'string', 'min:4','max:255'],
+                'ensembletype_id' => ['required', 'numeric'],
+                'conductor' => ['nullable', 'string'],
+            ]
+        );
     }
 }

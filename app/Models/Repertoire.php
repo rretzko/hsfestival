@@ -76,6 +76,24 @@ class Repertoire extends Model
         return $this->belongsTo(Ensemble::class);
     }
 
+    /**
+     * Return <br /> separated string of artist values
+     */
+    public function getArtistsBlockAttribute()
+    {
+        $artists = [];
+
+        $artists[] = $this->composer;
+
+        if(strlen($this->arranger)){ $artists[] = 'arr. '.$this->arranger;}
+
+        if(strlen($this->lyricist)){ $artists[] = 'lyr. '.$this->lyricist;}
+
+        if(strlen($this->choreographer)){ $artists[] = 'choreo. '.$this->choreographer;}
+
+        return implode('<br />',$artists);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

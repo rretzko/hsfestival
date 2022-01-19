@@ -64,7 +64,7 @@ class Membership extends Model
 
     public function membershiptype()
     {
-        return $this->belongsTo(Membership::class);
+        return $this->belongsTo(Membershiptype::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

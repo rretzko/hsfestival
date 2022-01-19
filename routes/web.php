@@ -128,8 +128,14 @@ Route::group([
         ->name('ensembles');
     Route::get('/ensembles/create', [\App\Http\Controllers\Users\EnsembleController::class, 'create'])
         ->name('ensembles.create');
+    Route::get('/ensembles/destroy/{ensemble}', [\App\Http\Controllers\Users\EnsembleController::class, 'destroy'])
+        ->name('ensembles.destroy');
+    Route::get('/ensembles/edit/{ensemble}', [\App\Http\Controllers\Users\EnsembleController::class, 'edit'])
+        ->name('ensembles.edit');
     Route::post('/ensembles/store', [\App\Http\Controllers\Users\EnsembleController::class, 'store'])
         ->name('ensembles.store');
+    Route::post('/ensembles/update/{ensemble}', [\App\Http\Controllers\Users\EnsembleController::class, 'update'])
+        ->name('ensembles.update');
 
    /** MEMBERSHIP */
     Route::get('/membership', [\App\Http\Controllers\Users\MembershipController::class, 'index'])
@@ -160,6 +166,20 @@ Route::group([
         ->name('profile');
     Route::post('/profile/update', [\App\Http\Controllers\Users\ProfileController::class, 'update'])
         ->name('profile.update');
+
+    /** REPERTOIRE */
+    Route::get('/repertoire/{ensemble}', [\App\Http\Controllers\Users\RepertoireController::class, 'index'])
+        ->name('repertoire');
+    Route::get('/repertoire/{event}/{ensemble}/create', [\App\Http\Controllers\Users\RepertoireController::class, 'create'])
+        ->name('repertoire.create');
+    Route::get('/repertoire/destroy/{repertoire}', [\App\Http\Controllers\Users\RepertoireController::class, 'destroy'])
+        ->name('repertoire.destroy');
+    Route::get('/repertoire/edit/{repertoire}', [\App\Http\Controllers\Users\RepertoireController::class, 'edit'])
+        ->name('repertoire.edit');
+    Route::post('/repertoire/{event}/{ensemble}/store', [\App\Http\Controllers\Users\RepertoireController::class, 'store'])
+        ->name('repertoire.store');
+    Route::post('/repertoire/update/{repertoire}', [\App\Http\Controllers\Users\RepertoireController::class, 'update'])
+        ->name('repertoire.update');
 
     /** SCHOOL */
     Route::get('/school', [\App\Http\Controllers\Users\SchoolController::class, 'index'])

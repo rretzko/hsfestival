@@ -18,7 +18,9 @@ class EnsembleController extends Controller
     public function index()
     {
         return view('users.ensembles.index', [
-            'ensembles' => Ensemble::all(),
+            'ensembles' => Ensemble::where('user_id', auth()->id())
+                ->where('event_id', Event::currentEvent()->first()->id)
+                ->get(),
         ]);
     }
 

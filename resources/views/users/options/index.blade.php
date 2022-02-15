@@ -16,7 +16,58 @@
 
                 @csrf
 
+                {{-- VENUES --}}
+                <div class="flex row">
+                    <label for="" style="min-width: 12rem;">Venue Choice</label>
+                    <div class="ml-2 flex flex-col">
+                        @foreach($event->venues->sortBy('start') AS $venue)
+
+                            <ul>
+                                <li>{{ $venue->startDateDmdy.': '.$venue->name }}</li>
+                                <ul class="ml-6">
+                                    <li>
+                                        <select name="venues[{{ $venue->id }}]" id="venue_{{ $venue->id }}" class="text-blueGray-700">
+                                            <option value="1"
+                                                @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 1) SELECTED @endif
+                                            >
+                                                1. My first choice
+                                            </option>
+                                            <option value="2"
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 2) SELECTED @endif
+                                            >
+                                                2. My second preference
+                                            </option>
+                                            <option value="3"
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 3) SELECTED @endif
+                                            >
+                                                3. My third preference
+                                            </option>
+                                            <option value="4"
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 4) SELECTED @endif
+                                            >
+                                                4. My fourth preference
+                                            </option>
+                                            <option value="0"
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 0) SELECTED @endif
+                                            >
+                                                5. I cannot participate on this date
+                                            </option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </ul>
+                        @endforeach
+                        @if($errors->any())
+                            {!! implode('', $errors->all('<div>:message</div>')) !!}
+                        @endif
+                        @error('venues')
+                            <div class="bg-white text-red-500 text-sm px-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
                 @foreach($options AS $option)
+
                     @if($option->optiontype->descr === 'boolean')
                         <x-options.boolean
                             :option=$option
@@ -29,14 +80,14 @@
                                 :useroptions=$useroptions
                             />
                         @endif
+
                 @endforeach
                 <div>
                     <label for="" style="min-width: 12rem;">
                         Comments:
                     </label>
                     <div>
-                        *Any school not scheduled on their first choice of day will be contacted about that during the
-                        month of December.
+                        *Any school not scheduled on their first choice of day will be contacted.
                     </div>
                     <div>
                         **Click here for a sample certificate

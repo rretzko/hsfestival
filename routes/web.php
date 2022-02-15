@@ -191,3 +191,14 @@ Route::group([
     Route::view('brokensvg', 'tailwinduiTemplate')->name('brokensvg');
 
 });
+
+Route::group([
+    'prefix' => 'eventmanagement',
+    'as' => 'eventmanagement.',
+    'namespace' => 'Eventmanagement',
+    'middleware' => ['auth']
+], function() {
+
+    Route::get('/', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
+        ->name('index');
+});

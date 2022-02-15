@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Option;
 use App\Models\Useroption;
+use App\Models\Useroptionsvenues;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
@@ -17,8 +19,10 @@ class OptionController extends Controller
     public function index()
     {
         return view('users.options.index', [
+            'event' => Event::currentEvent(),
             'options' => Option::all(),
             'useroptions' => Useroption::where('user_id', auth()->id())->get(),
+            'useroptionsvenues' => auth()->user()->useroptionsvenues,
         ]);
     }
 
@@ -80,7 +84,8 @@ class OptionController extends Controller
     public function update(Request $request)
     {
         $input = $request->validate([
-            'venue' => ['required','numeric'],
+            'venues' => ['required','array','min:4','max:4'],
+            'venues.*' => ['required','numeric','min:0','max:4'],
             'permissions' => ['required', 'numeric'],
             'confirmation_1' => ['required', 'numeric'],
             'confirmation_2' => ['required', 'numeric'],
@@ -89,15 +94,22 @@ class OptionController extends Controller
 
         foreach($input AS $key => $value){
 
-            Useroption::updateOrCreate(
-                [
-                    'user_id' => auth()->id(),
-                    'option_id' => Option::where('descr', $key)->first()->id,
-                ],
-                [
-                    'value' => $value,
-                ],
-            );
+            if(($key === 'venues') && is_array($value)){
+
+                $this->updateVenues($input['venues']);
+
+            }else {
+
+                Useroption::updateOrCreate(
+                    [
+                        'user_id' => auth()->id(),
+                        'option_id' => Option::where('descr', $key)->first()->id,
+                    ],
+                    [
+                        'value' => $value,
+                    ],
+                );
+            }
         }
 
         return $this->index();
@@ -112,5 +124,24 @@ class OptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function updateVenues(array $venues)
+    {
+        $event_id = Event::currentEvent()->id;
+
+        foreach($venues AS $venue_id => $preference){
+
+            Useroptionsvenues::updateOrCreate(
+                [
+                    'user_id' => auth()->id(),
+                    'event_id' =>  $event_id,
+                    'venue_id' => $venue_id,
+                ],
+                [
+                    'preference' => $preference,
+                ],
+            );
+        }
     }
 }

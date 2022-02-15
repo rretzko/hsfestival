@@ -75,6 +75,11 @@ class Event extends Model
         $this->attributes['end_datetime'] = $value ? Carbon::createFromFormat(config('project.datetime_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
+    public function venues()
+    {
+        return $this->hasMany(Venue::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

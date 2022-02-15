@@ -93,6 +93,12 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->hasOne(Membership::class);
     }
 
+    public function useroptionsvenues()
+    {
+        return $this->hasMany(Useroptionsvenues::class)
+            ->where('event_id', Event::currentEvent()->id);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

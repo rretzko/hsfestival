@@ -192,6 +192,22 @@ Route::group([
 
 });
 
+/** EVENT MANAGEMENT */
+Route::group([
+    'prefix' => 'eventmanagement',
+    'as' => 'eventmanagement.',
+    'middleware' => ['auth']
+], function(){
+
+    Route::get('/eventmanagement', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
+        ->name('index');
+
+    /** PARTICIPANTS */
+    Route::get('/', [\App\Http\Controllers\Eventmanagement\ParticipantController::class, 'index'])
+    ->name('participants.index');
+});
+
+/**
 Route::group([
     'prefix' => 'eventmanagement',
     'as' => 'eventmanagement.',
@@ -200,5 +216,9 @@ Route::group([
 ], function() {
 
     Route::get('/', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
-        ->name('index');
+        ->name('eventmanagement.index');
+
+
+
 });
+*/

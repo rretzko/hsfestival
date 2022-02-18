@@ -7,6 +7,18 @@
         <img class="h-8 w-auto" src="https://njacda.com/wp-content/uploads/2014/01/njacda2-300x83.png" alt="NJACDA logo">
     </div>
     <nav class="mt-4">
+
+        @if(auth()->user()->roles->where('title', 'Event_Mgr')->first())
+            <div class="mb-3">
+
+                <a href="{{ route('eventmanagement.index') }}"
+                   class="{{ ($active==='eventmanagement') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
+                    Administration
+                </a>
+
+            </div>
+        @endif
+
         <div class="mb-3">
             <a href="{{ route('user.home') }}"
               class="bg-gray-900 {{ ($active==='dashboard') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 font-medium rounded-md"
@@ -50,15 +62,6 @@
                 Recordings
             </a>
         </div>
-
-        @if(auth()->user()->roles->where('title', 'Event_Mgr')->first())
-            <div class="mb-3">
-                <a href="{{ route('eventmanagement.index') }}"
-                   class="{{ ($active==='eventmanagement') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
-                    Event Management
-                </a>
-            </div>
-        @endif
 
         <div class="mb-3">
             <a href="{{ route('user.logout') }}"

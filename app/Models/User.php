@@ -68,6 +68,18 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }
 
+    /**
+     * Excludes bots and super-admin
+     *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function excludeBots()
+    {
+        return User::all()->filter(function($user){
+            return ((substr($user->email, -4) != '.bot') && ($user->id > 1));
+        })->sortBy('last');
+    }
+
     public function phones()
     {
         return $this->hasMany(Phone::class);
@@ -78,9 +90,24 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->locale;
     }
 
+    public function getCurrentFirstChoiceVenueAttribute()
+    {
+        return Useroptionsvenues::where('user_id', $this->id)
+            ->where('event_id', Event::currentEvent()->id)
+            ->where('preference', 1)
+            ->first();
+    }
+
     public function getEmailVerifiedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
+    }
+
+    public function getLastAttribute()
+    {
+        $parts = explode(" ", $this->name);
+
+        return $parts[(count($parts) - 1)];
     }
 
     public function getMobilePhoneAttribute()
@@ -88,15 +115,23 @@ class User extends Authenticatable implements HasLocalePreference
         return Phone::where('user_id', $this->id)->where('phonetype_id', Phonetype::MOBILE)->first();
     }
 
+    public function getUserOptionPermissionAttribute() : bool
+    {
+        return Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PERMISSION)->exists()
+            ? Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PERMISSION)->first()->value
+            : 0;
+    }
+
+    public function getUserOptionPlaqueAttribute() : bool
+    {
+        return Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PLAQUE)->exists()
+            ? Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PLAQUE)->first()->value
+            : 0;
+    }
+
     public function membership()
     {
         return $this->hasOne(Membership::class);
-    }
-
-    public function useroptionsvenues()
-    {
-        return $this->hasMany(Useroptionsvenues::class)
-            ->where('event_id', Event::currentEvent()->id);
     }
 
     public function roles()
@@ -120,4 +155,17 @@ class User extends Authenticatable implements HasLocalePreference
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function useroptions()
+    {
+        return $this->hasMany(Useroption::class);
+    }
+
+    public function useroptionsvenues()
+    {
+        return $this->hasMany(Useroptionsvenues::class)
+            ->where('event_id', Event::currentEvent()->id);
+    }
+
+
 }

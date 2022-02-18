@@ -57,9 +57,6 @@
                                 </ul>
                             </ul>
                         @endforeach
-                        @if($errors->any())
-                            {!! implode('', $errors->all('<div>:message</div>')) !!}
-                        @endif
                         @error('venues')
                             <div class="bg-white text-red-500 text-sm px-2">{{ $message }}</div>
                         @enderror

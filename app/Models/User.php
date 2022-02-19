@@ -58,6 +58,16 @@ class User extends Authenticatable implements HasLocalePreference
         'deleted_at',
     ];
 
+    public function ensembles()
+    {
+        return $this->hasMany(Ensemble::class);
+    }
+
+    public function getEnsembleCountAttribute()
+    {
+        return $this->ensembles->count();
+    }
+
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('title', 'Admin')->exists();

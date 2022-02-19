@@ -203,8 +203,18 @@ Route::group([
         ->name('index');
 
     /** PARTICIPANTS */
-    Route::get('/', [\App\Http\Controllers\Eventmanagement\ParticipantController::class, 'index'])
-    ->name('participants.index');
+    Route::get('/participants', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
+        ->name('participants.index');
+    Route::get('/participant/{user}', [\App\Http\Controllers\Eventmanagement\ParticipantController::class, 'edit'])
+        ->name('participant.edit');
+
+    /** REGISTRANTS */
+    Route::get('/registrants', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
+    ->name('registrants.index');
+    Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
+        ->name('registrants.download');
+    Route::get('/registrant/{user}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'edit'])
+        ->name('registrant.edit');
 });
 
 /**

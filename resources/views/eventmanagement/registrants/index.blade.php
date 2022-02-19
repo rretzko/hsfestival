@@ -11,24 +11,77 @@
         <div class="flex row text-white space-x-2">
 
             <div id="page content" class="bg-indigo-500 w-full h-full ml-6 py-10 px-4 text-xl">
-                {{-- MENU --}}
+                {{-- HEADER --}}
                 <section class="border mb-1 px-2 rounded">
 
                     <header class="uppercase">
                         <a href="{{ route('eventmanagement.index') }}">
-                            Event Management
+                            {{ $event->name }} Registrants
                         </a>
                     </header>
-                    <ol class="ml-12" style="list-style-type: decimal">
-                        <li>
-                            <a href="{{ route('eventmanagement.registrants.index') }}">Registrants</a>
-                        </li>
+                    <div id="def" class="italic text-sm ml-6">
+                        (def. User requesting participation without venue assignment)
+                    </div>
 
-                        <li>
-                            <a href="{{ route('eventmanagement.participants.index') }}">Participants [under development]</a>
-                        </li>
-                    </ol>
-<!-- {{--
+                    {{-- USER TABLE --}}
+                    <div class="flex flex-col mb-2">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
+                                    <div class="flex justify-end mr-2 py-1">
+                                        <a href="{{ route('eventmanagement.registrants.download') }}" class="text-sm text-blueGray-800">Download</a>
+                                    </div>
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Venue</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Date</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plaque</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ensembles</th>
+                                            <th scope="col" class="relative px-6 py-3">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($users AS $user)
+
+                                            <tr class="bg-white @if($loop->odd) bg-blueGray-200 @endif ">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->school->shortname }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue->venue->id === 2) uppercase font-bold @endif">
+                                                    {{ $user->currentFirstChoiceVenue->venue->shortname}}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 ">
+                                                    {{ $user->currentFirstChoiceVenue->venue->startDateMdy}}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPermission ? 'Y' : 'N' }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPlaque ? 'Y' : 'N' }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->ensembleCount }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500 font-medium ">
+                                                    <a href="{{ route('eventmanagement.registrant.edit',['user' => $user]) }}"
+                                                       class="text-indigo-600 hover:text-blueGray-800 bg-indigo-100 px-2 border border-blueGray-300 rounded "
+                                                    >
+                                                        Edit
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <!-- {{--
 
                     <header class="uppercase">
                         <a href="{{ route('user.profile') }}">

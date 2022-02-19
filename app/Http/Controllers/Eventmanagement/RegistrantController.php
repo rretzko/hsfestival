@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Eventmanagement;
 
+use App\Exports\RegistrantsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
-class ParticipantController extends Controller
+class RegistrantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        return view('eventmanagement.participants.index',
+        return view('eventmanagement.registrants.index',
             [
                 'event' => Event::currentEvent(),
                 'users' => User::excludeBots(),
@@ -61,9 +63,13 @@ class ParticipantController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($user)
+    public function edit(User $user)
     {
-        dd($user);
+        return view('eventmanagement.registrants.edit',
+            [
+                'event' => Event::currentEvent(),
+                'user' => $user,
+            ]);
     }
 
     /**
@@ -87,5 +93,15 @@ class ParticipantController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function download()
+    {
+
+        $registrants = User::excludeBots();
+
+        $datetime = date('Ynd_Gis');
+
+        return Excel::download(new RegistrantsExport, 'registrants_'.$datetime.'.csv');
     }
 }

@@ -34,6 +34,7 @@
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Date</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plaque</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ensembles</th>
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -53,9 +54,15 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPermission ? 'Y' : 'N' }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPlaque ? 'Y' : 'N' }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->ensembleCount }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500 font-medium ">
+                                                    <a href="{{ route('eventmanagement.participant.edit',['user' => $user]) }}"
+                                                       class="text-indigo-600 hover:text-blueGray-800 bg-indigo-100 px-2 border border-blueGray-300 rounded "
+                                                    >
+                                                        Edit
+                                                    </a>
                                                 </td>
+
                                             </tr>
                                         @endforeach
 

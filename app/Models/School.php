@@ -54,6 +54,25 @@ class School extends Model
         'postal_code',
     ];
 
+    public function getShortnameAttribute()
+    {
+        $abbrs = [
+            'Central High School' => 'CHS',
+            'Memorial High School' => 'MHS',
+            'Regional High School' => 'RHS',
+            'High School' => 'HS',
+        ];
+
+        $str = $this->name;
+
+        foreach($abbrs AS $long => $abbr){
+
+            $str = str_replace($long, $abbr, $str);
+        }
+
+        return $str;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

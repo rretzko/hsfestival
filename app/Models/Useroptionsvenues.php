@@ -16,6 +16,19 @@ class Useroptionsvenues extends Model
         return $this->belongsTo(Event::class);
     }
 
+    public function getPreferenceDescrAttribute()
+    {
+        $descr = [
+          'Cannot participate on this date',
+          'First Choice',
+          'Second Choice',
+          'Third Choice',
+          'Fourth Choice',
+        ];
+
+        return $descr[$this->preference];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

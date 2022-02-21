@@ -221,6 +221,8 @@ Route::group([
         ->name('registrants.download');
     Route::get('/registrant/{user}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'edit'])
         ->name('registrant.edit');
+    Route::post('registrant/{user}/bio/update',[App\Http\Controllers\Eventmanagement\Registrant\BioController::class, 'update'])
+        ->name('registrant.bio.update');
 });
 
 /**

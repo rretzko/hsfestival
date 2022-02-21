@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eventmanagement;
 use App\Exports\RegistrantsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Option;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -68,7 +69,9 @@ class RegistrantController extends Controller
         return view('eventmanagement.registrants.edit',
             [
                 'event' => Event::currentEvent(),
+                'options' => Option::all(),
                 'user' => $user,
+                'useroptions' => $user->useroptions,
             ]);
     }
 

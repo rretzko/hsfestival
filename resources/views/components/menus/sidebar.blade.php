@@ -41,14 +41,14 @@
                 Ensembles
             </a>
         </div>
-        <h2 style="color: yellow;">Coming Soon!</h2>
+
         <div class="mb-3">
-            <a href="#"
+            <a href="{{ route('user.sightreading') }}"
                class="{{ ($active==='sightreading') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
                 Sight Reading
             </a>
         </div>
-
+    <h2 style="color: yellow;">Coming Soon!</h2>
         <div class="mb-3">
             <a href="#"
                class="{{ ($active==='payment') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">

@@ -161,9 +161,9 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->hasOne(School::class);
     }
 
-    protected function serializeDate(DateTimeInterface $date)
+    public function sightreadings()
     {
-        return $date->format('Y-m-d H:i:s');
+        return $this->belongsToMany(Sightreading::class);
     }
 
     public function useroptions()
@@ -177,5 +177,9 @@ class User extends Authenticatable implements HasLocalePreference
             ->where('event_id', Event::currentEvent()->id);
     }
 
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
 }

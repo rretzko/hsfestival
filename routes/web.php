@@ -187,6 +187,12 @@ Route::group([
     Route::post('/school/update', [\App\Http\Controllers\Users\SchoolController::class, 'update'])
         ->name('school.update');
 
+    /** SIGHTREADING */
+    Route::get('/sightreading', [\App\Http\Controllers\Users\SightreadingController::class, 'index'])
+        ->name('sightreading');
+    Route::post('/sightreading/update', [\App\Http\Controllers\Users\SightreadingController::class, 'update'])
+        ->name('sightreading.update');
+
     /** BROKEN SVG */
     Route::view('brokensvg', 'tailwinduiTemplate')->name('brokensvg');
 

@@ -223,6 +223,8 @@ Route::group([
         ->name('registrant.edit');
     Route::post('registrant/{user}/bio/update',[App\Http\Controllers\Eventmanagement\Registrant\BioController::class, 'update'])
         ->name('registrant.bio.update');
+    Route::post('registrant/{user}/options/update',[App\Http\Controllers\Eventmanagement\Registrant\OptionsController::class, 'update'])
+        ->name('registrant.options.update');
 });
 
 /**

@@ -105,7 +105,7 @@ class User extends Authenticatable implements HasLocalePreference
         return Useroptionsvenues::where('user_id', $this->id)
             ->where('event_id', Event::currentEvent()->id)
             ->where('preference', 1)
-            ->first();
+            ->first() ?? null;
     }
 
     public function getEmailVerifiedAtAttribute($value)

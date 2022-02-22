@@ -52,11 +52,11 @@
                                             <tr class="bg-white @if($loop->odd) bg-blueGray-200 @endif ">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->school->shortname }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue->venue->id === 2) uppercase font-bold @endif">
-                                                    {{ $user->currentFirstChoiceVenue->venue->shortname}}
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue && ($user->currentFirstChoiceVenue->venue->id === 2)) uppercase font-bold @endif">
+                                                    {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->shortname : 'none found'}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 ">
-                                                    {{ $user->currentFirstChoiceVenue->venue->startDateMdy}}
+                                                    {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->startDateMdy : 'none found'}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPermission ? 'Y' : 'N' }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPlaque ? 'Y' : 'N' }}</td>

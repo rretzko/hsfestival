@@ -85,7 +85,7 @@
                         {{-- PROFILE: OPTIONS --}}
                         <form class="border border-white px-2 py-1 space-y-1"
                               style="background-color: rgba(0,0,0,0.1);"
-                              method="POST" action=""
+                              method="POST" action="{{ route('eventmanagement.registrant.options.update',['user' => $user]) }}"
                         >
 
                             @csrf
@@ -160,7 +160,12 @@
 
                             <div class="input-group">
                                 <label for="submit"> </label>
-                                <input type="submit" value="Update" class="w-28 rounded border border-blueGray-300 my-2" />
+                                <div class="flex flex-row my-2">
+                                    <input type="submit" value="Update" class="w-28 rounded border border-blueGray-300 my-2" />
+                                    @if(session()->has('status-options'))
+                                        <div id="status-options" class="ml-3 px-2 rounded " style="background-color: rgba(0,255,0,0.5);">{{ Session::get('status-options') }}</div>
+                                    @endif
+                                </div>
                             </div>
                         </form>
                     </section>
@@ -171,10 +176,19 @@
 
     <script>
         window.onload = function(){
-            if(document.getElementById('status-bio').innerText.length){
+
+            if((document.getElementById('status-bio') != null) && document.getElementById('status-bio').innerText.length){
                 setTimeout(function(){
                     document.getElementById('status-bio').innerText = "";
                     document.getElementById('status-bio').setAttribute('style','background-color: transparent');
+                },3000);
+            }
+
+            if((document.getElementById('status-options') != null) && document.getElementById('status-options').innerText.length){
+                console.log(188);
+                setTimeout(function(){
+                    document.getElementById('status-options').innerText = "";
+                    document.getElementById('status-options').setAttribute('style','background-color: transparent');
                 },3000);
             }
         }

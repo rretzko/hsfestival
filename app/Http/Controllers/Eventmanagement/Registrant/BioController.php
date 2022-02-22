@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eventmanagement\Registrant;
 
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class BioController extends Controller
         $inputs = $request->validate([
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
+            'school_id' => ['required', 'numeric'],
             'schoolname' => ['required', 'string'],
         ]);
 
@@ -22,6 +24,9 @@ class BioController extends Controller
                 'email' => $inputs['email'],
             ]
         );
+
+        $school = School::find($inputs['school_id']);
+        $school->update(['name' => $inputs['schoolname']]);
 
         $request->session()->flash('status-bio','User bio updated.');
 

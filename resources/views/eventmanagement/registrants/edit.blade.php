@@ -42,6 +42,8 @@
 
                             @csrf
 
+                            <input type="hidden" name="school_id" id="school_id" value="{{ $user->school->id }}" />
+
                             <div class="input-group">
                                 <div>Sys.Id. {{ $user->id }} </div>
                             </div>

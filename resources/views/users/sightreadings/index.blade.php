@@ -30,6 +30,9 @@
                                            onclick="updateCountCost()"
                                     >
                                     <label>{{ $sightreading->name.' @ $'.$sightreading->cost }}</label>
+                                    @if($sightreading->year_of == date('Y'))
+                                        <span class="text-sm">(Current year sightreading examples will be delivered AFTER the festival closes.)</span>
+                                    @endif
                                 </div>
 
                             </li>

@@ -8,6 +8,7 @@ use App\Models\Ensembletype;
 use App\Models\Event;
 use App\Models\Option;
 use App\Models\User;
+use App\Models\Venue;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,12 +19,13 @@ class RegistrantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Venue $venue = null)
     {
         return view('eventmanagement.registrants.index',
             [
                 'event' => Event::currentEvent(),
-                'users' => User::excludeBots(),
+                'users' => User::excludeBots($venue),
+                'venues' => Venue::orderBy('start')->get(),
             ]);
     }
 
@@ -74,6 +76,7 @@ class RegistrantController extends Controller
                 'options' => Option::all(),
                 'user' => $user,
                 'useroptions' => $user->useroptions,
+                'venues' => Venue::orderBy('start')->get(),
             ]);
     }
 

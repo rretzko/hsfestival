@@ -27,6 +27,36 @@
                     <div class="flex flex-col mb-2">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+
+                                {{-- VENUE NAVIGATION --}}
+                                <div class="">
+                                    <div class="sm:hidden">
+                                        <label for="tabs" class="sr-only">Select a tab</label>
+                                        <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+                                        <select id="venues" name="venues" class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+                                            @foreach($venues AS $venue)
+                                                <option class="bg-red-500">{{ $venue->shortname.': '.$venue->startDateMdY }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="hidden sm:block px-2 my-2" style="">
+                                        <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
+                                            <a href="{{ route('eventmanagement.registrants.index') }}" class="rounded mr-1 text-gray-900 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
+                                                <span>All</span>
+                                                <span aria-hidden="true" class="bg-indigo-500 absolute inset-x-0 bottom-0 h-0.5"></span>
+                                            </a>
+                                            @foreach($venues AS $venue)
+                                                <a href="{{ route('eventmanagement.registrants.index',['venue' => $venue]) }}" class="rounded mr-1 text-gray-900 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
+                                                    <span>{{ $venue->shortname.': '.$venue->startDateMdY }}</span>
+                                                    <span aria-hidden="true" class="bg-indigo-500 absolute inset-x-0 bottom-0 h-0.5"></span>
+                                                </a>
+                                            @endforeach
+
+                                        </nav>
+                                    </div>
+                                </div>
+
+
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
                                     <div class="flex justify-end mr-2 py-1">
                                         <a href="{{ route('eventmanagement.registrants.download') }}" class="text-sm text-blueGray-800">Download</a>
@@ -47,7 +77,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users AS $user)
+                                        @forelse($users AS $user)
 
                                             <tr class="bg-white @if($loop->odd) bg-blueGray-200 @endif ">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
@@ -70,7 +100,9 @@
                                                 </td>
 
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr><td colspan="8" class="text-center text-black">No registrants found</td> </tr>
+                                        @endforelse
 
                                         </tbody>
                                     </table>

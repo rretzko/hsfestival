@@ -68,11 +68,19 @@ class User extends Authenticatable implements HasLocalePreference
      *
      * @return User[]|\Illuminate\Database\Eloquent\Collection
      */
-    static public function excludeBots()
+    static public function excludeBots(Venue $venue = null)
     {
-        return User::all()->filter(function($user){
+        $users = User::all()->filter(function($user){
             return ((substr($user->email, -4) != '.bot') && ($user->id > 1));
         })->sortBy('last');
+
+        //early exit
+        if(! $venue){ return $users;}
+
+        return $users->filter(function($user) use($venue){
+           return ($user->getCurrentFirstChoiceVenueAttribute() &&
+               ($user->getCurrentFirstChoiceVenueAttribute()->venue_id === $venue->id));
+        });
     }
 
     public function getEnsembleCountAttribute()

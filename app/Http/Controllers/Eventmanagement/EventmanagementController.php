@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eventmanagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Venue;
 use Illuminate\Http\Request;
 
 class EventmanagementController extends Controller

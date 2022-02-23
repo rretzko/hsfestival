@@ -215,7 +215,7 @@ Route::group([
         ->name('participant.edit');
 
     /** REGISTRANTS */
-    Route::get('/registrants', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
+    Route::get('/registrants/{venue?}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
     ->name('registrants.index');
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');

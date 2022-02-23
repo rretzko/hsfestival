@@ -215,10 +215,10 @@ Route::group([
         ->name('participant.edit');
 
     /** REGISTRANTS */
-    Route::get('/registrants/{venue?}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
-    ->name('registrants.index');
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');
+    Route::get('/registrants/{venue?}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
+    ->name('registrants.index');
     Route::get('/registrant/{user}', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'edit'])
         ->name('registrant.edit');
     Route::post('registrant/{user}/bio/update',[App\Http\Controllers\Eventmanagement\Registrant\BioController::class, 'update'])

@@ -37,8 +37,8 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
         return [
             $registrant->name,
             $registrant->school->name,
-            $registrant->currentFirstChoiceVenue->venue->shortname,
-            $registrant->currentFirstChoiceVenue->venue->startDateMdy,
+            $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->shortname : 'None found',
+            $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->startDateMdy : 'None found',
             $registrant->userOptionPermission ? 'Y' : 'N',
             $registrant->userOptionPlaque ? 'Y' : 'N',
             $registrant->ensembleCount,

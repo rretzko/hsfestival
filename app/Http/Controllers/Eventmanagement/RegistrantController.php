@@ -105,7 +105,6 @@ class RegistrantController extends Controller
 
     public function download()
     {
-
         $registrants = User::excludeBots();
 
         $datetime = date('Ynd_Gis');

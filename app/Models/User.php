@@ -63,21 +63,6 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->hasMany(Ensemble::class);
     }
 
-    public function getEnsembleCountAttribute()
-    {
-        return $this->ensembles->count();
-    }
-
-    public function getIsAdminAttribute()
-    {
-        return $this->roles()->where('title', 'Admin')->exists();
-    }
-
-    public function scopeAdmins()
-    {
-        return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
-    }
-
     /**
      * Excludes bots and super-admin
      *
@@ -88,6 +73,16 @@ class User extends Authenticatable implements HasLocalePreference
         return User::all()->filter(function($user){
             return ((substr($user->email, -4) != '.bot') && ($user->id > 1));
         })->sortBy('last');
+    }
+
+    public function getEnsembleCountAttribute()
+    {
+        return $this->ensembles->count();
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->roles()->where('title', 'Admin')->exists();
     }
 
     public function phones()
@@ -147,6 +142,11 @@ class User extends Authenticatable implements HasLocalePreference
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function scopeAdmins()
+    {
+        return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }
 
     public function setPasswordAttribute($input)

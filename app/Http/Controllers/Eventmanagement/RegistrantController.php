@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Eventmanagement;
 
 use App\Exports\RegistrantsExport;
 use App\Http\Controllers\Controller;
+use App\Models\Ensembletype;
 use App\Models\Event;
 use App\Models\Option;
 use App\Models\User;
@@ -68,6 +69,7 @@ class RegistrantController extends Controller
     {
         return view('eventmanagement.registrants.edit',
             [
+                'ensembletypes' => Ensembletype::all(),
                 'event' => Event::currentEvent(),
                 'options' => Option::all(),
                 'user' => $user,

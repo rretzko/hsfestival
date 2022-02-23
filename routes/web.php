@@ -225,20 +225,15 @@ Route::group([
         ->name('registrant.bio.update');
     Route::post('registrant/{user}/options/update',[App\Http\Controllers\Eventmanagement\Registrant\OptionsController::class, 'update'])
         ->name('registrant.options.update');
+    Route::post('registrant/{user}/ensembles/{ensemble}/update',[App\Http\Controllers\Eventmanagement\Registrant\EnsemblesController::class, 'update'])
+        ->name('registrant.ensembles.update');
+
+    /** REPERTOIRE */
+    Route::get('/repertoire/{repertoire}/{user}',[App\Http\Controllers\Eventmanagement\RepertoireController::class, 'edit'])
+        ->name('repertoire.edit');
+    Route::get('/repertoire/destroy/{repertoire}/{user}',[App\Http\Controllers\Eventmanagement\RepertoireController::class, 'destroy'])
+        ->name('repertoire.destroy');
+    Route::post('/repertoire/{repertoire}/{user}',[App\Http\Controllers\Eventmanagement\RepertoireController::class, 'update'])
+        ->name('repertoire.update');
 });
 
-/**
-Route::group([
-    'prefix' => 'eventmanagement',
-    'as' => 'eventmanagement.',
-    'namespace' => 'Eventmanagement',
-    'middleware' => ['auth']
-], function() {
-
-    Route::get('/', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
-        ->name('eventmanagement.index');
-
-
-
-});
-*/

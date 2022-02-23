@@ -92,7 +92,7 @@
                                       placeholder=""
                                       value="1"
                                       aria-invalid="true" aria-describedby="auditioned-error"
-                                       @if( $ensemble->auditioned === 1) checked @endif
+                                       @if( $ensemble->auditioned == 1) checked @endif
                                 >
                             </div>
                             <label for="auditioned" class="block text-sm text-lg text-white">This is an auditioned ensemble.</label>

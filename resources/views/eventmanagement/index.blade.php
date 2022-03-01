@@ -27,6 +27,10 @@
                         <li>
                             <a href="{{ route('eventmanagement.participants.index') }}">Participants [under development]</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('eventmanagement.passwordreset.index') }}">Password Reset</a>
+                        </li>
                     </ol>
 <!-- {{--
 

@@ -214,6 +214,12 @@ Route::group([
     Route::get('/participant/{user}', [\App\Http\Controllers\Eventmanagement\ParticipantController::class, 'edit'])
         ->name('participant.edit');
 
+    /** PASSWORD RESET */
+    Route::get('/passwordreset', [\App\Http\Controllers\Eventmanagement\PasswordresetController::class, 'index'])
+        ->name('passwordreset.index');
+    Route::post('/passwordreset/update', [\App\Http\Controllers\Eventmanagement\PasswordresetController::class, 'update'])
+        ->name('passwordreset.update');
+
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');

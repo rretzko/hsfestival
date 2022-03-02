@@ -116,7 +116,12 @@
 
                 <div id="payment" class="text-center w-6/12 ml-2 " style="border: 1px solid lightgrey;">
                     <header class="ml-2 mr-2" style="border-bottom: 1px solid lightgray;">PayPal</header>
+
+                    <div>
+                        Coming very soon!...
+                    </div>
                 </div>
+
             </div>
             <!-- {{--
             <form method="post" action="{{ route('user.options.update') }}">

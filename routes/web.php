@@ -214,6 +214,12 @@ Route::group([
     Route::get('/eventmanagement', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
         ->name('index');
 
+    /** LOG IN AS */
+    Route::get('/loginas', [\App\Http\Controllers\Eventmanagement\LoginasController::class, 'index'])
+        ->name('loginas.index');
+    Route::post('/loginas/update', [\App\Http\Controllers\Eventmanagement\LoginasController::class, 'update'])
+        ->name('loginas.update');
+
     /** PARTICIPANTS */
     Route::get('/participants', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'index'])
         ->name('participants.index');

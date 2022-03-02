@@ -9,7 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "barryvdh/laravel-dompdf": "^1.0",
         "bugsnag/bugsnag-laravel": "^2.21",
+        "coconutcraig/laravel-postmark": "^2.11",
         "doctrine/dbal": "^3.0",
         "dompdf/dompdf": "^1.0",
         "fideloper/proxy": "^4.4",
@@ -17,11 +19,11 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/dusk": "^6.11",
         "laravel/framework": "^8.70.1",
+        "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
-        "laravel/sanctum": "^2.8",
         "spatie/laravel-medialibrary": "^9.4"
     },
     "require-dev": {

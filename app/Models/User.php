@@ -128,6 +128,34 @@ class User extends Authenticatable implements HasLocalePreference
         return Phone::where('user_id', $this->id)->where('phonetype_id', Phonetype::MOBILE)->first();
     }
 
+    public function getPaymentBalanceAttribute()
+    {
+        return ($this->getPaymentDueAttribute() - $this->getPaymentPaidAttribute());
+    }
+
+    public function getPaymentDueAttribute()
+    {
+        $ensemblepayments = [
+            0 => [245,210], //non-member => [plaque, certificate]
+            1 => [195,160], //member => [plaque, certificate]
+        ];
+
+        $ensemblecount =$this->ensembles->count();
+        $membership = (! (is_null($this->membership))) ? 1 : 0;
+        $plaque = $this->getUserOptionPlaqueAttribute() ? 0 : 1;
+
+        return $ensemblecount * $ensemblepayments[$membership][$plaque];
+    }
+
+    public function getPaymentPaidAttribute()
+    {
+        $eventid = Event::currentEvent()->id;
+
+        return Payment::where('user_id', $this->id)
+            ->where('event_id', $eventid)
+            ->sum('amount') ?? 0;
+    }
+
     public function getUserOptionPermissionAttribute() : bool
     {
         return Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PERMISSION)->exists()

@@ -115,11 +115,84 @@
                 </div>
 
                 <div id="payment" class="text-center w-6/12 ml-2 " style="border: 1px solid lightgrey;">
-                    <header class="ml-2 mr-2" style="border-bottom: 1px solid lightgray;">PayPal</header>
+                    <header class="ml-2 mr-2 text-center" style="border-bottom: 1px solid lightgray;">PayPal</header>
 
-                    <div>
-                        Coming very soon!...
+                    <div class="text-center w-12" style="width: 24rem; margin: auto;">
+
+                        <div id="invoice_summary" class="mb-6">
+                            <div class="category mt-4">
+                                <label>Due:</label>
+                                <data>
+                                    ${{ number_format(auth()->user()->paymentDue, 2) }}
+                                </data>
+                            </div>
+
+                            <div class="category">
+                                <label>Paid:</label>
+                                <data>
+                                    ${{ number_format(auth()->user()->paymentPaid, 2) }}
+                                </data>
+                            </div>
+
+                            <div class="category">
+                                <label>Balance:</label>
+                                <data>
+                                    ${{ number_format(auth()->user()->paymentBalance, 2) }}
+                                </data>
+                            </div>
+                        </div>
+
+                        {{-- SANDBOX --}}
+                        <!--
+                        <script src="https://www.paypal.com/sdk/js?client-id=AQ3Tqhkp2PQr34p16HIajm3kSYh9L3G3kXTtoKrn9RFpkkpk-d1J8JIxOj-cxknfC3kdBM7bvpEu9bpD&currency=USD&disable-funding=credit,card"></script>
+                        -->
+                        {{-- PRODUCTION --}}
+                        <script src="https://www.paypal.com/sdk/js?client-id=AaEa4PCcKTDHEkVTrNM8ob_kJfycUUXCoI94IXCanWnBfhOHcWrwMFmyQ6ddirKu2340YTFwQ9FWwEdt&currency=USD&disable-funding=credit,card"></script>
+
+                        <!-- Set up a container element for the button -->
+                        <div id="paypal-button-container"></div>
+
+                        <script>
+                            paypal.Buttons({
+                                style: {
+                                    layout: 'vertical',
+                                    tagline: 'false'
+                                },
+                                createOrder: function(data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: "{{ auth()->user()->paymentBalance }}"
+                                            }
+                                        }],
+                                        user_credentials: [{
+                                            id: {
+                                                value: "{{ auth()->id() }}"
+                                            },
+                                            school: {
+                                                value: "{{ auth()->user()->school->id }}"
+                                            },
+                                            event: {
+                                                value: "{{ $event->id }}"
+                                            }
+
+                                        }],
+
+                                    });
+                                },
+                                onApprove: function(data, actions) {
+                                    return actions.order.capture().then(function(details) {
+                                        window.location.href = '/success.html';
+                                    });
+                                }
+                            }).render("#paypal-button-container");
+
+                        </script>
+
+
                     </div>
+
+
                 </div>
 
             </div>

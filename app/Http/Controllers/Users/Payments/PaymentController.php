@@ -16,7 +16,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('users.payments.index');
+        $event = Event::currentEvent();
+        return view('users.payments.index',compact('event'));
     }
 
     /**
@@ -27,7 +28,7 @@ class PaymentController extends Controller
     public function download()
     {
         $event = Event::currentEvent();
-        $filename = 'hsf_invoice'.date('Ymd_Gis',strtotime('NOW')).'.pdf';
+        $filename = 'hsf_invoice_'.date('Ymd_Gis',strtotime('NOW')).'.pdf';
         $schoolid = auth()->user()->school->id;
 
         $invoiceid = $event->id.'_'.auth()->id().'_'.$schoolid.'_hsf';

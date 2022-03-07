@@ -62,9 +62,30 @@ class Ensemble extends Model
         return $this->belongsTo(Ensembletype::class);
     }
 
+    public function ensembleVenueAssignment()
+    {
+        //early exit
+        if(! $this->getHasAssignmentAttribute()){ return NULL;}
+
+        return EnsembleVenueAssignment::where('ensemble_id', $this->id)->first();
+    }
+
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function getAssignedVenueidAttribute() : int
+    {
+        //early exit
+        if(! $this->getHasAssignmentAttribute()){ return 0;}
+
+        return $this->ensembleVenueAssignment()->venue_id;
+    }
+
+    public function getHasAssignmentAttribute() : bool
+    {
+        return EnsembleVenueAssignment::where('ensemble_id', $this->id)->exists();
     }
 
     public function repertoire()
@@ -86,6 +107,13 @@ class Ensemble extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function useroptionsvenues()
+    {
+        return Useroptionsvenues::where('user_id', $this->user_id)
+            ->orderBy('preference')
+            ->get();
     }
 
 }

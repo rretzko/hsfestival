@@ -18,11 +18,33 @@ class Venue extends Model
     }
 
     /**
+     * Return venue shortname + parenthetical start-date Md ex.Rowan (May 25)
+     * @return string
+     */
+    public function getDescrAttribute() : string
+    {
+        return $this->shortname.' ('.$this->getStartDateMdAttribute().')';
+    }
+
+    public function getEnsembleCountAttribute() : int
+    {
+        return EnsembleVenueAssignment::where('venue_id', $this->id)->count();
+    }
+
+    /**
      * @return string Day-of-week, Month day, Year ex. Tuesday, February 14, 2022
      */
     public function getStartDateDmdyAttribute()
     {
         return Carbon::parse($this->start)->format('l, M d, Y');
+    }
+
+    /**
+     * @return string Month day ex. February 14
+     */
+    public function getStartDateMdAttribute()
+    {
+        return Carbon::parse($this->start)->format('M d');
     }
 
     /**

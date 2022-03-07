@@ -253,5 +253,13 @@ Route::group([
         ->name('repertoire.destroy');
     Route::post('/repertoire/{repertoire}/{user}',[App\Http\Controllers\Eventmanagement\RepertoireController::class, 'update'])
         ->name('repertoire.update');
+
+    /** SCHEDULING */
+    Route::get('/scheduling/days', [App\Http\Controllers\Eventmanagement\Scheduling\DayController::class, 'index'])
+        ->name('scheduling.days');
+    Route::post('/scheduling/days/update', [App\Http\Controllers\Eventmanagement\Scheduling\DayController::class, 'update'])
+        ->name('scheduling.days.update');
+    Route::get('/scheduling/timeslots', [App\Http\Controllers\Eventmanagement\Scheduling\TimeslotController::class, 'index'])
+        ->name('scheduling.timeslots');
 });
 

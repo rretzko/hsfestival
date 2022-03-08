@@ -164,6 +164,36 @@
                 </section>
                 <section class="uppercase border mb-1 px-2 rounded">
                     Payment
+                    <div class="pl-3">
+                        <ul class=list-disc">
+                            <li class="flex mb-2">
+                                <div class="font-bold min-w-48 mr-2">Due</div>
+                                <div title="Payment Due">
+                                    ${{ number_format(auth()->user()->paymentDue, 2) }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pl-3">
+                        <ul class=list-disc">
+                            <li class="flex mb-2">
+                                <div class="font-bold min-w-48 mr-2">Paid</div>
+                                <div title="Payment Due">
+                                    ${{ number_format(auth()->user()->paymentPaid, 2) }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pl-3">
+                        <ul class=list-disc">
+                            <li class="flex mb-2">
+                                <div class="font-bold min-w-48 mr-2">Balance</div>
+                                <div title="Payment Due">
+                                    ${{ number_format(auth()->user()->paymentBalance, 2) }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
                 <section class="uppercase border mb-1 px-2 rounded">
                     Recordings

@@ -27,9 +27,9 @@ class DayController extends Controller
            'venue_id' => ['required','numeric','exists:venues,id'],
         ]);
 
-        $timeslot = EnsembleVenueAssignment::where('ensemble_id', $inputs['ensemble_id'])->exists()
-            ? EnsembleVenueAssignment::where('ensemble_id', $inputs['ensemble_id'])->first()->timeslot
-            : '00:00';
+        $timeslot_id = EnsembleVenueAssignment::where('ensemble_id', $inputs['ensemble_id'])->exists()
+            ? EnsembleVenueAssignment::where('ensemble_id', $inputs['ensemble_id'])->first()->timeslot_id
+            : 1;
 
         \App\Models\EnsembleVenueAssignment::updateOrCreate(
             [
@@ -37,7 +37,7 @@ class DayController extends Controller
             ],
             [
                 'venue_id' => $inputs['venue_id'],
-                'timeslot' => $timeslot,
+                'timeslot_id' => $timeslot_id,
             ]
         );
 

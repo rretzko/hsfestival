@@ -33,6 +33,14 @@ class Venue extends Model
 
     }
 
+    public function getEnsemblesByTimeslotAttribute() : Collection
+    {
+        return Ensemble::find(EnsembleVenueAssignment::where('venue_id',$this->id)
+                ->pluck('ensemble_id'))->sortBy('assignedTimeslotid')
+            ?? collect();
+
+    }
+
     public function getEnsembleCountAttribute() : int
     {
         return EnsembleVenueAssignment::where('venue_id', $this->id)->count();

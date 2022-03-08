@@ -78,7 +78,7 @@
                                         </thead>
                                         <tbody>
                                         {{-- ROWS --}}
-                                        @forelse($venue->ensembles AS $ensemble)
+                                        @forelse($venue->ensemblesByTimeslot AS $ensemble)
                                             <tr class="@if($loop->odd) bg-gray-100 @else bg-white @endif">
                                                 <td class="text-center text-sm">
                                                     {{ $loop->iteration }}
@@ -102,13 +102,13 @@
                                                     <input type="hidden" name="ensemble_id" value="{{ $ensemble->id }}" />
                                                     <input type="hidden" name="venue_id" value="{{ $venue->id }}" />
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        <select name="timeslot">
-                                                            @foreach($timeslots AS $key => $timeslot)
+                                                        <select name="timeslot_id">
+                                                            @foreach($timeslots AS $timeslot)
 
-                                                                    <option value="{{ $key }}"
-                                                                        @if($ensemble->assignedTimeslot == $key) SELECTED @endif
+                                                                    <option value="{{ $timeslot->id}}"
+                                                                        @if($ensemble->assignedTimeslotid == $timeslot->id) SELECTED @endif
                                                                     >
-                                                                        {{ $timeslot }}<br />
+                                                                        {{ $timeslot->descr }}<br />
                                                                     </option>
 
                                                             @endforeach

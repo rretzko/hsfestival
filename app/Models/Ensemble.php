@@ -75,6 +75,14 @@ class Ensemble extends Model
         return $this->belongsTo(Event::class);
     }
 
+    public function getAssignedTimeslotidAttribute() : int
+    {
+        //early exit
+        if(! $this->getHasAssignmentAttribute()){ return 0;}
+
+        return $this->ensembleVenueAssignment()->timeslot_id;
+    }
+
     public function getAssignedVenueidAttribute() : int
     {
         //early exit

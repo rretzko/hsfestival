@@ -27,7 +27,6 @@ use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-//Route::redirect('/', '/login');
 Route::view('/', 'welcome');
 
 Auth::routes(['register' => true]);
@@ -261,5 +260,7 @@ Route::group([
         ->name('scheduling.days.update');
     Route::get('/scheduling/timeslots', [App\Http\Controllers\Eventmanagement\Scheduling\TimeslotController::class, 'index'])
         ->name('scheduling.timeslots');
+    Route::post('/scheduling/timeslots/update', [App\Http\Controllers\Eventmanagement\Scheduling\TimeslotController::class, 'update'])
+        ->name('scheduling.timeslots.update');
 });
 

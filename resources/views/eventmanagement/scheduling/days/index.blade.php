@@ -72,7 +72,7 @@
                                             Assignment
                                         </th>
                                         <th>
-                                            <span class="sr-only">Remove</span>
+                                            <span class="sr-only">Assign</span>
                                         </th>
                                     </tr>
                                     </thead>

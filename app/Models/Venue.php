@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Venue extends Model
 {
@@ -24,6 +25,20 @@ class Venue extends Model
     public function getDescrAttribute() : string
     {
         return $this->shortname.' ('.$this->getStartDateMdAttribute().')';
+    }
+
+    public function getEnsemblesAttribute() : Collection
+    {
+        return Ensemble::find(EnsembleVenueAssignment::where('venue_id',$this->id)->pluck('ensemble_id')) ?? collect();
+
+    }
+
+    public function getEnsemblesByTimeslotAttribute() : Collection
+    {
+        return Ensemble::find(EnsembleVenueAssignment::where('venue_id',$this->id)
+                ->pluck('ensemble_id'))->sortBy('assignedTimeslotid')
+            ?? collect();
+
     }
 
     public function getEnsembleCountAttribute() : int

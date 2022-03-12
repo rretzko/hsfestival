@@ -23,6 +23,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             'name',
+            'email',
             'school',
             'first venue',
             'first date',
@@ -36,6 +37,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             $registrant->name,
+            $registrant->email,
             $registrant->school->name,
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->shortname : 'None found',
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->startDateMdy : 'None found',

@@ -64,7 +64,7 @@
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name/Email</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Venue</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Date</th>
@@ -80,7 +80,10 @@
                                         @forelse($users AS $user)
 
                                             <tr class="bg-white @if($loop->odd) bg-blueGray-200 @endif ">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{ $user->name }}<br />
+                                                    <span class="text-sm">{{ $user->email }}</span>
+                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->school->shortname }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue && ($user->currentFirstChoiceVenue->venue->id === 2)) uppercase font-bold @endif">
                                                     {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->shortname : 'none found'}}

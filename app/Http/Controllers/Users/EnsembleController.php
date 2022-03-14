@@ -100,7 +100,7 @@ class EnsembleController extends Controller
                 'ensemble' => $ensemble,
                 'ensembletypes' => Ensembletype::all(),
                 'venues' => Venue::where('event_id', Event::currentEvent()->id)->orderBy('start')->get(),
-                'disabled' => (Carbon::now() > '2022-03-13 23:59:59'),
+                'disabled' => (Carbon::now() > '2022-03-23 23:59:59'),
                 'assignment' => $ensemble->ensembleVenueAssignmentDescr
             ]
         );

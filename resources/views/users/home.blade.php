@@ -136,6 +136,11 @@
                                         <a href="{{ route('user.ensembles.edit', ['ensemble' => $ensemble]) }}">
                                             {{ $ensemble->name }}
                                         </a>
+                                        <span class="font-normal"
+                                            style="@if($ensemble->ensembleVenueAssignmentDescr !== 'Pending') color: greenyellow; @endif"
+                                          >
+                                            - Assignment: {{ $ensemble->ensembleVenueAssignmentDescr }}
+                                        </span>
                                         @forelse($ensemble->repertoire AS $rep)
                                             <div class="ml-6 font-normal text-md">
                                                 <a href="{{ route('user.repertoire.edit', ['repertoire' => $rep]) }}">

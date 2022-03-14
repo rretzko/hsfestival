@@ -101,5 +101,16 @@
             </tr>
 
         </table>
+
+        <div id="payment-mail-address" style="text-align: center; margin-top: 2rem; border-top: 1px solid darkgrey;">
+            <header style="margin-top: 1rem;">Send checks, etc. to:</header>
+            <div style="font-family: 'Times New Roman; font-weight: bold;">
+                <div>Patrick Hachey</div>
+                <div>Re: NJACDA HS Choral Festival</div>
+                <div>93 Salmon Road</div>
+                <div>Landing, NJ 07850</div>
+            </div>
+        </div>
+
     </div>
 </div>

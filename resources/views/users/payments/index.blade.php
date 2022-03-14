@@ -189,6 +189,15 @@
 
                         </script>
 
+                        <div id="payment-mail-address">
+                            <header class="mb-2">Or send checks, etc. to:</header>
+                            <div class="bg-white text-black text-left px-2" style="font-family: 'Times New Roman;">
+                                <div>Patrick Hachey</div>
+                                <div>Re: NJACDA HS Choral Festival</div>
+                                <div>93 Salmon Road</div>
+                                <div>Landing, NJ 07850</div>
+                            </div>
+                        </div>
 
                     </div>
 

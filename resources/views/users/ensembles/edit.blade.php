@@ -86,7 +86,7 @@
 
                         <div class="mt-1 relative rounded-md shadow-sm">
                             <label for="venue_id" class="block text-sm font-medium text-white">Preferred Venue/Date</label>
-                            @if($disabled)
+                            @if($disabled || ($assignment !== 'Pending'))
                                 {{ App\Models\Venue::find($ensemble->venue_id)->descr }}
                                 <input type="hidden" name="venue_id" id="venue_id" value="{{ $ensemble->venue_id }}" />
                             @else
@@ -113,6 +113,14 @@
                             <span style="@if($assignment !== 'Pending') color: greenyellow; @endif">
                                 {{ $assignment }}
                             </span>
+                            <div class="text-sm">
+                                @if($assignment !== 'Pending')
+                                    Please contact
+                                    <a href="mailto:jwilson@brrsd.k12.nj.us?subject=Change in HS Festival Assignment&body=Hi John - I've been assigned {{ $assignment }} for my {{ $ensemble->name }}." style="color: greenyellow;">
+                                        John Wilson
+                                    </a> if a change in this assignment is required.
+                                @endif
+                            </div>
                         </div>
 
                     </div>

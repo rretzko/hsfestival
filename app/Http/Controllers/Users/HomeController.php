@@ -16,11 +16,22 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $ensembles = Ensemble::where('user_id', auth()->id())
+            ->where('school_id', auth()->user()->school->id)
+            ->get();
+
+        $assignment = false;
+        foreach($ensembles AS $ensemble){
+            if($ensemble->ensembleVenueAssignmentDescr !== 'Pending'){
+
+                $assignment = true;
+            }
+        }
+
         return view('users.home',
             [
-                'ensembles' => Ensemble::where('user_id', auth()->id())
-                    ->where('school_id', auth()->user()->school->id)
-                    ->get(),
+                'assignment' => $assignment,
+                'ensembles' => $ensembles,
                 'useroptions' => Useroption::where('user_id', auth()->id())->get(),
             ]
         );

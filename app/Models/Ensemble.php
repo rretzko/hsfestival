@@ -55,6 +55,7 @@ class Ensemble extends Model
         'name',
         'school_id',
         'user_id',
+        'venue_id',
     ];
 
     public function ensembletype()
@@ -68,6 +69,17 @@ class Ensemble extends Model
         if(! $this->getHasAssignmentAttribute()){ return NULL;}
 
         return EnsembleVenueAssignment::where('ensemble_id', $this->id)->first();
+    }
+
+    public function getEnsembleVenueAssignmentDescrAttribute() : string
+    {
+        //early exit
+        if(! $this->getHasAssignmentAttribute()){ return 'Pending'; }
+
+        $venue = Venue::find($this->ensembleVenueAssignment()->venue_id)->descr;
+        $timeslot = Timeslot::find($this->ensembleVenueAssignment()->timeslot_id)->descr;
+
+        return $venue.' @ '.$timeslot;
     }
 
     public function event()

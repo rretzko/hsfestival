@@ -82,6 +82,41 @@
                         @enderror
                     </div>
 
+                    <div class="max-w-3xl mx-auto mb-4">
+
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <label for="venue_id" class="block text-sm font-medium text-white">Preferred Venue/Date</label>
+                            @if($disabled)
+                                {{ App\Models\Venue::find($ensemble->venue_id)->descr }}
+                                <input type="hidden" name="venue_id" id="venue_id" value="{{ $ensemble->venue_id }}" />
+                            @else
+                                <select name="venue_id"  >
+                                    @foreach($venues AS $venue)
+                                        <option value="{{ $venue->id }}"
+                                                @if($ensemble->venue_id === $venue->id) selected @endif
+                                        >
+                                            {{ $venue->descr }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        @error('venue_id')
+                        <p class="mt-2 text-sm text-red-600" id="ensembletype_id-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="max-w-3xl mx-auto mb-4">
+
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <label for="venue_id" class="block text-sm font-medium text-white">Venue Assignment</label>
+                            <span style="@if($assignment !== 'Pending') color: greenyellow; @endif">
+                                {{ $assignment }}
+                            </span>
+                        </div>
+
+                    </div>
+
                     <div class="max-w-3xl mx-auto mt-4">
 
                         <div class="mt-2 relative rounded-md shadow-sm flex row space-x-2 ">
@@ -101,8 +136,6 @@
                         <p class="mt-2 text-sm text-red-600" id="auditioned-error">{{ $message }}</p>
                         @enderror
                     </div>
-
-
 
                     <x-buttons.submit val="Update Ensemble" />
 

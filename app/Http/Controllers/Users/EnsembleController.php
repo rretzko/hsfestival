@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Ensemble;
 use App\Models\Ensembletype;
 use App\Models\Event;
+use App\Models\Venue;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EnsembleController extends Controller
@@ -94,8 +96,12 @@ class EnsembleController extends Controller
     public function edit(Ensemble $ensemble)
     {
         return view('users.ensembles.edit',
-            ['ensemble' => $ensemble,
-             'ensembletypes' => Ensembletype::all(),
+            [
+                'ensemble' => $ensemble,
+                'ensembletypes' => Ensembletype::all(),
+                'venues' => Venue::where('event_id', Event::currentEvent()->id)->orderBy('start')->get(),
+                'disabled' => (Carbon::now() > '2022-03-13 23:59:59'),
+                'assignment' => $ensemble->ensembleVenueAssignmentDescr
             ]
         );
     }
@@ -122,6 +128,7 @@ class EnsembleController extends Controller
                 'school_id' => $school_id,
                 'event_id' => Event::currentEvent()->id,
                 'ensembletype_id' => $input['ensembletype_id'],
+                'venue_id' => $input['venue_id'],
             ]
         );
 
@@ -151,6 +158,7 @@ class EnsembleController extends Controller
                 'name' => ['required', 'string', 'min:4','max:255'],
                 'ensembletype_id' => ['required', 'numeric'],
                 'conductor' => ['nullable', 'string'],
+                'venue_id' => ['required', 'numeric', 'min:1'],
             ]
         );
     }

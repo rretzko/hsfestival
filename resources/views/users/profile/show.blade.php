@@ -233,10 +233,10 @@
 
             </div>
 
-            {{-- FORM: NAfME MEMBERSHIP --}}
+            {{-- FORM: ACDA MEMBERSHIP --}}
             <div class="z-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border border-white pb-4" style="margin-bottom: 2rem;" >
 
-                <label class="bg-white text-black z-10 px-2 relative" style="top: -1rem;">NAfME Membership</label>
+                <label class="bg-white text-black z-10 px-2 relative" style="top: -1rem;">ACDA Membership</label>
 
                 <form method="post" action="{{ route('user.membership.update') }}">
 

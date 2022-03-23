@@ -111,7 +111,7 @@ class Ensemble extends Model
     public function repertoire()
     {
         return $this->hasMany(Repertoire::class)
-            ->where('event_id', Event::currentEvent()->first()->id);
+            ->where('event_id', Event::currentEvent()->id);
     }
 
     public function school()

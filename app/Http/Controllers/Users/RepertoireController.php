@@ -26,7 +26,7 @@ class RepertoireController extends Controller
         return view('users.repertoire.index', [
             'ensemble' => $ensemble,
             'event' => Event::currentEvent()->first(),
-            'repertoire' => Repertoire::all(),
+            'repertoire' => Repertoire::where('ensemble_id', $ensemble->id)->get(),
         ]);
     }
 

@@ -88,7 +88,7 @@
                                                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                             style="background-color: rgba(1,100,255,.3); color: black;"
                                                     >
-                                                        Repertoire
+                                                        Repertoire ({{ $ensemble->repertoire->count() }})
                                                     </button>
                                                 </a>
                                             </td>

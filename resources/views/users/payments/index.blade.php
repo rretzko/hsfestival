@@ -196,6 +196,7 @@
                                 <div>Re: NJACDA HS Choral Festival</div>
                                 <div>93 Salmon Road</div>
                                 <div>Landing, NJ 07850</div>
+                                <div>Make check payable to: NJACDA</div>
                             </div>
                         </div>
 

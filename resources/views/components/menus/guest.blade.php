@@ -4,7 +4,7 @@
             Login
         </a>
     </div>
-    @if( Carbon\Carbon::now() < '2022-03-21 23:59:59')
+    @if( Carbon\Carbon::now() < '2022-03-25 23:59:59')
         <div class="ml-2">
             <a href="{{ route('register') }}">
                 Register

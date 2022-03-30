@@ -36,6 +36,10 @@
                             <li>
                                 <a href="{{ route('eventmanagement.loginas.index') }}">Log In As...</a>
                             </li>
+
+                            <li>
+                                <a href="{{ route('eventmanagement.payments.index') }}">Payments</a>
+                            </li>
                         </ol>
                     </section>
                     <section class="mt-2">

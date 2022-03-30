@@ -71,6 +71,11 @@ class Payment extends Model
         return $this->belongsTo(Paymenttype::class);
     }
 
+    public function getPaymentDateMmmDdYyyyAttribute()
+    {
+        return $this->payment_date ? Carbon::parse($this->payment_date)->format('M d,Y') : null;
+    }
+
     public function getPaymentDateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('project.date_format')) : null;

@@ -231,6 +231,18 @@ Route::group([
     Route::post('/passwordreset/update', [\App\Http\Controllers\Eventmanagement\PasswordresetController::class, 'update'])
         ->name('passwordreset.update');
 
+    /** PAYMENTS */
+    Route::get('/payments', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'index'])
+        ->name('payments.index');
+    Route::get('/payments/edit/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'edit'])
+        ->name('payments.edit');
+    Route::get('/payments/export', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'export'])
+        ->name('payments.export');
+    Route::post('/payments/store', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'store'])
+        ->name('payments.store');
+    Route::post('/payments/update/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'update'])
+        ->name('payments.update');
+
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');

@@ -242,6 +242,8 @@ Route::group([
         ->name('payments.store');
     Route::post('/payments/update/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'update'])
         ->name('payments.update');
+    Route::get('/payments/delete/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'destroy'])
+        ->name('payments.delete');
 
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])

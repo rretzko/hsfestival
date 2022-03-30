@@ -21,7 +21,7 @@ class PaymentController extends Controller
     {
         return view('eventmanagement.payments.index',
         [
-            'payments' => Payment::where('event_id', Event::currentEvent()->id)->get(),
+            'payments' => Payment::where('event_id', Event::currentEvent()->id)->orderByDesc('payment_date')->get(),
             'paymenttypes' => Paymenttype::all(),
             'users' => User::excludeBots(),
         ]);
@@ -82,7 +82,7 @@ class PaymentController extends Controller
         return view('eventmanagement.payments.edit',
             [
                 'payment' => $payment,
-                'payments' => Payment::where('event_id', Event::currentEvent()->id)->get(),
+                'payments' => Payment::where('event_id', Event::currentEvent()->id)->orderByDesc('payment_date')->get(),
                 'paymenttypes' => Paymenttype::all(),
                 'users' => User::excludeBots(),
             ]);
@@ -116,12 +116,14 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Payment $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+
+        return $this->index();
     }
 
     public function export()

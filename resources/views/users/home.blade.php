@@ -163,7 +163,7 @@
                         </ul>
 
                         <div class="text-sm mb-2">
-                            @if($assignment)
+                            @if(isset($assignment) && $assignment)
                                 Please contact
                                 <a href="mailto:jwilson@brrsd.k12.nj.us?subject=Change in HS Festival Assignment&body=Hi John - I am requesting the following venue assignment changes:" style="color: greenyellow;">
                                     John Wilson

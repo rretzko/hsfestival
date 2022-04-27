@@ -78,6 +78,11 @@ class School extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function vaccinations()
+    {
+        return $this->hasMany(Vaccination::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

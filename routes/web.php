@@ -122,6 +122,16 @@ Route::group([
     Route::get('/logout', [\App\Http\Controllers\Users\LogoutController::class, 'index'])
         ->name('logout');
 
+    /** COVID-19 STATUS */
+    Route::get('/covid19status', [\App\Http\Controllers\Users\Covid19Controller::class, 'create'])
+        ->name('covid19status');
+    Route::get('/covid19status/edit/{vaccination}', [\App\Http\Controllers\Users\Covid19Controller::class, 'edit'])
+        ->name('covid19status.edit');
+    Route::post('/covid19status/store', [\App\Http\Controllers\Users\Covid19Controller::class, 'store'])
+        ->name('covid19status.store');
+    Route::post('/covid19status/update/{vaccination}', [\App\Http\Controllers\Users\Covid19Controller::class, 'update'])
+        ->name('covid19status.update');
+
     /** ENSEMBLES */
     Route::get('/ensembles', [\App\Http\Controllers\Users\EnsembleController::class, 'index'])
         ->name('ensembles');
@@ -155,10 +165,10 @@ Route::group([
         ->name('payment.download');
 
     /** PASSWORD */
-    Route::get('/password', [\App\Http\Controllers\UsersPasswordpController::class, 'index'])
-        ->name('password');
-    Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
-        ->name('password.update');
+    //Route::get('/password', [\App\Http\Controllers\UsersPasswordpController::class, 'index'])
+   //     ->name('password');
+   // Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
+   //     ->name('password.update');
 
     /** PHONES */
     Route::get('/phones', [\App\Http\Controllers\Users\PhoneController::class, 'index'])

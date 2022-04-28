@@ -20,7 +20,7 @@ class VaccinationsImport implements ToModel
         $schoolid = auth()->user()->school->id;
         $vaccinationtypeid = $this->vaccinationTypeId($row[2]);
 
-        if($vaccinationtypeid) {
+        if($vaccinationtypeid && strlen($row[0]) && strlen($row[1])) {
             return new Vaccination([
                 'event_id' => $eventid,
                 'school_id' => $schoolid,
@@ -33,7 +33,7 @@ class VaccinationsImport implements ToModel
 
     private function vaccinationTypeId($descr)
     {
-        if(Vaccinationtype::where('descr', '=', $descr)->exists()) {
+        if(Vaccinationtype::where('descr', '=', strtolower($descr))->exists()) {
 
             return Vaccinationtype::where('descr', '=', $descr)->first()->id;
         }

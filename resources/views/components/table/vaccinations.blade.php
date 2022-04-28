@@ -37,7 +37,7 @@
             </td>
         </tr>
     @empty
-        <tr><td colspan="4" class="text-center">No Vaccinations found</td></tr>
+        <tr><td colspan="5" class="text-center">No Vaccinations found</td></tr>
     @endforelse
     </tbody>
 </table>

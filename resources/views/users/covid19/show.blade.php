@@ -35,6 +35,11 @@
                         </div>
                     @endif
 
+                    <div class="mb-4">
+                        <header>CSV Template File</header>
+                        <a href="/assets/csvs/vaccination_template.csv" class="pl-4" style="color: yellow;">Click here to download the csv template file.</a>
+                    </div>
+
                     <input id="fileSelect" type="file"
                            name="vaccinations" id="vaccinations"
                             accept=".csv"

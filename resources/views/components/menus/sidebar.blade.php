@@ -63,6 +63,13 @@
             </a>
         </div>
 
+        <div class="mb-3">
+            <a href="{{ route('user.logout') }}"
+               class="{{ ($active==='logout') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
+                Log Out
+            </a>
+        </div>
+
         <h2 style="color: yellow;">Coming Soon!</h2>
 
         <div class="mb-3">
@@ -72,12 +79,7 @@
             </a>
         </div>
 
-        <div class="mb-3">
-            <a href="{{ route('user.logout') }}"
-               class="{{ ($active==='logout') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
-                Log Out
-            </a>
-        </div>
+
     </nav>
 <!-- {{--
     <nav class="mt-5 flex-1 px-2 space-y-1">

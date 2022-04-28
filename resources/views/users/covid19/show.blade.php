@@ -51,33 +51,7 @@
             </div>
 
             {{-- VACCINATIONS TABLE --}}
-            <style>
-                table{background-color: white;border-collapse: collapse;}
-                td,th{border: 1px solid black; padding: 0 0.25rem; color: black;}
-            </style>
-            <table>
-                <caption style="font-size: 0.8rem;border: 1px solid black; background-color: rgba(255,255,255,0.3); color: white;">Click the student's name to edit</caption>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                @forelse($vaccinations AS $vaccination)
-                    <tr>
-                        <td>
-                            <a href="{{ route('user.covid19status.edit',$vaccination) }}" style="color: blue;">
-                                {{ $vaccination->fullnameAlpha }}
-                            </a>
-                        </td>
-                        <td>{{ $vaccination->vaccinationtype->descr }}</td>
-                    </tr>
-                @empty
-                    <tr><td colspan="2" class="text-center">No Vaccinations found</td></tr>
-                @endforelse
-                </tbody>
-            </table>
+            <x-table.vaccinations :vaccinations="$vaccinations" />
 
         </div>
     </div>

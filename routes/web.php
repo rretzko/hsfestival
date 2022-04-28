@@ -127,10 +127,16 @@ Route::group([
         ->name('covid19status');
     Route::get('/covid19status/edit/{vaccination}', [\App\Http\Controllers\Users\Covid19Controller::class, 'edit'])
         ->name('covid19status.edit');
+    Route::get('/covid19status/show', [\App\Http\Controllers\Users\Covid19Controller::class, 'show'])
+        ->name('covid19status.show');
+    Route::get('/covid19status/remove/{vaccination}', [\App\Http\Controllers\Users\Covid19Controller::class, 'destroy'])
+        ->name('covid19status.remove');
     Route::post('/covid19status/store', [\App\Http\Controllers\Users\Covid19Controller::class, 'store'])
         ->name('covid19status.store');
     Route::post('/covid19status/update/{vaccination}', [\App\Http\Controllers\Users\Covid19Controller::class, 'update'])
         ->name('covid19status.update');
+    Route::post('/covid19status/upload', [\App\Http\Controllers\Users\Covid19Controller::class, 'upload'])
+        ->name('covid19status.upload');
 
     /** ENSEMBLES */
     Route::get('/ensembles', [\App\Http\Controllers\Users\EnsembleController::class, 'index'])

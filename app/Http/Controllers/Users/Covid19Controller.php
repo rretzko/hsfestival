@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Imports\VaccinationsImport;
 use App\Models\Event;
 use App\Models\Vaccination;
 use App\Models\Vaccinationtype;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Covid19Controller extends Controller
 {
@@ -65,12 +67,18 @@ class Covid19Controller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('users.covid19.show',
+        [
+            'vaccinations' => Vaccination::where('school_id',auth()->user()->school->id)
+                ->where('event_id', Event::currentEvent()->id)
+                ->orderBy('last')
+                ->orderBy('first')
+                ->get(),
+        ]);
     }
 
     /**
@@ -119,13 +127,26 @@ class Covid19Controller extends Controller
     }
 
     /**
+     * Method for uploading participant vaccination information via csv file
+     * @param Request $request
+     */
+    public function upload(Request $request)
+    {
+        Excel::import(new VaccinationsImport, $request->file('vaccinations'));
+
+        return $this->create();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Vaccination $vaccination;
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vaccination $vaccination)
     {
-        //
+        Vaccination::destroy($vaccination->id);
+
+        return $this->create();
     }
 }

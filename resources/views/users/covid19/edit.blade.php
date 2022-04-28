@@ -13,6 +13,16 @@
                 Covid-19 status for {{ auth()->user()->school->name }}
             </header>
 
+            <div id="instructions"
+                 class="p-2"
+                 style="border: 1px solid black; border-radius: 0.5rem; background-color: rgba(255,255,255,0.3); margin-bottom: 1rem; width: 50%; padding: 0.25rem 0.5rem;">
+                Upload individual participants using the form below, or
+                <a href="{{ route('user.covid19status.show') }}" style="color: yellow;">
+                    click here to create a mass upload
+                </a>
+                using a .csv file.
+            </div>
+
             <div>
                 <style>
                     input,select{color: black;}
@@ -36,7 +46,9 @@
                                       class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                       placeholder="First name"
                                       value="{{ $vaccination->first }}"
-                                      aria-invalid="true" aria-describedby="first-error">
+                                      aria-invalid="true" aria-describedby="first-error"
+                                      required
+                                >
                                 @error('first')
                                 <p class="mt-2 text-sm text-red-600" id="first-error">{{ $message }}</p>
                                 @enderror
@@ -46,7 +58,9 @@
                                        class="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
                                        placeholder="Last name"
                                        value="{{ $vaccination->last }}"
-                                       aria-invalid="true" aria-describedby="last-error">
+                                       aria-invalid="true" aria-describedby="last-error"
+                                       required
+                                >
                                 @error('last')
                                 <p class="mt-2 text-sm text-red-600" id="last-error">{{ $message }}</p>
                                 @enderror
@@ -79,33 +93,8 @@
             </div>
 
             {{-- VACCINATIONS TABLE --}}
-            <style>
-                table{background-color: white;border-collapse: collapse;}
-                td,th{border: 1px solid black; padding: 0 0.25rem; color: black;}
-            </style>
-            <table>
-                <caption style="font-size: 0.8rem;border: 1px solid black; background-color: rgba(255,255,255,0.3); color: white;">Click the student's name to edit</caption>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                @forelse($vaccinations AS $vaccination)
-                    <tr>
-                        <td>
-                            <a href="{{ route('user.covid19status.edit',$vaccination) }}" style="color: blue;">
-                                {{ $vaccination->fullnameAlpha }}
-                            </a>
-                        </td>
-                        <td>{{ $vaccination->vaccinationtype->descr }}</td>
-                    </tr>
-                @empty
-                    <tr><td colspan="2" class="text-center">No Vaccinations found</td></tr>
-                @endforelse
-                </tbody>
-            </table>
+            <x-table.vaccinations :vaccinations="$vaccinations" />
+
 
         </div>
     </div>

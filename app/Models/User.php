@@ -70,9 +70,14 @@ class User extends Authenticatable implements HasLocalePreference
      */
     static public function excludeBots(Venue $venue = null)
     {
-        $users = User::all()->filter(function($user){
+        $allusers = User::all()->filter(function($user){
             return ((substr($user->email, -4) != '.bot') && ($user->id > 1));
         })->sortBy('last');
+
+        //high school festival
+        $users = $allusers->filter(function($user){
+            return $user->useroptionsvenues->count();
+        });
 
         //early exit
         if(! $venue){ return $users;}

@@ -78,7 +78,7 @@
                                     @endforeach
                                 </select>
                                 <div style="color: yellow; font-size: .8rem;">
-                                    Note: Choosing 'None/PCRtesting' indicates that this student will show a photo of a negative PCR test taken within 72 hours of the festival to a festival organizer.
+                                    Note: Choosing 'none' indicates that this student will show a photo of a negative PCR test taken within 72 hours of the festival to a festival organizer.
                                 </div>
                             </div>
                             @error('vaccinationtype_id')

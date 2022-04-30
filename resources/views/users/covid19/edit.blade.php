@@ -81,6 +81,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <div style="color: yellow; font-size: .8rem;">
+                                    Note: Choosing 'None/PCRtesting' indicates that this student will show a photo of a negative PCR test taken within 72 hours of the festival to a festival organizer.
+                                </div>
                             </div>
                             @error('vaccinationtype_id')
                             <p class="mt-2 text-sm text-red-600" id="vaccinationtype_id-error">{{ $message }}</p>

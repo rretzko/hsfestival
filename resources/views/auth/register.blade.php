@@ -21,7 +21,7 @@
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        @if(Carbon\Carbon::now() > '2022-03-21 11:59:59')
+                        @if(Carbon\Carbon::now() > '2022-05-21 11:59:59')
                             <div class="text-center font-bold">
                                 Registration is Closed.
                             </div>

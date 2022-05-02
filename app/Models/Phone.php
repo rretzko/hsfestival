@@ -60,6 +60,11 @@ class Phone extends Model
         return $formatted;
     }
 
+    public function formatPhone()
+    {
+        return self::formatString($this->phone);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

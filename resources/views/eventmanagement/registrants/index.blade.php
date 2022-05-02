@@ -65,7 +65,7 @@
                                         <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name/Email</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School/Cell</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Venue</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Date</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
@@ -84,7 +84,10 @@
                                                     {{ $user->name }}<br />
                                                     <span class="text-sm">{{ $user->email }}</span>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->school->shortname }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{ $user->school->shortname }}<br />
+                                                    {{ $user->phones->where('phonetype_id',1)->first()->formatPhone() }}
+                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue && ($user->currentFirstChoiceVenue->venue->id === 2)) uppercase font-bold @endif">
                                                     {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->shortname : 'none found'}}
                                                 </td>

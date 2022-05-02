@@ -172,9 +172,9 @@ Route::group([
 
     /** PASSWORD */
     //Route::get('/password', [\App\Http\Controllers\UsersPasswordpController::class, 'index'])
-   //     ->name('password');
-   // Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
-   //     ->name('password.update');
+    //    ->name('password');
+    Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
+        ->name('password.update');
 
     /** PHONES */
     Route::get('/phones', [\App\Http\Controllers\Users\PhoneController::class, 'index'])

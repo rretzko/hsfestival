@@ -54,6 +54,11 @@ class School extends Model
         'postal_code',
     ];
 
+    public function adjudications()
+    {
+        return $this->hasMany(Adjudication::class);
+    }
+
     public function getShortnameAttribute()
     {
         $abbrs = [

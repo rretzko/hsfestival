@@ -55,6 +55,16 @@ class Event extends Model
             ->first();
     }
 
+    public function adjudications()
+    {
+        return $this->hasMany(Adjudication::class);
+    }
+
+    public function adjudicators()
+    {
+        return $this->belongsToMany(Adjudicator::class);
+    }
+
     public function getStartDatetimeAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;

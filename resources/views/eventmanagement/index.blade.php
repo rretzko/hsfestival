@@ -40,6 +40,10 @@
                             <li>
                                 <a href="{{ route('eventmanagement.payments.index') }}">Payments</a>
                             </li>
+
+                            <li>
+                                <a href="{{ route('eventmanagement.adjudicators.create') }}">Adjudicators</a>
+                            </li>
                         </ol>
                     </section>
                     <section class="mt-2">

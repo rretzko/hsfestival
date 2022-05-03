@@ -58,6 +58,11 @@ class Ensemble extends Model
         'venue_id',
     ];
 
+    public function adjudications()
+    {
+        return $this->hasMany(Adjudication::class);
+    }
+
     public function ensembletype()
     {
         return $this->belongsTo(Ensembletype::class);

@@ -229,6 +229,20 @@ Route::group([
     Route::get('/eventmanagement', [\App\Http\Controllers\Eventmanagement\EventmanagementController::class, 'index'])
         ->name('index');
 
+    /** ADJUDICATORS */
+    Route::get('/adjudicators', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'create'])
+        ->name('adjudicators.create');
+    Route::get('/adjudicators/attach/{adjudicator}', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'attach'])
+        ->name('adjudicators.attach');
+    Route::get('/adjudicators/edit/{adjudicator}', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'edit'])
+        ->name('adjudicators.edit');
+    Route::get('/adjudicators/remove/{adjudicator}', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'destroy'])
+        ->name('adjudicators.remove');
+    Route::post('/adjudicators/store', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'store'])
+        ->name('adjudicators.store');
+    Route::post('/adjudicators/update/{adjudicator}', [\App\Http\Controllers\Eventmanagement\AdjudicatorController::class, 'update'])
+        ->name('adjudicators.update');
+
     /** LOG IN AS */
     Route::get('/loginas', [\App\Http\Controllers\Eventmanagement\LoginasController::class, 'index'])
         ->name('loginas.index');
@@ -292,5 +306,24 @@ Route::group([
         ->name('scheduling.timeslots');
     Route::post('/scheduling/timeslots/update', [App\Http\Controllers\Eventmanagement\Scheduling\TimeslotController::class, 'update'])
         ->name('scheduling.timeslots.update');
+});
+
+/** RECORDING ENGINEER */
+Route::group([
+    'prefix' => 'recordingengineer',
+    'as' => 'recordingengineer.',
+    'middleware' => ['auth']
+], function() {
+
+    Route::get('/recordingengineer', [\App\Http\Controllers\Recordingengineer\RecordingengineerController::class, 'create'])
+        ->name('create');
+    Route::get('/recordingengineer/edit/{adjudication}', [\App\Http\Controllers\Recordingengineer\RecordingengineerController::class, 'edit'])
+        ->name('edit');
+    Route::get('/recordingengineer/remove/{adjudication}', [\App\Http\Controllers\Recordingengineer\RecordingengineerController::class, 'destroy'])
+        ->name('remove');
+    Route::post('/recordingengineer', [\App\Http\Controllers\Recordingengineer\RecordingengineerController::class, 'store'])
+        ->name('store');
+    Route::post('/recordingengineer/update/{adjudication}', [\App\Http\Controllers\Recordingengineer\RecordingengineerController::class, 'update'])
+        ->name('update');
 });
 

@@ -188,6 +188,10 @@ Route::group([
     Route::post('/profile/update', [\App\Http\Controllers\Users\ProfileController::class, 'update'])
         ->name('profile.update');
 
+    /** RECORDINGS */
+    Route::get('/recordings', [\App\Http\Controllers\Users\AdjudicationController::class, 'index'])
+        ->name('recordings');
+
     /** REPERTOIRE */
     Route::get('/repertoire/{ensemble}', [\App\Http\Controllers\Users\RepertoireController::class, 'index'])
         ->name('repertoire');

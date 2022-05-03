@@ -36,7 +36,9 @@ class Adjudication extends Model
 
     public function getMp3PlayerAttribute()
     {
-        $src = Storage::disk('spaces')->url($this->path);
+        $parts = explode('/', $this->path);
+
+        $src = Storage::disk('spaces')->url($this->path.'/'.$parts[(count($parts)-1)]);
 
         $str = '<audio controls style="border: 1px solid black; border-radius: 1.5rem;">';
         $str .= '<source src="'.$src.'" type="audio/mpeg" >';

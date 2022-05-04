@@ -113,6 +113,22 @@ class Ensemble extends Model
         return EnsembleVenueAssignment::where('ensemble_id', $this->id)->exists();
     }
 
+    public function performanceOrder(Event $event)
+    {
+        $a = [];
+
+        foreach($event->venues AS $venue){
+
+            foreach(EnsembleVenueAssignment::where('venue_id', $venue->id)->orderBy('timeslot_id')->get() AS $ensemblevenueassignment){
+
+                $a[$venue->id][] = $ensemblevenueassignment;
+
+            }
+        }
+
+        return $a;
+    }
+
     public function repertoire()
     {
         return $this->hasMany(Repertoire::class)

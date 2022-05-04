@@ -279,6 +279,10 @@ Route::group([
     Route::get('/payments/delete/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'destroy'])
         ->name('payments.delete');
 
+    /** PROGRAM */
+    Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
+        ->name('program.pdf');
+
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');

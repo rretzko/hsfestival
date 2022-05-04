@@ -44,6 +44,10 @@
                             <li>
                                 <a href="{{ route('eventmanagement.adjudicators.create') }}">Adjudicators</a>
                             </li>
+
+                            <li>
+                                <a href="{{ route('eventmanagement.program.pdf') }}">Program PDF</a>
+                            </li>
                         </ol>
                     </section>
                     <section class="mt-2">

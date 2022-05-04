@@ -8,10 +8,9 @@
                 <thead class="bg-white">
                 <tr>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">###</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">School</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Ensemble</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">School/Ensemble</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Adjudicator</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Part</th>
+                    <th>Adjudication</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Edit</span>
                     </th>
@@ -28,16 +27,14 @@
                             {{ $loop->iteration }}
                         </td>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                            {{ $adjudication->school->name }}
-                        </td>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                            {{ $adjudication->school->name }}<br />
                             {{ $adjudication->ensemble->name }}
                         </td>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                            {{ $adjudication->adjudicator->fullnameAlpha }}
+                            {{ $adjudication->adjudicator->last }} ({{ $adjudication->part }})
                         </td>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center">
-                            {{ $adjudication->part }}
+                        <td>
+                            {!! $adjudication->mp3Player !!}
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <a href="{{ route('recordingengineer.edit',['adjudication' => $adjudication]) }}"

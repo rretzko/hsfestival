@@ -11,4 +11,13 @@
     <div class="pagebreak"></div>
 
     <x-program.performance-adjudicator-pages />
+
+    <div class="pagebreak"></div>
+
+    <x-program.sight-reading-adjudicator-page />
+
+    <div class="pagebreak"></div>
+
+    <x-program.sight-reading-composer-pages />
+
 </div>

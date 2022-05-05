@@ -57,14 +57,16 @@
                                                 ###
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                School
+                                                School/Name/Conductor
                                             </th>
+                                            <!--
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Name
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Conductor
                                             </th>
+                                            -->
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Type
                                             </th>
@@ -84,13 +86,17 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {{ $ensemble->school->shortname }}
+                                                    {{ $ensemble->school->shortname }}<br />
+                                                    {{ $ensemble->name }}<br />
+                                                    {{ $ensemble->conductor }}
+                                                <!-- {{--
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ $ensemble->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $ensemble->conductor }}
+                                                --}} -->
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $ensemble->ensembletype->descr }}

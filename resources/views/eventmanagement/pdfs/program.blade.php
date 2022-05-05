@@ -7,4 +7,8 @@
     <div class="pagebreak"></div>
 
     <x-program.ensembles-page :event="$event" :ensembles="$ensembles" />
+
+    <div class="pagebreak"></div>
+
+    <x-program.performance-adjudicator-pages />
 </div>

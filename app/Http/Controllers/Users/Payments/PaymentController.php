@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users\Payments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Sightreading;
 use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,10 @@ class PaymentController extends Controller
     public function index()
     {
         $event = Event::currentEvent();
-        return view('users.payments.index',compact('event'));
+        $sightreadingpackets = auth()->user()->sightreadings()->wherePivot('event_id', $event->id)->get();
+
+        return view('users.payments.index',
+            compact('event','sightreadingpackets'));
     }
 
     /**

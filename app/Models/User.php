@@ -145,11 +145,14 @@ class User extends Authenticatable implements HasLocalePreference
             1 => [195,160], //member => [plaque, certificate]
         ];
 
+        $sightreadingpayment = 40;
+
         $ensemblecount =$this->ensembles->count();
         $membership = (! (is_null($this->membership))) ? 1 : 0;
         $plaque = $this->getUserOptionPlaqueAttribute() ? 0 : 1;
+        $sightreading = $this->sightreadings()->wherePivot('event_id', Event::currentEvent()->id)->get();
 
-        return $ensemblecount * $ensemblepayments[$membership][$plaque];
+        return (($ensemblecount * $ensemblepayments[$membership][$plaque]) + ($sightreading->count() * $sightreadingpayment));
     }
 
     public function getPaymentPaidAttribute()
@@ -204,7 +207,8 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function sightreadings()
     {
-        return $this->belongsToMany(Sightreading::class);
+        return $this->belongsToMany(Sightreading::class)
+            ->withPivot('event_id');
     }
 
     public function useroptions()

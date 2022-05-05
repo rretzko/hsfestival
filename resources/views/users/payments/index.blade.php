@@ -82,6 +82,10 @@
                                             <li>$50 per ensemble</li>
                                         </ul>
                                     </li>
+                                    <li class="font-bold">Sight Reading
+                                        <ul class="font-normal ml-2">
+                                            <li>{{ $sightreadingpackets->count() }} Packets @ $40 per packet</li>
+                                        </ul></li>
                                 </ul>
                             </data>
                         </div>

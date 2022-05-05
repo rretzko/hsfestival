@@ -164,17 +164,17 @@ Route::group([
     Route::post('/options/update', [\App\Http\Controllers\Users\OptionController::class, 'update'])
         ->name('options.update');
 
-    /** PAYMENT */
-    Route::get('/payment', [\App\Http\Controllers\Users\Payments\PaymentController::class, 'index'])
-        ->name('payment');
-    Route::get('/payment/download', [\App\Http\Controllers\Users\Payments\PaymentController::class, 'download'])
-        ->name('payment.download');
-
     /** PASSWORD */
     //Route::get('/password', [\App\Http\Controllers\UsersPasswordpController::class, 'index'])
     //    ->name('password');
     Route::post('/password/update', [\App\Http\Controllers\Users\PasswordController::class, 'update'])
         ->name('password.update');
+
+    /** PAYMENT */
+    Route::get('/payment', [\App\Http\Controllers\Users\Payments\PaymentController::class, 'index'])
+        ->name('payment');
+    Route::get('/payment/download', [\App\Http\Controllers\Users\Payments\PaymentController::class, 'download'])
+        ->name('payment.download');
 
     /** PHONES */
     Route::get('/phones', [\App\Http\Controllers\Users\PhoneController::class, 'index'])

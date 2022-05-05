@@ -44,14 +44,63 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end pr-4">
+                <div class="flex justify-end pr-4 mb-2">
                     <button type="submit"
                             id="submit"
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-4"
                             style="color: black;"
                     >
                         Update Sightreadings
                     </button>
+
+                </div>
+
+                {{-- PAYPAL BUTTON --}}
+                <div class="flex justify-end"
+                    style="font-size: 1rem; margin-right: 2rem;"
+                >
+
+                    <script src="https://www.paypal.com/sdk/js?client-id=AaEa4PCcKTDHEkVTrNM8ob_kJfycUUXCoI94IXCanWnBfhOHcWrwMFmyQ6ddirKu2340YTFwQ9FWwEdt&currency=USD&disable-funding=credit,card"></script>
+
+                    <!-- Set up a container element for the button -->
+                    <div id="paypal-button-container"></div>
+
+                    <script>
+                        paypal.Buttons({
+                            style: {
+                                layout: 'vertical',
+                                tagline: 'false'
+                            },
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: "{{ (auth()->user()->sightreadings->count() * 40) }}"
+                                        }
+                                    }],
+                                    user_credentials: [{
+                                        id: {
+                                            value: "{{ auth()->id() }}"
+                                        },
+                                        school: {
+                                            value: "{{ auth()->user()->school->id }}"
+                                        },
+                                        event: {
+                                            value: "{{ $event->id }}"
+                                        }
+
+                                    }],
+
+                                });
+                            },
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    window.location.href = '/success.html';
+                                });
+                            }
+                        }).render("#paypal-button-container");
+
+                    </script>
                 </div>
             </form>
 

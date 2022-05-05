@@ -87,8 +87,10 @@
                                         },
                                         event: {
                                             value: "{{ $event->id }}"
+                                        },
+                                        sightreading:{
+                                            value: 1
                                         }
-
                                     }],
 
                                 });

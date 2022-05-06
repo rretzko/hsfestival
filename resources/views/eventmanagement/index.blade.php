@@ -46,7 +46,15 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('eventmanagement.program.pdf') }}">Program PDF</a>
+                                Reports
+                                <ul style="margin-left: 1rem; font-size: smaller; list-style-type: disc;">
+                                    <li>
+                                        <a href="{{ route('eventmanagement.program.pdf') }}">Program PDF</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('eventmanagement.vaccinations.pdf') }}">Vaccinations</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ol>
                     </section>

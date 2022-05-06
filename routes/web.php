@@ -279,10 +279,6 @@ Route::group([
     Route::get('/payments/delete/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'destroy'])
         ->name('payments.delete');
 
-    /** PROGRAM */
-    Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
-        ->name('program.pdf');
-
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');
@@ -304,6 +300,12 @@ Route::group([
         ->name('repertoire.destroy');
     Route::post('/repertoire/{repertoire}/{user}',[App\Http\Controllers\Eventmanagement\RepertoireController::class, 'update'])
         ->name('repertoire.update');
+
+    /** REPORTS */
+    Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
+        ->name('program.pdf');
+    Route::get('/vaccinations', [\App\Http\Controllers\Eventmanagement\Pdfs\VaccinationsController::class, 'pdf'])
+        ->name('vaccinations.pdf');
 
     /** SCHEDULING */
     Route::get('/scheduling/days', [App\Http\Controllers\Eventmanagement\Scheduling\DayController::class, 'index'])

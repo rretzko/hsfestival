@@ -19,28 +19,6 @@ class ProgramController extends Controller
             compact('event','ensembles'));
 
         return $pdf->download('highschoolfestivalprogram.pdf');
-        /*
-        $registrants = \App\Models\Registrant::where('eventversion_id', $eventversion->id)
-            ->where('registranttype_id', \App\Models\Registranttype::REGISTERED)
-            ->where('school_id', Userconfig::getValue('school', auth()->id()))
-            ->get()
-            ->sortBy('student.person.last');
 
-        $score = new \App\Models\Score;
-
-        $scoresummary = new \App\Models\Scoresummary;
-
-        //ex. pages.pdfs.applications.12.64.application
-        $pdf = \Barryvdh\DomPDF\Facade::loadView('pdfs.auditionresults.'//9.65.2021_22_application',
-            . $eventversion->event->id
-            .'.'
-            . $eventversion->id
-            . '.auditionresults',
-            //.applicationTest',
-            compact('eventversion', 'registrants','score','scoresummary'));
-
-
-        return $pdf->download('auditionresults_'.str_replace(' ','_',$eventversion->short_name).'.pdf');
-*/
     }
 }

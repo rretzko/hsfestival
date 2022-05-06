@@ -13,7 +13,7 @@ class Vaccination extends Model
 
     public function getFullnameAlphaAttribute()
     {
-        return $this->last.', '.$this->first;
+        return ucwords(strtolower($this->last)).', '.ucwords(strtolower($this->first));
     }
 
     public function vaccinationtype()

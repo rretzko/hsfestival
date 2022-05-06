@@ -4,7 +4,7 @@
 
 <x-program.page-header />
 
-<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 1rem;">
+<section style="display: flex; flex-direction: column;padding-bottom: 0.5rem; margin-bottom: 1rem;">
 
          <div style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black; background-color: rgba(0,0,0,0.1); padding-left: 0.5rem; margin-bottom: 0.5rem;">
             Performance Adjudictors
@@ -67,7 +67,7 @@
     </div>
 
     {{-- DEBORAH MELLO --}}
-    <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
+    <table style="padding-bottom: 1rem; margin-bottom: 1rem;">
         <tbody>
         <tr>
             <td rowspan="2" style="vertical-align: top; width: 20%;">
@@ -107,7 +107,7 @@
     </div>
 
     {{-- BRANDON WILLIAMS --}}
-    <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
+    <table style="padding-bottom: 1rem; margin-bottom: 1rem;">
         <tbody>
         <tr>
             <td rowspan="2" style="vertical-align: top; width: 20%;">

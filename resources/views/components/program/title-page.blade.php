@@ -4,7 +4,7 @@
 
 <x-program.page-header />
 
-<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 4rem; margin-top: 4rem;">
+<section style="display: flex; flex-direction: column; border-bottom: 1px solid black; border-top: 1px solid black; padding-bottom: 0.5rem; padding-top: 1rem; margin-bottom: 4rem; margin-top: 1rem;">
     <div style="font-weight: bold; text-align: center;">The {{ $event->year_of }}</div>
     <div style="font-size: 4rem; font-weight: bold; text-align: center;">NJACDA</div>
     <div style="font-size: 2rem; font-weight: bold; text-align: center;">High School</div>

@@ -5,7 +5,7 @@
 
 <x-program.page-header />
 
-<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 1rem;">
+<section style="display: flex; flex-direction: column; padding-bottom: 0.5rem; margin-bottom: 1rem;">
 
     @forelse($ensembles AS $venueid => $ensemblevenueassignments)
 
@@ -14,10 +14,9 @@
          </div>
 
         @forelse($ensemblevenueassignments AS $assignment)
-            <div style="border-bottom: 1px solid black; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+            <div style=" padding-bottom: 0.5rem; margin-bottom: 1rem;">
                 <style>
                     .ensemble-table{border-collapse: collapse;}
-                    .ensemble-table td,th{border: 0px solid transparent;}
                     .pagebreak{page-break-after: always;}
                 </style>
                 <table class="ensemble-table" style="width: 100%; background-color: transparent;">

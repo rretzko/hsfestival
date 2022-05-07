@@ -304,6 +304,8 @@ Route::group([
     /** REPORTS */
     Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
         ->name('program.pdf');
+    Route::get('/sightreading', [\App\Http\Controllers\Eventmanagement\Pdfs\SightreadingController::class, 'pdf'])
+        ->name('sightreading.pdf');
     Route::get('/vaccinations', [\App\Http\Controllers\Eventmanagement\Pdfs\VaccinationsController::class, 'pdf'])
         ->name('vaccinations.pdf');
 

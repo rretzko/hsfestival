@@ -52,6 +52,9 @@
                                         <a href="{{ route('eventmanagement.program.pdf') }}">Program PDF</a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('eventmanagement.sightreading.pdf') }}">Sight Reading Orders</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('eventmanagement.vaccinations.pdf') }}">Vaccinations</a>
                                     </li>
                                 </ul>

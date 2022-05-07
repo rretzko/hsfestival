@@ -54,6 +54,15 @@ class School extends Model
         'postal_code',
     ];
 
+    public function getAddressBlockAttribute(): string
+    {
+        $str = $this->address_1.'<br />';
+        $str .= (strlen($this->address_2)) ? $this->address_2.'<br />' : '';
+        $str .= $this->city.', '.$this->state_abbr.'  '.$this->postal_code;
+
+        return $str;
+    }
+
     public function adjudications()
     {
         return $this->hasMany(Adjudication::class);

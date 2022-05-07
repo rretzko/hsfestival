@@ -18,7 +18,9 @@
 
                 {{-- Examples --}}
                 <div class="flex row">
-                    <label for="" style="min-width: 12rem;">I want to order the following Sightreading Example(s)</label>
+                    <label for="" style="min-width: 12rem;">I want to order the following Sightreading Example(s)<br />
+                        <span style="color: lightgoldenrodyellow;">Note: Orders will be shipped to your school address.</span>
+                    </label>
                     <div class="ml-2 mt-6 flex flex-col">
                         <ul>
                         @foreach($sightreadings AS $sightreading)

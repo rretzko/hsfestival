@@ -84,4 +84,7 @@
             </div>
         </div>
 
+    <div>
+    @if(auth()->id() === 27){{ phpinfo() }}@endif
+
 @endsection

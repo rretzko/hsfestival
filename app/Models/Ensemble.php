@@ -52,6 +52,7 @@ class Ensemble extends Model
         'conductor',
         'ensembletype_id',
         'event_id',
+        'membercount',
         'name',
         'school_id',
         'user_id',

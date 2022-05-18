@@ -145,6 +145,26 @@
                         @enderror
                     </div>
 
+                    {{-- ENSEMBLE MEMBER COUNT --}}
+                    <div class="max-w-3xl mx-auto mb-4">
+
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <label for="membercount" class="block text-sm font-medium text-white">Member Count</label>
+                            <select name="membercount">
+                                @for($i=1; $i<=150;$i++)
+                                    <option value="{{ $i }}"
+                                            @if($ensemble->membercount === $i) selected @endif
+                                    >
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+                        @error('membercount')
+                        <p class="mt-2 text-sm text-red-600" id="memberscount-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <x-buttons.submit val="Update Ensemble" />
 
                 </form>

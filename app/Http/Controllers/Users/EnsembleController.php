@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ensemble;
 use App\Models\Ensembletype;
 use App\Models\Event;
+use App\Models\Vaccination;
 use App\Models\Venue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -69,6 +70,7 @@ class EnsembleController extends Controller
                     'school_id' => $school_id,
                     'event_id' => Event::currentEvent()->id,
                     'ensembletype_id' => $input['ensembletype_id'],
+                    'membercount' => $this->testForVaccinations($input),
                 ]
             );
         }
@@ -129,6 +131,7 @@ class EnsembleController extends Controller
                 'event_id' => Event::currentEvent()->id,
                 'ensembletype_id' => $input['ensembletype_id'],
                 'venue_id' => $input['venue_id'],
+                'membercount' => $this->testForVaccinations($input),
             ]
         );
 
@@ -150,6 +153,27 @@ class EnsembleController extends Controller
         return $this->index();
     }
 
+    /**
+     * If membershipcount === 1 and (vaccinationcount > 0),
+     * return vaccination count
+     *
+     * @param Request $request
+     * @return array
+     */
+    private function testForVaccinations(array $input): int
+    {
+        $vaccinationcount = 0;
+
+        if($input['membershipcount'] == 1){
+
+            $vaccinationcount = Vaccination::where('event_id', $input['event_id'])
+                ->where('school_id', $input['school_id'])
+                ->count('id');
+        }
+
+        return ($vaccinationcount) ?: $input['membershipcount'];
+    }
+
     private function validateRequest(Request $request)
     {
         return $request->validate(
@@ -159,6 +183,7 @@ class EnsembleController extends Controller
                 'ensembletype_id' => ['required', 'numeric'],
                 'conductor' => ['nullable', 'string'],
                 'venue_id' => ['required', 'numeric', 'min:1'],
+                'membercount' => ['required','numeric','min:1','max:150'],
             ]
         );
     }

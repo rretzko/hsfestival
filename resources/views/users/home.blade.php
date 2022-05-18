@@ -121,6 +121,7 @@
                         </ul>
                     </div>
                 </section>
+
                 {{-- ENSEMBLES --}}
                 <section class="border mb-1 px-2 rounded">
                     <header class="uppercase">
@@ -140,6 +141,9 @@
                                             style="@if($ensemble->ensembleVenueAssignmentDescr !== 'Pending') color: greenyellow; @endif"
                                           >
                                             - Assignment: {{ $ensemble->ensembleVenueAssignmentDescr }}
+                                        </span>
+                                        <span>
+                                            - Member count: {{ $ensemble->membercount }}
                                         </span>
                                         @forelse($ensemble->repertoire AS $rep)
                                             <div class="ml-6 font-normal text-md">

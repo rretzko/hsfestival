@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        @if(auth()->user()->roles->where('title', 'Recording_Engineer')->first() || auth()->user()->roles->where('title', 'Event_Mgr')->first)
+        @if(auth()->user()->roles->where('title', 'Recording_Engineer')->first() || auth()->user()->roles->where('title', 'Event_Mgr')->first())
             <div class="mb-3">
                 <a href="{{ route('recordingengineer.create') }}"
                    class="{{ ($active==='recordingengineer') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md"

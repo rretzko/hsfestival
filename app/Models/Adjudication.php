@@ -42,6 +42,7 @@ class Adjudication extends Model
 
         $str = '<audio controls style="border: 1px solid black; border-radius: 1.5rem;">';
         $str .= '<source src="'.$src.'" type="audio/mpeg" >';
+        $str .= '<source src="'.$src.'" type="audio/mp4" >';
         $str .= 'Your browser does not support the audio element';
         $str .= '</audio>';
 

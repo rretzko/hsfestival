@@ -36,6 +36,7 @@ class Event extends Model
     protected $fillable = [
         'name',
         'short_name',
+        'event_type',
         'start_datetime',
         'end_datetime',
     ];
@@ -48,6 +49,10 @@ class Event extends Model
         'deleted_at',
     ];
 
+    /**
+     * @deprecated 2022-06-21 replaced with CurrentEvent object
+     * @return mixed
+     */
     public static function currentEvent()
     {
         return Event::where('start_datetime', '<=', Carbon::now())

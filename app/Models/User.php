@@ -111,7 +111,7 @@ class User extends Authenticatable implements HasLocalePreference
     public function getCurrentFirstChoiceVenueAttribute()
     {
         return Useroptionsvenues::where('user_id', $this->id)
-            ->where('event_id', Event::currentEvent()->id)
+            ->where('event_id', CurrentEvent::currentEvent()->id)
             ->where('preference', 1)
             ->first() ?? null;
     }
@@ -150,14 +150,14 @@ class User extends Authenticatable implements HasLocalePreference
         $ensemblecount =$this->ensembles->count();
         $membership = (! (is_null($this->membership))) ? 1 : 0;
         $plaque = $this->getUserOptionPlaqueAttribute() ? 0 : 1;
-        $sightreading = $this->sightreadings()->wherePivot('event_id', Event::currentEvent()->id)->get();
+        $sightreading = $this->sightreadings()->wherePivot('event_id', CurrentEvent::currentEvent()->id)->get();
 
         return (($ensemblecount * $ensemblepayments[$membership][$plaque]) + ($sightreading->count() * $sightreadingpayment));
     }
 
     public function getPaymentPaidAttribute()
     {
-        $eventid = Event::currentEvent()->id;
+        $eventid = CurrentEvent::currentEvent()->id;
 
         return Payment::where('user_id', $this->id)
             ->where('event_id', $eventid)
@@ -219,7 +219,7 @@ class User extends Authenticatable implements HasLocalePreference
     public function useroptionsvenues()
     {
         return $this->hasMany(Useroptionsvenues::class)
-            ->where('event_id', Event::currentEvent()->id);
+            ->where('event_id', CurrentEvent::currentEvent()->id);
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -84,7 +84,7 @@
                 <section class="border mb-1 px-2 rounded">
                     <header class="uppercase">
                         <a href="{{ route('user.options') }}">
-                            Options
+                            {{ $event->name }} Options
                         </a>
                     </header>
                     <div class="pl-3">

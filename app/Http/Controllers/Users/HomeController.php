@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Ensemble;
 use App\Models\Useroption;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class HomeController extends Controller
             [
                 'assignment' => $assignment,
                 'ensembles' => $ensembles,
+                'event' => CurrentEvent::currentEvent(),
                 'useroptions' => Useroption::where('user_id', auth()->id())->get(),
             ]
         );

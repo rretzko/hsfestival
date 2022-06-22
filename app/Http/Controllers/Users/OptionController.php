@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Option;
 use App\Models\Useroption;
@@ -18,9 +19,11 @@ class OptionController extends Controller
      */
     public function index()
     {
+        $event = CurrentEvent::currentEvent();
+
         return view('users.options.index', [
-            'event' => Event::currentEvent(),
-            'options' => Option::all(),
+            'event' => $event,
+            'options' => Option::where('event_id', $event->id)->get(),
             'useroptions' => Useroption::where('user_id', auth()->id())->get(),
             'useroptionsvenues' => auth()->user()->useroptionsvenues,
         ]);
@@ -100,10 +103,15 @@ class OptionController extends Controller
 
             }else {
 
+                $this->newRegistrantNotification();
+
                 Useroption::updateOrCreate(
                     [
                         'user_id' => auth()->id(),
-                        'option_id' => Option::where('descr', $key)->first()->id,
+                        'option_id' => Option::where('descr', $key)
+                            ->where('event_id', CurrentEvent::currentEvent()->id)
+                            ->first()
+                            ->id,
                     ],
                     [
                         'value' => $value,
@@ -126,9 +134,16 @@ class OptionController extends Controller
         //
     }
 
+    private function newRegistrantNotification() : void
+    {
+        $userOptions = Useroption::where('user_id', auth()->id())
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->exists();
+    }
+
     private function updateVenues(array $venues)
     {
-        $event_id = Event::currentEvent()->id;
+        $event_id = CurrentEvent::currentEvent()->id;
 
         foreach($venues AS $venue_id => $preference){
 

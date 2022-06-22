@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
     <x-menus.guest/>
+
     <div class="text-white">
         <img
             src="https://njacda.com/wp-content/uploads/2014/01/1524725_10206920933608488_2344636879262137296_n-960x430.jpg"
@@ -17,11 +19,23 @@
                             <h6 class="text-blueGray-500 text-sm font-bold">
                                 {{ __('global.register') }} <br /><span style="color: red">All fields are required!</span>
                             </h6>
+                            <div style="border: 1px solid red; padding: 0.5rem; margin-top: 1rem;">
+                                <p>If you participated in either the High School Festival or Summer Conference of 2022,
+                                    you are already in the system.
+                                </p>
+                                <p>
+                                    Please <a href="{{ route('login') }}" style="color: blue;" >click here</a> or use the
+                                    '<a href="{{ route('login') }}" style="color: blue;"  >Login</a>' above to log in.
+                                    If you have forgotten your password, you will find the
+                                    '<a href="password/reset" style="color: blue;">Forgot your password</a>' link on
+                                    the Log In page.
+                                </p>
+                            </div>
                         </div>
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        @if(Carbon\Carbon::now() > '2022-03-22 11:59:59')
+                        @if(! \App\Models\CurrentEvent::isRegistrationOpen())
                             <div class="text-center font-bold">
                                 Registration is Closed.
                             </div>

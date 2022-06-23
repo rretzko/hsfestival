@@ -17,9 +17,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //get all ensembles assigned to user's school
         $ensembles = Ensemble::where('user_id', auth()->id())
             ->where('school_id', auth()->user()->school->id)
             ->get();
+
+        //filter-in ensembles participating in the current event
+        $ensembles = $ensembles->filter(function($ensemble){
+
+            return $ensemble->isParticipating;
+        });
 
         $assignment = false;
         foreach($ensembles AS $ensemble){

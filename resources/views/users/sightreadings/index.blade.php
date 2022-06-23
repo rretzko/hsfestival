@@ -12,8 +12,10 @@
             <header class="uppercase mb-4">
                 Event Sightreading Examples
             </header>
-            <form method="post" action="{{ route('user.sightreading.update') }}">
-
+            <form method="post"
+                  action="{{ route('user.sightreading.update') }}"
+                  onsubmit="return confirm('When you click CONFIRM, you order will immediately be emailed to {{ auth()->user()->email }} and your event balance due will be appropriately updated. These charges CANNOT be refunded!');"
+            >
                 @csrf
 
                 {{-- Examples --}}
@@ -32,7 +34,7 @@
                                            onclick="updateCountCost()"
                                     >
                                     <label>{{ $sightreading->name.' @ $'.$sightreading->cost }}</label>
-                                    @if($sightreading->year_of == date('Y'))
+                                    @if($sightreading === $sightreadings->first())
                                         <span class="text-sm">(Current year sightreading examples will be delivered AFTER the festival closes.)</span>
                                     @endif
                                 </div>

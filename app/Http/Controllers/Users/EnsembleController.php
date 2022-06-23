@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Ensemble;
 use App\Models\Ensembletype;
 use App\Models\Event;
@@ -22,7 +23,6 @@ class EnsembleController extends Controller
     {
         return view('users.ensembles.index', [
             'ensembles' => Ensemble::where('user_id', auth()->id())
-                ->where('event_id', Event::currentEvent()->first()->id)
                 ->get(),
         ]);
     }
@@ -117,6 +117,8 @@ class EnsembleController extends Controller
      */
     public function update(Request $request, Ensemble $ensemble)
     {
+        $event = CurrentEvent::currentEvent();
+
         $input = $this->validateRequest($request);
 
         $school_id = auth()->user()->school->id;
@@ -128,12 +130,16 @@ class EnsembleController extends Controller
                 'auditioned' => isset($input['auditioned']) ?: 0,
                 'user_id' => auth()->id(),
                 'school_id' => $school_id,
-                'event_id' => Event::currentEvent()->id,
+                'event_id' => $event->id,
                 'ensembletype_id' => $input['ensembletype_id'],
                 'venue_id' => $input['venue_id'],
-                'membercount' => $this->testForVaccinations($input),
+                'membercount' => $this->testForVaccinations($input, $school_id),
             ]
         );
+
+        (strstr(strtolower($input['submit']),'add'))
+            ? $ensemble->events()->attach($event)
+            : $ensemble->events()->detach($event);
 
         $request->session()->flash('warning', $input['name'].' has been updated.');
 
@@ -160,18 +166,18 @@ class EnsembleController extends Controller
      * @param Request $request
      * @return array
      */
-    private function testForVaccinations(array $input): int
+    private function testForVaccinations(array $input, int $school_id): int
     {
         $vaccinationcount = 0;
 
-        if($input['membershipcount'] == 1){
+        if($input['membercount'] == 1){
 
-            $vaccinationcount = Vaccination::where('event_id', $input['event_id'])
-                ->where('school_id', $input['school_id'])
+            $vaccinationcount = Vaccination::where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('school_id', $school_id)
                 ->count('id');
         }
 
-        return ($vaccinationcount) ?: $input['membershipcount'];
+        return ($vaccinationcount) ?: $input['membercount'];
     }
 
     private function validateRequest(Request $request)
@@ -184,6 +190,7 @@ class EnsembleController extends Controller
                 'conductor' => ['nullable', 'string'],
                 'venue_id' => ['required', 'numeric', 'min:1'],
                 'membercount' => ['required','numeric','min:1','max:150'],
+                'submit' => ['required','string'],
             ]
         );
     }

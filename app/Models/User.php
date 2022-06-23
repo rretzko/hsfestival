@@ -166,15 +166,29 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getUserOptionPermissionAttribute() : bool
     {
-        return Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PERMISSION)->exists()
-            ? Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PERMISSION)->first()->value
+        return Useroption::where('user_id', $this->id)
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->where('option_id', Optiontype::PERMISSION)
+            ->exists()
+            ? Useroption::where('user_id', $this->id)
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('option_id', Optiontype::PERMISSION)
+                ->first()
+                ->value
             : 0;
     }
 
     public function getUserOptionPlaqueAttribute() : bool
     {
-        return Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PLAQUE)->exists()
-            ? Useroption::where('user_id', $this->id)->where('option_id', Optiontype::PLAQUE)->first()->value
+        return Useroption::where('user_id', $this->id)
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->where('option_id', Optiontype::PLAQUE)
+            ->exists()
+            ? Useroption::where('user_id', $this->id)
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('option_id', Optiontype::PLAQUE)
+                ->first()
+                ->value
             : 0;
     }
 
@@ -213,7 +227,8 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function useroptions()
     {
-        return $this->hasMany(Useroption::class);
+        return $this->hasMany(Useroption::class)
+            ->where('event_id', CurrentEvent::currentEvent()->id);
     }
 
     public function useroptionsvenues()

@@ -45,6 +45,9 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Type
                                         </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Participating?
+                                        </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit</span>
                                         </th>
@@ -71,6 +74,14 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {{ $ensemble->ensembletype->descr }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                <input type="checkbox"
+                                                       title="Click the 'Edit' button to update this checkbox."
+                                                       @if($ensemble->isParticipating) checked  @endif
+                                                       disabled
+                                                />
+
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="{{ route('user.ensembles.edit',['ensemble' => $ensemble]) }}" class="text-indigo-600 hover:text-indigo-900">

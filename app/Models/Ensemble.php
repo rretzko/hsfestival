@@ -6,6 +6,7 @@ use \DateTimeInterface;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ensemble extends Model
@@ -74,23 +75,23 @@ class Ensemble extends Model
         //early exit
         if(! $this->getHasAssignmentAttribute()){ return NULL;}
 
-        return EnsembleVenueAssignment::where('ensemble_id', $this->id)->first();
+        return EnsembleVenueAssignment::where('ensemble_id', $this->id)
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->first();
     }
 
-    public function getEnsembleVenueAssignmentDescrAttribute() : string
-    {
-        //early exit
-        if(! $this->getHasAssignmentAttribute()){ return 'Pending'; }
-
-        $venue = Venue::find($this->ensembleVenueAssignment()->venue_id)->descr;
-        $timeslot = Timeslot::find($this->ensembleVenueAssignment()->timeslot_id)->descr;
-
-        return $venue.' @ '.$timeslot;
-    }
-
+    /**
+     * @deprecated 23-Jun-22 with addition of ensemble_event pivot table
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function events() : BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     public function getAssignedTimeslotidAttribute() : int
@@ -109,9 +110,27 @@ class Ensemble extends Model
         return $this->ensembleVenueAssignment()->venue_id;
     }
 
+    public function getEnsembleVenueAssignmentDescrAttribute() : string
+    {
+        //early exit
+        if(! $this->getHasAssignmentAttribute()){ return 'Pending'; }
+
+        $venue = Venue::find($this->ensembleVenueAssignment()->venue_id)->descr;
+        $timeslot = Timeslot::find($this->ensembleVenueAssignment()->timeslot_id)->descr;
+
+        return $venue.' @ '.$timeslot;
+    }
+
     public function getHasAssignmentAttribute() : bool
     {
-        return EnsembleVenueAssignment::where('ensemble_id', $this->id)->exists();
+        return EnsembleVenueAssignment::where('ensemble_id', $this->id)
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->exists();
+    }
+
+    public function getIsParticipatingAttribute() : bool
+    {
+        return (bool)$this->events()->where('event_id', CurrentEvent::currentEvent()->id)->first();
     }
 
     public function performanceOrder(Event $event)

@@ -165,7 +165,16 @@
                         @enderror
                     </div>
 
-                    <x-buttons.submit val="Update Ensemble" />
+                    <div>
+                        <span style="background-color: white; border: 1px solid darkgreen; border-radius:0 0.5rem; margin-right: 0.5rem;">
+                            <input style="background-color: rgba(0,255,0,0.1); padding: 0.5rem;" type="submit" name="submit" value="Add Participating Ensemble" />
+                        </span>
+                        @if($ensemble->isParticipating)
+                            <span style="background-color: white; border: 1px solid darkred; border-radius: 0.5rem;">
+                                <input style="background-color: rgba(255,0,0,0.1); padding:0 0.5rem; " type="submit" name="submit" value="Remove Participating Ensemble" />
+                            </span>
+                        @endif
+                    </div>
 
                 </form>
             </div>

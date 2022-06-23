@@ -34,7 +34,9 @@ class HomeController extends Controller
                 'assignment' => $assignment,
                 'ensembles' => $ensembles,
                 'event' => CurrentEvent::currentEvent(),
-                'useroptions' => Useroption::where('user_id', auth()->id())->get(),
+                'useroptions' => Useroption::where('user_id', auth()->id())
+                    ->where('event_id', CurrentEvent::currentEvent()->id)
+                    ->get(),
             ]
         );
     }

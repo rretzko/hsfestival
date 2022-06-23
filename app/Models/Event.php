@@ -7,6 +7,7 @@ use App\Support\HasAdvancedFilter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
@@ -70,14 +71,14 @@ class Event extends Model
         return $this->belongsToMany(Adjudicator::class);
     }
 
+    public function ensembles() : BelongsToMany
+    {
+        return $this->belongsToMany(Ensemble::class);
+    }
+
     public function getStartDatetimeAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
-    }
-
-    public function setStartDatetimeAttribute($value)
-    {
-        $this->attributes['start_datetime'] = $value ? Carbon::createFromFormat(config('project.datetime_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     public function getEndDatetimeAttribute($value)
@@ -105,4 +106,11 @@ class Event extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function setStartDatetimeAttribute($value)
+    {
+        $this->attributes['start_datetime'] = $value ? Carbon::createFromFormat(config('project.datetime_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
+
 }

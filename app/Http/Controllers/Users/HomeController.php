@@ -36,13 +36,15 @@ class HomeController extends Controller
             }
         }
 
+        $event = CurrentEvent::currentEvent();
+
         return view('users.home',
             [
                 'assignment' => $assignment,
                 'ensembles' => $ensembles,
-                'event' => CurrentEvent::currentEvent(),
+                'event' => $event,
                 'useroptions' => Useroption::where('user_id', auth()->id())
-                    ->where('event_id', CurrentEvent::currentEvent()->id)
+                    ->where('event_id', $event->id)
                     ->get(),
             ]
         );

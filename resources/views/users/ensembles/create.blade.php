@@ -27,6 +27,7 @@
                         </div>
                     @endif
 
+                    {{-- NAME --}}
                     <div class="max-w-3xl mx-auto mb-2">
                         <label for="name" class="block text-sm font-medium text-white">Ensemble Name</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -43,10 +44,11 @@
                             </div>
                         </div>
                         @error('name')
-                        <p class="mt-2 text-sm text-red-600" id="name-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-100" id="name-error">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    {{-- ENSEMBLE TYPE --}}
                     <div class="max-w-3xl mx-auto mb-4">
 
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -58,10 +60,11 @@
                             </select>
                         </div>
                         @error('ensembletype_id')
-                        <p class="mt-2 text-sm text-red-600" id="ensembletype_id-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-100" id="ensembletype_id-error">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    {{-- CONDUCTOR --}}
                     <div class="max-w-3xl mx-auto mb-2 ">
                         <label for="conductor" class="block text-sm font-medium text-white">Conductor</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -72,10 +75,36 @@
                                    aria-invalid="true" aria-describedby="conductor-error">
                         </div>
                         @error('conductor')
-                        <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-100" id="email-error">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    <div class="max-w-3xl mx-auto mb-4">
+
+                        {{-- PREFERRED VENUE --}}
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <label for="venue_id" class="block text-sm font-medium text-white">Preferred Venue/Date</label>
+                            @if($disabled || ($assignment !== 'Pending'))
+                                {{ $preferredvenue->descr }}
+                                <input type="hidden" name="venue_id" id="venue_id" value="{{ $preferredvenue->id }}" />
+                            @else
+                                <select name="venue_id"  >
+                                    @foreach($venues AS $venue)
+                                        <option value="{{ $venue->id }}"
+                                                @if($preferredvenue->id === $venue->id) selected @endif
+                                        >
+                                            {{ $venue->descr }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        @error('venue_id')
+                        <p class="mt-2 text-sm text-red-100" id="ensembletype_id-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- AUDITIONED --}}
                     <div class="max-w-3xl mx-auto mt-4">
 
                         <div class="mt-2 relative rounded-md shadow-sm flex row space-x-2 ">
@@ -91,13 +120,32 @@
                             <label for="auditioned" class="block text-sm text-lg text-white">This is an auditioned ensemble.</label>
                         </div>
                         @error('auditioned')
-                        <p class="mt-2 text-sm text-red-600" id="auditioned-error">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-100" id="auditioned-error">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    {{-- MEMEBER COUNT --}}
+                    <div class="max-w-3xl mx-auto mb-4">
 
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <label for="membercount" class="block text-sm font-medium text-white">Member Count</label>
+                            <select name="membercount">
+                                @for($i=1; $i<150; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        @error('membercount')
+                        <p class="mt-2 text-sm text-red-100" id="membercount-error">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <x-buttons.submit val="Add Ensemble" />
+                    <div class="max-w-3xl mx-auto mb-4">
+                    <input style="padding: 0.5rem;" class="rounded bg-green-100" type="submit" name="submit"
+                              value="Add Ensemble"
+                    />
+                    </div>
+
 
                 </form>
             </div>

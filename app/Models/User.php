@@ -98,16 +98,6 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->roles()->where('title', 'Admin')->exists();
     }
 
-    public function phones()
-    {
-        return $this->hasMany(Phone::class);
-    }
-
-    public function preferredLocale()
-    {
-        return $this->locale;
-    }
-
     public function getCurrentFirstChoiceVenueAttribute()
     {
         return Useroptionsvenues::where('user_id', $this->id)
@@ -192,9 +182,34 @@ class User extends Authenticatable implements HasLocalePreference
             : 0;
     }
 
+    /**
+     * Return either: User-selected venue with preference === 1 or
+     * first of all event venues
+     * @return mixed
+     */
+    public function getPreferredVenueAttribute()
+    {
+        $current = CurrentEvent::currentEvent();
+
+        return Useroptionsvenues::where('user_id',$this->id)
+            ->where('event_id', $current->id)
+            ->where('preference',1)
+            ->first() ?: CurrentEvent::currentEvent()->venues->first();
+    }
+
     public function membership()
     {
         return $this->hasOne(Membership::class);
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
+
+    public function preferredLocale()
+    {
+        return $this->locale;
     }
 
     public function roles()

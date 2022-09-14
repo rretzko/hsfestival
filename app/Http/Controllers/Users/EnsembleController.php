@@ -34,9 +34,13 @@ class EnsembleController extends Controller
      */
     public function create()
     {
+        $preferredvenue = auth()->user()->preferredVenue;
+
         return view('users.ensembles.create',
             [
                 'ensembletypes' => Ensembletype::all(),
+                'disabled' => (Carbon::now() > '2022-03-23 23:59:59'),
+                'preferredvenue' => $preferredvenue,
             ]
         );
     }
@@ -70,7 +74,7 @@ class EnsembleController extends Controller
                     'school_id' => $school_id,
                     'event_id' => Event::currentEvent()->id,
                     'ensembletype_id' => $input['ensembletype_id'],
-                    'membercount' => $this->testForVaccinations($input),
+                    'membercount' => $this->testForVaccinations($input,$school_id),
                 ]
             );
         }
@@ -181,7 +185,7 @@ class EnsembleController extends Controller
     }
 
     private function validateRequest(Request $request)
-    {dd($request->all());
+    {
         return $request->validate(
             [
                 'auditioned' => ['nullable', 'numeric'],

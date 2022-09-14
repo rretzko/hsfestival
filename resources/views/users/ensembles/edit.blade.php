@@ -49,6 +49,7 @@
                         @enderror
                     </div>
 
+                    {{-- ENSEMBLE TYPE --}}
                     <div class="max-w-3xl mx-auto mb-4">
 
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -84,6 +85,7 @@
 
                     <div class="max-w-3xl mx-auto mb-4">
 
+                        {{-- PREFERRED VENUE --}}
                         <div class="mt-1 relative rounded-md shadow-sm">
                             <label for="venue_id" class="block text-sm font-medium text-white">Preferred Venue/Date</label>
                             @if($disabled || ($assignment !== 'Pending'))
@@ -167,7 +169,7 @@
 
                     <div>
                         <span style="background-color: white; border: 1px solid darkgreen; border-radius:0 0.5rem; margin-right: 0.5rem;">
-                            <input style="background-color: rgba(0,255,0,0.1); padding: 0.5rem;" type="submit" name="submit" value="Add Participating Ensemble" />
+                            <input style="background-color: rgba(0,255,0,0.1); padding: 0.5rem;" type="submit" name="submit" value='Update {{ $ensemble->name }}' />
                         </span>
                         @if($ensemble->isParticipating)
                             <span style="background-color: white; border: 1px solid darkred; border-radius: 0.5rem;">

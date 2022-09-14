@@ -181,7 +181,7 @@ class EnsembleController extends Controller
     }
 
     private function validateRequest(Request $request)
-    {
+    {dd($request->all());
         return $request->validate(
             [
                 'auditioned' => ['nullable', 'numeric'],

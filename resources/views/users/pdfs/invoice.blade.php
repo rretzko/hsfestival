@@ -1,8 +1,8 @@
 <div>
     <div id="headers" style="display: flex;">
         <div style="width: 50%; text-align: left;">
-            <div style="font-size: 1.2rem; font-weight: bold;">NJ Americal Choral Directors Association</div>
-            <div style="font-size: 1.15rem;">{{ date('Y') }} High School Choral Festival</div>
+            <div style="font-size: 1.2rem; font-weight: bold;">NJ American Choral Directors Association</div>
+            <div style="font-size: 1.15rem;">{{ $event->name }}</div>
         </div>
 
         <div style="width: 100%; text-align: right;">

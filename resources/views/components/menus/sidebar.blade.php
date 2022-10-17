@@ -65,14 +65,15 @@
                 Payment
             </a>
         </div>
-
+{{-- SUPPRESS COVID-19 MENU OPTION FOR 2023 --}}
+            {{--
         <div class="mb-3">
             <a href="{{ route('user.covid19status') }}"
                class="{{ ($active==='covid19status') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">
                 Covid-19 Status
             </a>
         </div>
-
+--}}
         <div class="mb-3">
             <a href="{{ route('user.recordings') }}"
                class="{{ ($active==='recordings') ? 'text-white' : 'text-gray-300' }} hover:bg-gray-700 hover:text-white group flex items-center px-2 text-sm font-medium rounded-md">

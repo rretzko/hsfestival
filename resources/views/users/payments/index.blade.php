@@ -38,14 +38,14 @@
                             <label>Ensembles:</label>
                             <data>{{ auth()->user()->ensembles()->count() }}</data>
                         </div>
-
+<!-- {{--
                         <div class="category">
                             <label>Plaque or Certificate:</label>
                             <data>
                                 @if(auth()->user()->userOptionPlaque) Plaque @else Certificate @endif
                             </data>
                         </div>
-
+--}} -->
                         <div class="category">
                             <label>Membership:</label>
                            <data>
@@ -63,28 +63,35 @@
                             <data>
                                 <ul>
                                     @if(auth()->user()->membership)
-                                        <li class="font-bold">ACDA Member
+                                        <li class="font-bold">ACDA Member Registration Fee
+                                            <!-- {{--
                                             <ul class="font-normal ml-2">
                                                 <li>Certificate: $160 per ensemble</li>
                                                 <li>Plaque: $195 per ensemble</li>
                                             </ul>
+                                            --}} -->
+                                            <ul class="font-normal ml-2">
+                                                <li>$250 per ensemble</li>
+                                            </ul>
                                         </li>
                                     @else
                                         <li class="font-bold">Non-Member
+                                            <!-- {{--
                                             <ul class="font-normal ml-2">
                                                 <li>Certificate: $210 per ensemble</li>
                                                 <li>Plaque: $245 per ensemble</li>
                                             </ul>
+                                            --}} -->
                                         </li>
                                     @endif
-                                    <li class="font-bold">Late Fee
+                                    <li class="font-bold">Late Fee <span style="font-size: 0.66rem;">(if registered after December 15, 2022)</span>
                                         <ul class="font-normal ml-2">
                                             <li>$50 per ensemble</li>
                                         </ul>
                                     </li>
                                     <li class="font-bold">Sight Reading
                                         <ul class="font-normal ml-2">
-                                            <li>{{ $sightreadingpackets->count() }} Packets @ $40 per packet</li>
+                                            <li>{{ $sightreadingpackets->count() }} Packets @ $50 per packet</li>
                                         </ul></li>
                                 </ul>
                             </data>
@@ -151,9 +158,11 @@
                         <script src="https://www.paypal.com/sdk/js?client-id=AQ3Tqhkp2PQr34p16HIajm3kSYh9L3G3kXTtoKrn9RFpkkpk-d1J8JIxOj-cxknfC3kdBM7bvpEu9bpD&currency=USD&disable-funding=credit,card"></script>
                         -->
                         {{-- PRODUCTION --}}
+                        {{-- COMMENTED OUT PER DECISION TO NOT PAYPAL 2023 EVENT (ID === 3}}
+{{--
                         <script src="https://www.paypal.com/sdk/js?client-id=AaEa4PCcKTDHEkVTrNM8ob_kJfycUUXCoI94IXCanWnBfhOHcWrwMFmyQ6ddirKu2340YTFwQ9FWwEdt&currency=USD&disable-funding=credit,card"></script>
 
-                        <!-- Set up a container element for the button -->
+                        {{-- Set up a container element for the button
                         <div id="paypal-button-container"></div>
 
                         <script>
@@ -192,9 +201,9 @@
                             }).render("#paypal-button-container");
 
                         </script>
-
+--}}
                         <div id="payment-mail-address">
-                            <header class="mb-2">Or send checks, etc. to:</header>
+                            <header class="mb-2">Send checks, etc. to:</header>
                             <div class="bg-white text-black text-left px-2" style="font-family: 'Times New Roman;">
                                 <div>Patrick Hachey</div>
                                 <div>Re: NJACDA HS Choral Festival</div>

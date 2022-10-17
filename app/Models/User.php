@@ -130,19 +130,34 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getPaymentDueAttribute()
     {
-        $ensemblepayments = [
-            0 => [245,210], //non-member => [plaque, certificate]
-            1 => [195,160], //member => [plaque, certificate]
-        ];
+        $event = CurrentEvent::currentEvent();
 
-        $sightreadingpayment = 40;
+        if($event->id === 1) {
+            $ensemblepayments = [
+                0 => [245, 210], //non-member => [plaque, certificate]
+                1 => [195, 160], //member => [plaque, certificate]
+            ];
+        }else{
+
+            $ensemblepayments = [
+              3 => 250, //$event->id => payment
+            ];
+        }
+
+        if($event->id === 1) {
+            $sightreadingpayment = 40;
+        }else{
+            $sightreadingpayment = 50;
+        }
 
         $ensemblecount =$this->ensembles->count();
         $membership = (! (is_null($this->membership))) ? 1 : 0;
         $plaque = $this->getUserOptionPlaqueAttribute() ? 0 : 1;
-        $sightreading = $this->sightreadings()->wherePivot('event_id', CurrentEvent::currentEvent()->id)->get();
+        $sightreading = $this->sightreadings()->wherePivot('event_id', $event->id)->get();
 
-        return (($ensemblecount * $ensemblepayments[$membership][$plaque]) + ($sightreading->count() * $sightreadingpayment));
+        return ($event->id === 1)
+            ? (($ensemblecount * $ensemblepayments[$membership][$plaque]) + ($sightreading->count() * $sightreadingpayment))
+            : (($ensemblecount * $ensemblepayments[$event->id]) + ($sightreading->count() * $sightreadingpayment));
     }
 
     public function getPaymentPaidAttribute()

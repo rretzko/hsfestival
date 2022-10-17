@@ -60,6 +60,8 @@
                 </div>
 
                 {{-- PAYPAL BUTTON --}}
+                {{-- PAYPAL PAYMENTS SUPPRESSED FOR 2023 --}}
+                {{--
                 <div class="flex justify-end"
                     style="font-size: 1rem; margin-right: 2rem;"
                 >
@@ -108,6 +110,7 @@
 
                     </script>
                 </div>
+                --}}
             </form>
 
         </div>

@@ -88,9 +88,6 @@
                     <div>
                         *Any school not scheduled on their first choice of day will be contacted.
                     </div>
-                    <div>
-                        **Click here for a sample certificate
-                    </div>
                 </div>
                 <div class="flex justify-end pr-4">
                     <button type="submit"

@@ -21,34 +21,36 @@
                     <label for="" style="min-width: 12rem;">Venue Choice</label>
                     <div class="ml-2 flex flex-col">
                         @foreach($event->venues->sortBy('start') AS $venue)
-
+{{-- echo {{ $venue->id }}
+{{ dd($useroptionsvenues) }}
+---}}
                             <ul>
                                 <li>{{ $venue->startDateDmdy.': '.$venue->name }}</li>
                                 <ul class="ml-6">
                                     <li>
                                         <select name="venues[{{ $venue->id }}]" id="venue_{{ $venue->id }}" class="text-blueGray-700">
                                             <option value="1"
-                                                @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 1) SELECTED @endif
+                                                @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 1) SELECTED @endif
                                             >
                                                 1. My first choice
                                             </option>
                                             <option value="2"
-                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 2) SELECTED @endif
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 2) SELECTED @endif
                                             >
                                                 2. My second preference
                                             </option>
                                             <option value="3"
-                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 3) SELECTED @endif
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 3) SELECTED @endif
                                             >
                                                 3. My third preference
                                             </option>
                                             <option value="4"
-                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 4) SELECTED @endif
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 4) SELECTED @endif
                                             >
                                                 4. My fourth preference
                                             </option>
                                             <option value="0"
-                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 0) SELECTED @endif
+                                                    @if($useroptionsvenues->count() && $useroptionsvenues->where('venue_id', $venue->id)->first() && $useroptionsvenues->where('venue_id', $venue->id)->first()->preference === 0) SELECTED @endif
                                             >
                                                 5. I cannot participate on this date
                                             </option>

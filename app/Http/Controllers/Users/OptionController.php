@@ -92,7 +92,7 @@ class OptionController extends Controller
             'permissions' => ['required', 'numeric'],
             'confirmation_1' => ['required', 'numeric'],
             'confirmation_2' => ['required', 'numeric'],
-            'plaque_or_certificate' => ['required','numeric'],
+            'plaque_or_certificate' => ['nullable', 'numeric'],
         ]);
 
         foreach($input AS $key => $value){

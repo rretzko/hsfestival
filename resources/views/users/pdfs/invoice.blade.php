@@ -13,7 +13,7 @@
     <div id="invoice_id">
         <table style="width: 100%; background-color: rgba(0,0,0,.1);">
             <tr style="padding: 0 .5rem;">
-                <td style="width: 50%; text-align: left;">INVOICE: {{ $invoiceid }}</td>
+                <td style="width: 50%; text-align: left;">QUOTE: {{ $invoiceid }}</td>
                 <td style="width: 50%; text-align: right;">{{ date('d-M-Y',strtotime(now())) }}</td>
             </tr>
         </table>

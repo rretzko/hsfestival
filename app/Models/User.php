@@ -68,6 +68,19 @@ class User extends Authenticatable implements HasLocalePreference
      *
      * @return User[]|\Illuminate\Database\Eloquent\Collection
      */
+    static public function allExcludeBots(Venue $venue = null)
+    {
+        return User::all()->filter(function($user){
+            return ((substr($user->email, -4) != '.bot') && ($user->id > 1));
+        })->sortBy('last');
+    }
+
+    /**
+     * Excludes bots and super-admin
+     * Includes all current event users
+     *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
     static public function excludeBots(Venue $venue = null)
     {
         $allusers = User::all()->filter(function($user){
@@ -83,8 +96,8 @@ class User extends Authenticatable implements HasLocalePreference
         if(! $venue){ return $users;}
 
         return $users->filter(function($user) use($venue){
-           return ($user->getCurrentFirstChoiceVenueAttribute() &&
-               ($user->getCurrentFirstChoiceVenueAttribute()->venue_id === $venue->id));
+            return ($user->getCurrentFirstChoiceVenueAttribute() &&
+                ($user->getCurrentFirstChoiceVenueAttribute()->venue_id === $venue->id));
         });
     }
 

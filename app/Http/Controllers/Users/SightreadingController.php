@@ -32,8 +32,8 @@ class SightreadingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {dd($request);
-        $request->validate([
+    {
+        $inputs = $request->validate([
             'sightreadings' => ['nullable','array'],
             'sightreadings.*' =>['nullable', 'numeric'],
         ]);

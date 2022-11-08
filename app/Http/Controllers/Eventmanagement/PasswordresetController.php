@@ -12,7 +12,7 @@ class PasswordresetController extends Controller
     public function index()
     {
         //return view('eventmanagement.passwordreset.index', ['registrants' => User::all()->sortBy('last')]);
-        return view('eventmanagement.passwordreset.index', ['users' => User::excludeBots()]);
+        return view('eventmanagement.passwordreset.index', ['users' => User::allExcludeBots()]);
     }
 
     public function update(Request $request)

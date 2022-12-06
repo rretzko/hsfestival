@@ -90,7 +90,7 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ $user->school->shortname }}<br />
-                                                    {{ $user->phones->where('phonetype_id',1)->first()->formatPhone() }}
+                                                    {{ $user->phones->where('phonetype_id',1)->first() ? $user->phones->where('phonetype_id',1)->first()->formatPhone() : '' }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 @if($user->currentFirstChoiceVenue && ($user->currentFirstChoiceVenue->venue->id === 2)) uppercase font-bold @endif">
                                                     {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->shortname : 'none found'}}

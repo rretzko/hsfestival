@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Eventmanagement;
 
 use App\Exports\RegistrantsExport;
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Ensembletype;
 use App\Models\Event;
 use App\Models\Option;
@@ -23,7 +24,7 @@ class RegistrantController extends Controller
     {
         return view('eventmanagement.registrants.index',
             [
-                'event' => Event::currentEvent(),
+                'event' => CurrentEvent::currentEvent(),
                 'users' => User::excludeBots($venue),
                 'venues' => Venue::orderBy('start')->get(),
             ]);

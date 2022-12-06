@@ -34,9 +34,11 @@
                                         <label for="tabs" class="sr-only">Select a tab</label>
                                         <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
                                         <select id="venues" name="venues" class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
-                                            @foreach($venues AS $venue)
-                                                <option class="bg-red-500">{{ $venue->shortname.': '.$venue->startDateMdY }}</option>
-                                            @endforeach
+                                            @forelse($venues AS $venue)
+                                                <option value="{{ $venue->id }}" class="bg-red-500">{{ $venue->shortname.': '.$venue->startDateMdY }}</option>
+                                            @empty
+                                                <option value="0">No venues found</option>
+                                            @endforelse
                                         </select>
                                     </div>
                                     <div class="hidden sm:block px-2 my-2" style="">
@@ -45,12 +47,14 @@
                                                 <span>All</span>
                                                 <span aria-hidden="true" class="bg-indigo-500 absolute inset-x-0 bottom-0 h-0.5"></span>
                                             </a>
-                                            @foreach($venues AS $venue)
+                                            @forelse($venues AS $venue)
                                                 <a href="{{ route('eventmanagement.registrants.index',['venue' => $venue]) }}" class="rounded mr-1 text-gray-900 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
                                                     <span>{{ $venue->shortname.': '.$venue->startDateMdY }}</span>
                                                     <span aria-hidden="true" class="bg-indigo-500 absolute inset-x-0 bottom-0 h-0.5"></span>
                                                 </a>
-                                            @endforeach
+                                            @empty
+                                                No Venues Found
+                                            @endforelse
 
                                         </nav>
                                     </div>

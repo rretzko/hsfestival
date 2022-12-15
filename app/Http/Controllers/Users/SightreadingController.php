@@ -27,7 +27,6 @@ class SightreadingController extends Controller
         ]);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -72,7 +71,7 @@ class SightreadingController extends Controller
 
             $sr = Sightreading::find($sightreading);
 
-            $path = 'assets\sightreadings\\'.$sr->year_of.'.pdf';
+            $path = 'assets/sightreadings/'.$sr->year_of.'.pdf';
 
             $files[] = public_path($path);
         }

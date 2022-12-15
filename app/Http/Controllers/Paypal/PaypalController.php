@@ -43,7 +43,7 @@ class PaypalController extends Controller
     }
 
     public function update()
-    {
+    {Log::info('Got to controller! @ '.__METHOD__);
         if(isset($_POST) && count($_POST)){
             Log::info('***** MAKE DTO *****');
             $dto = $this->makeDto();

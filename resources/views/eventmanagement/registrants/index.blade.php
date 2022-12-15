@@ -50,6 +50,7 @@
                                             @forelse($venues AS $venue)
                                                 <a href="{{ route('eventmanagement.registrants.index',['venue' => $venue]) }}" class="rounded mr-1 text-gray-900 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
                                                     <span>{{ $venue->shortname.': '.$venue->startDateMdY }}</span>
+                                                    <span>({{ $venue->countPreferences }})</span>
                                                     <span aria-hidden="true" class="bg-indigo-500 absolute inset-x-0 bottom-0 h-0.5"></span>
                                                 </a>
                                             @empty

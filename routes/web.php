@@ -31,6 +31,9 @@ Route::view('/', 'welcome');
 
 Auth::routes(['register' => true]);
 
+/** PAYPAL IPN ACCESS */
+Route::post('update_account', [App\Http\Controllers\Paypal\PaypalController::class,'update'])->name('paypal.ipn');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 

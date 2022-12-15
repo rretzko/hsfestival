@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use phpDocumentor\Reflection\Types\Collection;
 
 class User extends Authenticatable implements HasLocalePreference
 {
@@ -97,7 +98,8 @@ class User extends Authenticatable implements HasLocalePreference
 
         return $users->filter(function($user) use($venue){
             return ($user->getCurrentFirstChoiceVenueAttribute() &&
-                ($user->getCurrentFirstChoiceVenueAttribute()->venue_id === $venue->id));
+                //($user->getCurrentFirstChoiceVenueAttribute()->venue_id === $venue->id));
+                $user->getAnyChoiceVenueAttribute($venue)->count());
         });
     }
 
@@ -111,12 +113,20 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->roles()->where('title', 'Admin')->exists();
     }
 
+    public function getAnyChoiceVenueAttribute($venue): \Illuminate\Database\Eloquent\Collection
+    {
+        return Useroptionsvenues::where('event_id', CurrentEvent::currentEvent()->id)
+            ->where('venue_id', $venue->id)
+            ->where('preference', '>', 0)
+            ->get() ?? collect();
+    }
+
     public function getCurrentFirstChoiceVenueAttribute()
     {
         return Useroptionsvenues::where('user_id', $this->id)
-            ->where('event_id', CurrentEvent::currentEvent()->id)
-            ->where('preference', 1)
-            ->first() ?? null;
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('preference', 1)
+                ->first() ?? null;
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -247,7 +257,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function scopeAdmins()
     {
-        return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
+        return $this->whereHas('roles', function ($q){$q->where('title', 'Admin');});
     }
 
     public function setPasswordAttribute($input)

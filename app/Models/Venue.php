@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Venue extends Model
 {
@@ -16,6 +17,15 @@ class Venue extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function getCountPreferencesAttribute(): int
+    {
+        return DB::table('useroptionsvenues')
+            ->where('event_id',CurrentEvent::currentEvent()->id)
+            ->where('venue_id', $this->id)
+            ->where('preference', '>', 0)
+            ->count('id');
     }
 
     /**

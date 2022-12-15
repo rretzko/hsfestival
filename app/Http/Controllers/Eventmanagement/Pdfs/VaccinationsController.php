@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eventmanagement\Pdfs;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Vaccination;
 use App\Models\Vaccinationtype;
@@ -12,7 +13,7 @@ class VaccinationsController extends Controller
 {
     public function pdf()
     {
-        $event = Event::currentEvent();
+        $event = CurrentEvent::currentEvent();
         $service = new \App\Services\VaccinationTablesService($event);
         $vaccinationtables = $service->tables();
         $filename = 'vaccinations_'.date('Ymd_Gis').'.pdf';

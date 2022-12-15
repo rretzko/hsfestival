@@ -19,27 +19,41 @@
                 @csrf
 
                 {{-- Examples --}}
-                <div class="flex row">
+                <div class="flex flex-col">
                     <label for="" style="min-width: 12rem;">I want to order the following Sightreading Example(s)<br />
-                        <span style="color: lightgoldenrodyellow;">Note: Orders will be shipped to your school address.</span>
+                        <span style="color: yellow; font-weight: bold;">Note: Orders will be emailed to: {{ auth()->user()->email }}.</span>
                     </label>
+
+                    @if(session()->has('sent'))
+                        <div id="advisory" class="bg-green-100 text-black my-4 px-2">
+                            {{ session()->get('sent') }}<br />
+                            An invoice and quote are included in your email.
+                        </div>
+                    @endif
+
                     <div class="ml-2 mt-6 flex flex-col">
                         <ul>
                         @foreach($sightreadings AS $sightreading)
-                            <li>
-                                <div>
-                                    <input id="sightreading_{{ $sightreading->id }}" name="sightreadings[]" type="checkbox"
-                                           value="{{ $sightreading->id }}"
-                                           @if($examples->where('id', $sightreading->id)->first()) CHECKED @endif
-                                           onclick="updateCountCost()"
-                                    >
-                                    <label>{{ $sightreading->name.' @ $'.$sightreading->cost }}</label>
-                                    @if($sightreading === $sightreadings->first())
-                                        <span class="text-sm">(Current year sightreading examples will be delivered AFTER the festival closes.)</span>
-                                    @endif
-                                </div>
+                            @if($sightreading->id != 17)
+                                <li>
+                                    <div>
+                                        <input id="sightreading_{{ $sightreading->id }}" name="sightreadings[]" type="checkbox"
+                                               value="{{ $sightreading->id }}"
+                                               class="@if($examples->where('id', $sightreading->id)->first()) bg-gray-400 @endif"
+                                               @if($examples->where('id', $sightreading->id)->first()) DISABLED @endif
+                                               onclick="updateCountCost({{ auth()->id() }},{{ $event->id }})"
+                                        >
+                                        <label>{{ $sightreading->name.' @ $'.$sightreading->cost }}</label>
+                                        @if($sightreading === $sightreadings->first())
+                                            <span class="text-sm">(Current year sightreading examples will be delivered AFTER the festival closes.)</span>
+                                        @endif
+                                        @if($examples->where('id', $sightreading->id)->first())
+                                            <span class="text-sm">(Previously ordered.)</span>
+                                        @endif
+                                    </div>
 
-                            </li>
+                                </li>
+                            @endif
                         @endforeach
                         </ul>
                         @error('sightreadings')
@@ -48,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end pr-4 mb-2">
+                <div class="flex justify-start pr-4 my-2">
                     <button type="submit"
                             id="submit"
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-4"
@@ -113,12 +127,18 @@
                 --}}
             </form>
 
+            <x-paypals.sightreading
+                amountduenet="0"
+                :eventversion="$event"
+                :school="$school"
+            />
+
         </div>
     </div>
 
     <script>
 
-        function updateCountCost()
+        function updateCountCost($user_id, $event_id)
         {
             var $count = 0;
             var $cost = 0;
@@ -131,11 +151,17 @@
 
             });
 
-            $cost = ($count * 40);
+            $cost = ($count * 50);
 
             $submit = document.getElementById('submit');
 
             $value = $submit.innerText = 'Update Sightreadings ('+$count+' Examples = $'+$cost+')';
+
+            document.getElementById('display_amount_due_net').innerText = 'PayPal Payment Amount Due: $'+$cost+'.00';
+            document.getElementById('amount').value = $cost;
+
+            document.getElementById('new_custom').value = $user_id+'*'+$event_id+'*'+$cost;
+
 
         }
     </script>

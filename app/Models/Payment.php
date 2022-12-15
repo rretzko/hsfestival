@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Payment extends Model
 {
@@ -79,6 +80,26 @@ class Payment extends Model
     public function getPaymentDateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('project.date_format')) : null;
+    }
+
+    public function recordIPNPayment(array $dto)
+    {
+        $payment = Payment::create(
+            [
+                'user_id' => $dto['user_id'],
+                'event_id' => $dto['event_id'],
+                'paymenttype_id' => $dto['paymenttype_id'],
+                'vendor_id' => $dto['vendor_id'],
+                'amount' => $dto['amount'],
+                'updated_by' => 368,
+            ],
+        );
+
+        if($payment->id){
+            Log::info('***** Payment made for: '.$payment->user_id);
+        }else{
+            Log::info('@@@@@ Payment NOT made for: '.$payment->user_id);
+        }
     }
 
     public function setPaymentDateAttribute($value)

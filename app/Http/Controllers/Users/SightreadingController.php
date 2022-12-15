@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Sightreading;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SightreadingController extends Controller
 {
@@ -21,6 +23,7 @@ class SightreadingController extends Controller
             'event' => CurrentEvent::currentEvent(),
             'examples' => auth()->user()->sightreadings,
             'sightreadings' => Sightreading::orderByDesc('year_of')->get(),
+            'school' => auth()->user()->school,
         ]);
     }
 
@@ -39,12 +42,66 @@ class SightreadingController extends Controller
         ]);
 
         if($request['sightreadings']) {
-            auth()->user()->sightreadings()->sync($request['sightreadings']);
+            auth()->user()->sightreadings()->attach($request['sightreadings']);
         }else{
             auth()->user()->sightreadings()->detach();
         }
 
+        //download pdf invoice/quote
+        $pdf = $this->pdf($request['sightreadings']);
+
+        //email requested docs
+        $this->emailSightReadingAttachments($request['sightreadings'], $pdf);
+
+        session()->flash('sent', 'Please check your email for the requested sight reading samples.');
+
         return $this->index();
+    }
+
+    /** END OF PUBLIC FUNCTIONS **************************************************/
+
+    private function emailSightReadingAttachments(array $sightreadings, $pdf): void
+    {
+        $data = [];
+        $data['email'] = 'rick@mfrholdings.com';
+        $data['title'] = 'Requested Sight Reading Materials';
+        $data['body'] = 'Email body goes here';
+
+        $files = [];
+        foreach($sightreadings AS $sightreading){
+
+            $sr = Sightreading::find($sightreading);
+
+            $path = 'assets\sightreadings\\'.$sr->year_of.'.pdf';
+
+            $files[] = public_path($path);
+        }
+
+        Mail::send('emails.sightReadingEmail', $data, function($message) use($data, $files, $pdf){
+           $message->to($data['email'], $data['email'])
+           ->subject($data['title']);
+
+           foreach($files AS $file){
+               $message->attach($file);
+           }
+
+           $message->attachData($pdf->output(), 'invoice_quote.pdf');
+
+        });
+    }
+
+    public function pdf(array $sightreadings)
+    {
+        $event = CurrentEvent::currentEvent();
+        //$service = new \App\Services\VaccinationTablesService($event);
+        //$vaccinationtables = $service->tables();
+        $filename = 'sightreadings_invoice_quote_'.date('Ymd_Gis').'.pdf';
+
+        $pdf = PDF::loadView('users.sightreadings.pdfs.invoiceQuote',
+            compact('event','sightreadings'));
+
+        return $pdf;
+        //return $pdf->download($filename);
     }
 
 }

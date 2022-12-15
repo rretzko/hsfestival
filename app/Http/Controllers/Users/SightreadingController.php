@@ -35,11 +35,13 @@ class SightreadingController extends Controller
      */
     public function update(Request $request)
     {
+        //validation
         $inputs = $request->validate([
             'sightreadings' => ['nullable','array'],
             'sightreadings.*' =>['nullable', 'numeric'],
         ]);
 
+        //store sightreadings
         if($request['sightreadings']) {
             auth()->user()->sightreadings()->attach($request['sightreadings']);
         }else{
@@ -64,7 +66,7 @@ class SightreadingController extends Controller
         $data = [];
         $data['email'] = 'rick@mfrholdings.com';
         $data['title'] = 'Requested Sight Reading Materials';
-        $data['body'] = 'Email body goes here';
+        $data['body'] = '';
 
         $files = [];
         foreach($sightreadings AS $sightreading){
@@ -92,15 +94,14 @@ class SightreadingController extends Controller
     public function pdf(array $sightreadings)
     {
         $event = CurrentEvent::currentEvent();
-        //$service = new \App\Services\VaccinationTablesService($event);
-        //$vaccinationtables = $service->tables();
         $filename = 'sightreadings_invoice_quote_'.date('Ymd_Gis').'.pdf';
+        $invoiceid = $event->id.'_'.date('Ynd_Gis');
+        $pdfs = Sightreading::find($sightreadings);
+        $payment_due = (count($sightreadings) * 50);
 
         $pdf = PDF::loadView('users.sightreadings.pdfs.invoiceQuote',
-            compact('event','sightreadings'));
+            compact('event','invoiceid','payment_due', 'pdfs', 'sightreadings'));
 
         return $pdf;
-        //return $pdf->download($filename);
     }
-
 }

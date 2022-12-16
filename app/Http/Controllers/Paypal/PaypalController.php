@@ -43,7 +43,6 @@ class PaypalController extends Controller
         //create a log of the transaction
         $this->save_log_file = true;
 Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
-foreach($_POST AS $key => $value){Log::info('Post["'.$key.'"] => '.$value);}
     }
 
     public function update()

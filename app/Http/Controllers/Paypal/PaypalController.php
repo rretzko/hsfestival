@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Paypal;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sightreadings\SightreadingPayment;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -22,6 +23,8 @@ class PaypalController extends Controller
     public function __construct()
     {
 foreach($_POST AS $key => $value){Log::info('$_POST['.$key.'] => '.$value);}
+Log::info('========================================================');
+if(array_key_exists('custom', $_POST)){$this->updatePayment();}
 
         $this->ppipn = new \App\Models\Paypal\PaypalIPN();
 
@@ -140,6 +143,21 @@ Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
     private function userId(array $parts)
     {
         return $parts[0];
+    }
+
+    private function updatePayment()
+    {
+        $parts = explode('*', $_POST['custom']);
+        $user = User::find($parts[0]);
+
+        SightreadingPayment::create(
+            [
+                'user_id' => $user->id,
+                'school_id' => $user->school->id,
+                'vendor_id' => $_POST['ipn_track_id'],
+                'amount' => $parts[2],
+            ]
+        );
     }
 }
 

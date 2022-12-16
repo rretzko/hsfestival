@@ -14,7 +14,7 @@
             </header>
             <form method="post"
                   action="{{ route('user.sightreading.update') }}"
-                  onsubmit="return confirm('When you click CONFIRM, you order will immediately be emailed to {{ auth()->user()->email }} and your event balance due will be appropriately updated. These charges CANNOT be refunded!');"
+                  onsubmit="return confirm('When you click OK, you order will immediately be emailed to {{ auth()->user()->email }} and your event balance due will be appropriately updated. These charges CANNOT be refunded!');"
             >
                 @csrf
 

@@ -50,7 +50,7 @@ class SightreadingController extends Controller
 
         //store sightreadings
         if($request['sightreadings']) {
-            foreach($request['sightreadings'] AS $sightreading_id){
+            foreach ($request['sightreadings'] as $sightreading_id) {
 
                 SightreadingOrder::create(
                     [
@@ -60,16 +60,20 @@ class SightreadingController extends Controller
                     ]
                 );
             }
+
+            //create pdf invoice/quote attachment
+            $pdf = $this->pdf($request['sightreadings']);
+
+            //email requested docs
+            $this->emailSightReadingAttachments($request['sightreadings'], $pdf);
+
+            //create message
+            session()->flash('sent', 'Please check your email for the requested sight reading samples.');
+
+        }else{
+
+            session()->flash('none_sent', 'No Sightreading examples were selected.');
         }
-
-        //create pdf invoice/quote attachment
-        $pdf = $this->pdf($request['sightreadings']);
-
-        //email requested docs
-        $this->emailSightReadingAttachments($request['sightreadings'], $pdf);
-
-        //create message
-        session()->flash('sent', 'Please check your email for the requested sight reading samples.');
 
         return $this->index();
     }

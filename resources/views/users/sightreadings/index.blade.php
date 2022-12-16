@@ -32,6 +32,12 @@
                         </div>
                     @endif
 
+                    @if(session()->has('none_sent'))
+                        <div id="advisory" class="bg-green-100 text-black my-4 px-2">
+                            {{ session()->get('none_sent') }}<br />
+                        </div>
+                    @endif
+
                     <div class="ml-2 mt-6 flex flex-col">
                         <ul>
                         @foreach($sightreadings AS $sightreading)

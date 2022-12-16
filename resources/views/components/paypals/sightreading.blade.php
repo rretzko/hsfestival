@@ -13,7 +13,7 @@
                 <!-- Identify your business so that you can collect the payments. -->
                 <input type="hidden" name="business" value="njacda@mfrholdings.com" >
                 <input type="hidden" name="notify_url" value="https://highschoolfestival.com/update_account" >
-                <input type="hidden" name="custom" id="new_custom" value="{{ auth()->id().'*'.$event->id.'*'.$outstandingBalance }}" >
+                <input type="hidden" name="custom" value="{{ auth()->id().'*'.$event->id.'*'.$outstandingBalance }}" >
                 <!-- Specify a subscribe button -->
                 <input type="hidden" name="cmd" value="_xclick" >
                 <!-- Identify the registrant -->

@@ -2,6 +2,8 @@
 
 namespace App\Models\Paypal;
 
+use Illuminate\Support\Facades\Log;
+
 class PaypalIPN
 {
     /** @var bool Indicates if the sandbox endpoint is used. */
@@ -26,7 +28,7 @@ class PaypalIPN
      * @return void
      */
     public function useSandbox()
-    {
+    {Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         $this->use_sandbox = true;
     }
 
@@ -48,8 +50,10 @@ class PaypalIPN
     public function getPaypalUri()
     {
         if ($this->use_sandbox) {
+            Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
             return self::SANDBOX_VERIFY_URI;
         } else {
+            Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
             return self::VERIFY_URI;
         }
     }
@@ -62,11 +66,11 @@ class PaypalIPN
      * @throws Exception
      */
     public function verifyIPN()
-    {
+    {Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         if (!count($_POST)) {
             throw new Exception("Missing POST Data");
         }
-
+Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         $raw_post_data = file_get_contents('php://input');
         $raw_post_array = explode('&', $raw_post_data);
         $myPost = array();
@@ -82,7 +86,7 @@ class PaypalIPN
                 $myPost[$keyval[0]] = urldecode($keyval[1]);
             }
         }
-
+Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         // Build the body of the verification post request, adding the _notify-validate command.
         $req = 'cmd=_notify-validate';
         $get_magic_quotes_exists = false;
@@ -97,7 +101,7 @@ class PaypalIPN
             }
             $req .= "&$key=$value";
         }
-
+Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         // Post the data back to PayPal, using curl. Throw exceptions if errors occur.
         $ch = curl_init($this->getPaypalUri());
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -126,19 +130,21 @@ class PaypalIPN
             curl_close($ch);
             throw new Exception("cURL error: [$errno] $errstr");
         }
-
+Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         $info = curl_getinfo($ch);
         $http_code = $info['http_code'];
         if ($http_code != 200) {
             throw new Exception("PayPal responded with http code $http_code");
         }
-
+Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
         curl_close($ch);
 
         // Check if PayPal verifies the IPN data, and if so, return true.
         if ($res == self::VALID) {
+            Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
             return true;
         } else {
+            Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
             return false;
         }
     }

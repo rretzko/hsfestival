@@ -20,27 +20,28 @@ class PaypalController extends Controller
     private $save_log_file;
 
     public function __construct()
-    {Log::info('Got to controller! @ '.__METHOD__);
+    {Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
         $this->ppipn = new \App\Models\Paypal\PaypalIPN();
-
+        Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
         //set sandbox to true
         $enable_sandbox = false;
         //$this->ppipn->useSandbox();
-
+        Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
         //valid email addresses for business
         $my_email_addresses =
             [
                 'njacda@mfrholdings.com',
                 'rick@mfrholdings.com',
             ];
-
+        Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
         //send confirmation email to user
         $this->send_confirmation_email = true;
         $this->send_confirmation_email_address = 'Rick Retzko <rick@mfrholdings.com>';
         $this->send_confirmation_email_from_address = 'PayPal IPN <rick@mfrholdings.com>';
-
+        Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
         //create a log of the transaction
         $this->save_log_file = true;
+        Log::info('Got to controller! @ '.__METHOD__.':'.__LINE__);
     }
 
     public function update()

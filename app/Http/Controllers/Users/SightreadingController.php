@@ -83,7 +83,7 @@ class SightreadingController extends Controller
     private function emailSightReadingAttachments(array $sightreadings, $pdf): void
     {
         $data = [];
-        $data['email'] = 'rick@mfrholdings.com';
+        $data['email'] = auth()->user()->email;
         $data['title'] = 'Requested Sight Reading Materials';
         $data['body'] = '';
 

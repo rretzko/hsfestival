@@ -27,7 +27,8 @@
                     @if(session()->has('sent'))
                         <div id="advisory" class="bg-green-100 text-black my-4 px-2">
                             {{ session()->get('sent') }}<br />
-                            An invoice and quote are included in your email.
+                            An invoice and quote are included in your email<br />
+                            If you have an outstanding balance, you may also pay via PayPal below.
                         </div>
                     @endif
 
@@ -39,15 +40,15 @@
                                     <div>
                                         <input id="sightreading_{{ $sightreading->id }}" name="sightreadings[]" type="checkbox"
                                                value="{{ $sightreading->id }}"
-                                               class="@if($examples->where('id', $sightreading->id)->first()) bg-gray-400 @endif"
-                                               @if($examples->where('id', $sightreading->id)->first()) DISABLED @endif
+                                               class="@if((bool)$orders->where('sightreading_id', $sightreading->id)->first()) bg-gray-400 @endif"
+                                               @if((bool)$orders->where('sightreading_id', $sightreading->id)->first()) DISABLED @endif
                                                onclick="updateCountCost({{ auth()->id() }},{{ $event->id }})"
                                         >
                                         <label>{{ $sightreading->name.' @ $'.$sightreading->cost }}</label>
                                         @if($sightreading === $sightreadings->first())
                                             <span class="text-sm">(Current year sightreading examples will be delivered AFTER the festival closes.)</span>
                                         @endif
-                                        @if($examples->where('id', $sightreading->id)->first())
+                                        @if((bool)$orders->where('sightreading_id', $sightreading->id)->first())
                                             <span class="text-sm">(Previously ordered.)</span>
                                         @endif
                                     </div>
@@ -68,70 +69,23 @@
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-4"
                             style="color: black;"
                     >
-                        Update Sightreadings
+                        Email Sightreading PDf(s)
                     </button>
 
                 </div>
 
-                {{-- PAYPAL BUTTON --}}
-                {{-- PAYPAL PAYMENTS SUPPRESSED FOR 2023 --}}
-                {{--
-                <div class="flex justify-end"
-                    style="font-size: 1rem; margin-right: 2rem;"
-                >
-
-                    <script src="https://www.paypal.com/sdk/js?client-id=AaEa4PCcKTDHEkVTrNM8ob_kJfycUUXCoI94IXCanWnBfhOHcWrwMFmyQ6ddirKu2340YTFwQ9FWwEdt&currency=USD&disable-funding=credit,card"></script>
-
-                    <!-- Set up a container element for the button -->
-                    <div id="paypal-button-container"></div>
-
-                    <script>
-                        paypal.Buttons({
-                            style: {
-                                layout: 'vertical',
-                                tagline: 'false'
-                            },
-                            createOrder: function(data, actions) {
-                                return actions.order.create({
-                                    purchase_units: [{
-                                        amount: {
-                                            value: "{{ (auth()->user()->sightreadings->count() * 40) }}"
-                                        }
-                                    }],
-                                    user_credentials: [{
-                                        id: {
-                                            value: "{{ auth()->id() }}"
-                                        },
-                                        school: {
-                                            value: "{{ auth()->user()->school->id }}"
-                                        },
-                                        event: {
-                                            value: "{{ $event->id }}"
-                                        },
-                                        sightreading:{
-                                            value: 1
-                                        }
-                                    }],
-
-                                });
-                            },
-                            onApprove: function(data, actions) {
-                                return actions.order.capture().then(function(details) {
-                                    window.location.href = '/success.html';
-                                });
-                            }
-                        }).render("#paypal-button-container");
-
-                    </script>
-                </div>
-                --}}
             </form>
 
-            <x-paypals.sightreading
-                amountduenet="0"
-                :eventversion="$event"
-                :school="$school"
-            />
+            {{-- PAYPAL BUTTON IF OUTSTANDING BALANCE EXISTS --}}
+            <div>
+                @if($outstanding_balance)
+                    <x-paypals.sightreading
+                        outstandingBalance="{{ $outstanding_balance }}"
+                        :event="$event"
+                        :school="$school"
+                    />
+              @endif
+            </div>
 
         </div>
     </div>
@@ -157,10 +111,10 @@
 
             $value = $submit.innerText = 'Update Sightreadings ('+$count+' Examples = $'+$cost+')';
 
-            document.getElementById('display_amount_due_net').innerText = 'PayPal Payment Amount Due: $'+$cost+'.00';
-            document.getElementById('amount').value = $cost;
+            //document.getElementById('display_amount_due_net').innerText = 'PayPal Payment Amount Due: $'+$cost+'.00';
+            //document.getElementById('amount').value = $cost;
 
-            document.getElementById('new_custom').value = $user_id+'*'+$event_id+'*'+$cost;
+            //document.getElementById('new_custom').value = $user_id+'*'+$event_id+'*'+$cost;
 
 
         }

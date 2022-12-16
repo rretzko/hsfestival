@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Paypal;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sightreadings\SightreadingPayment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -50,7 +51,14 @@ class PaypalController extends Controller
             Log::info('***** LOG POST INFO *****');
             $this->logPostInfo($dto);
 
-            $payment = new Payment;
+            //payment factory to determine correct method
+            if($dto['item_name'] === 'sightreading'){
+                $payment = new SightreadingPayment();
+            }else {
+                $payment = new Payment;
+            }
+
+            //record payment
             $payment->recordIPNPayment($dto);
 
         }else{

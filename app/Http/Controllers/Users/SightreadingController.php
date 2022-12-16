@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Sightreading;
+use App\Models\Sightreadings\BalanceDue;
+use App\Models\Sightreadings\SightreadingOrder;
+use App\Models\Sightreadings\SightreadingPayment;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,11 +22,15 @@ class SightreadingController extends Controller
      */
     public function index()
     {
+        $bd = new BalanceDue(auth()->id());
+
         return view('users.sightreadings.index', [
             'event' => CurrentEvent::currentEvent(),
             'examples' => auth()->user()->sightreadings,
             'sightreadings' => Sightreading::orderByDesc('year_of')->get(),
             'school' => auth()->user()->school,
+            'orders' => SightreadingOrder::where('user_id', auth()->id())->get(),
+            'outstanding_balance' => $bd->balanceDue(),
         ]);
     }
 
@@ -43,17 +50,25 @@ class SightreadingController extends Controller
 
         //store sightreadings
         if($request['sightreadings']) {
-            auth()->user()->sightreadings()->attach($request['sightreadings']);
-        }else{
-            auth()->user()->sightreadings()->detach();
+            foreach($request['sightreadings'] AS $sightreading_id){
+
+                SightreadingOrder::create(
+                    [
+                        'user_id' => auth()->id(),
+                        'school_id' => auth()->user()->school->id,
+                        'sightreading_id' => $sightreading_id,
+                    ]
+                );
+            }
         }
 
-        //download pdf invoice/quote
+        //create pdf invoice/quote attachment
         $pdf = $this->pdf($request['sightreadings']);
 
         //email requested docs
         $this->emailSightReadingAttachments($request['sightreadings'], $pdf);
 
+        //create message
         session()->flash('sent', 'Please check your email for the requested sight reading samples.');
 
         return $this->index();

@@ -22,9 +22,18 @@ class PaypalController extends Controller
 
     public function __construct()
     {
-foreach($_POST AS $key => $value){Log::info('$_POST['.$key.'] => '.$value);}
-Log::info('========================================================');
-if(array_key_exists('custom', $_POST)){$this->updatePayment();}
+
+        /**
+         * Unable to get PayPal verification working
+         * The following is a workaround which uses the $_POST from PayPal
+         * without the handshake verification.
+         */
+            //foreach($_POST AS $key => $value){Log::info('$_POST['.$key.'] => '.$value);}
+            //Log::info('========================================================');
+            if(array_key_exists('custom', $_POST)){
+                $this->updatePayment();
+            }
+        /** end workaround */
 
         $this->ppipn = new \App\Models\Paypal\PaypalIPN();
 

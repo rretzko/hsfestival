@@ -9,7 +9,7 @@
         <h4 class="font-bold mb-4 px-4" id="display_amount_due_net" style="background-color: rgba(0,0,0,0.1);">Outstanding Balance: ${{ number_format($outstandingBalance, 2) }}</h4>
 
         <div class="m-auto" style="width: 12rem;">
-            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank" >
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" >
                 <!-- Identify your business so that you can collect the payments. -->
                 <input type="hidden" name="business" value="njacda@mfrholdings.com" >
                 <input type="hidden" name="notify_url" value="https://highschoolfestival.com/update_account" >

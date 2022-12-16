@@ -28,7 +28,7 @@ class PaypalIPN
      * @return void
      */
     public function useSandbox()
-    {Log::info('Got to ipn! @ '.__METHOD__.':'.__LINE__);
+    {
         $this->use_sandbox = true;
     }
 

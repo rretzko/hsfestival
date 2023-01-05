@@ -47,7 +47,7 @@
                             {{ $payment->payment_number }}
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <a href="{{ route('eventmanagement.payments.edit',['payment' => $payment]) }}"
+                            <a href="{{ route('eventmanagement.sightreadings.payments.edit',['sightreadingPayment' => $payment]) }}"
                                class="">
                                 <button class="bg-indigo-500 px-2 rounded-full ">
                                     Edit
@@ -55,7 +55,7 @@
                             </a>
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <a href="{{ route('eventmanagement.payments.delete',['payment' => $payment]) }}"
+                            <a href="{{ route('eventmanagement.sightreadings.payments.remove',['sightreadingPayment' => $payment]) }}"
                                class="">
                                 <button class="bg-red-500 px-2 rounded-full ">
                                     Delete

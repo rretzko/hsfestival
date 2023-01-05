@@ -29,7 +29,7 @@
                                     .input-group{display: flex; flex-direction: column; margin-bottom: 2px; color: black;}
                                     label{color: white;}
                                 </style>
-                                <form method="POST" action="{{ route('eventmanagement.sightreadings.payments.store') }}" >
+                                <form method="POST" action="{{ route('eventmanagement.sightreadings.payments.update', ['sightreadingPayment' => $sightreadingPayment]) }}" >
 
                                     @csrf
 
@@ -38,7 +38,11 @@
                                         <select name="user_id">
                                             <option value="0">Select</option>
                                             @foreach($users AS $user)
-                                                <option value="{{$user->id }}">{{$user->name }}</option>
+                                                <option value="{{$user->id }}"
+                                                @if($sightreadingPayment->user_id == $user->id) selected @endif
+                                                >
+                                                    {{$user->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('user_id')
@@ -51,7 +55,11 @@
                                         <select name="school_id">
                                             <option value="0">Select</option>
                                             @foreach($schools AS $school)
-                                                <option value="{{$school->id }}">{{$school->name }}</option>
+                                                <option value="{{$school->id }}"
+                                                @if($sightreadingPayment->school_id == $school->id) selected @endif
+                                                >
+                                                    {{$school->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('school_id')
@@ -61,7 +69,7 @@
 
                                     <div class="input-group">
                                         <label for="amount">Amount</label>
-                                        <input name="amount" class="px-2" type="numeric" value=""/>
+                                        <input name="amount" class="px-2" type="numeric" value="{{ $sightreadingPayment->amount }}"/>
                                         @error('amount')
                                         <span class="bg-white text-red-500 px-2 text-sm ">{{ $message }}</span>
                                         @enderror
@@ -69,7 +77,7 @@
 
                                     <div class="input-group">
                                         <label for="vendor_id">Payment Number</label>
-                                        <input name="vendor_id" type="text" value="" placeholder="Any identifying value"/>
+                                        <input name="vendor_id" type="text" value="{{ $sightreadingPayment->vendor_id }}" placeholder="Any identifying value"/>
                                         @error('vendor_id')
                                         <span class="bg-white text-red-500 px-2 text-sm ">{{ $message }}</span>
                                         @enderror
@@ -84,14 +92,8 @@
                         </div>
                     </div>
 
-                    <div>
-                        @if(session()->has('success'))
-                            <div class="bg-green-100 text-green-800 px-2">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                    </div>
                     {{-- PAYMENTS TABLE --}}
+                    <!-- This example requires Tailwind CSS v2.0+ -->
                     <x-table.sightreadings.payments :payments="$payments"/>
 
                 </section>

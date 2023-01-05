@@ -285,8 +285,14 @@ Route::group([
     /** PAYMENTS FOR SIGHTREADINGS */
     Route::get('/sightreadingpayments', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'index'])
         ->name('sightreadings.payments.index');
+    Route::get('/sightreadingpayments/edit/{sightreadingPayment}', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'edit'])
+        ->name('sightreadings.payments.edit');
+    Route::get('/sightreadingpayments/remove/{sightreadingPayment}', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'destroy'])
+        ->name('sightreadings.payments.remove');
     Route::post('/sightreadingpayments/store', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'store'])
         ->name('sightreadings.payments.store');
+    Route::post('/sightreadingpayments/update/{sightreadingPayment}', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'update'])
+        ->name('sightreadings.payments.update');
 
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])

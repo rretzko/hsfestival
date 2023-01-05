@@ -74,24 +74,45 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param SightreadingPayment $sightreadingPayment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SightreadingPayment $sightreadingPayment)
     {
-        //
+        $users = User::orderBy('name')->get();
+        $schools = School::orderBy('name')->get();
+        $payments = SightreadingPayment::orderByDesc('updated_at')->get();
+
+        return view('eventmanagement.sightreadings.payments.edit',
+            compact('sightreadingPayment', 'payments', 'schools', 'users')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param SightreadingPayment $sightreadingPayment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SightreadingPayment $sightreadingPayment)
     {
-        //
+        $inputs = $request->validate(
+            [
+                'amount' => ['required','numeric'],
+                'school_id' => ['required','integer','exists:schools,id'],
+                'user_id' => ['required','integer','exists:users,id'],
+                'vendor_id' => ['nullable','string'],
+            ]
+        );
+
+        $sightreadingPayment->update($inputs);
+
+        $sightreadingPayment->refresh();
+
+        session()->flash('success', 'The payment of $'.$sightreadingPayment->amount.' has been updated.');
+
+        return $this->index();
     }
 
     /**

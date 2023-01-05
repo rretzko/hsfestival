@@ -46,6 +46,11 @@ class SightreadingPayment extends Model
         return $this->belongsTo(School::class);
     }
 
+    public function schoolName(): string
+    {
+        return $this->school->name;
+    }
+
     public function sightreading()
     {
         return $this->belongsTo(Sightreading::class);
@@ -54,5 +59,10 @@ class SightreadingPayment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function userName(): string
+    {
+        return $this->user->name;
     }
 }

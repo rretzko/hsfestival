@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Eventmanagement\Sightreadings;
 
+use App\Exports\SightreadingPaymentsExport;
 use App\Http\Controllers\Controller;
 use App\Models\School;
 use App\Models\Sightreadings\SightreadingPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaymentController extends Controller
 {
@@ -130,5 +132,10 @@ class PaymentController extends Controller
         session()->flash('success', 'The $'.$amount.' payment has been removed.');
 
         return $this->index();
+    }
+
+    public function export()
+    {
+        return Excel::download(new SightreadingPaymentsExport, 'sightReadingPayments.csv');
     }
 }

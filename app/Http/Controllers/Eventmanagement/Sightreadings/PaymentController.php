@@ -118,11 +118,17 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param SightreadingPayment $sightreadingPayment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SightreadingPayment $sightreadingPayment)
     {
-        //
+        $amount = $sightreadingPayment->amount;
+
+        $sightreadingPayment->delete();
+
+        session()->flash('success', 'The $'.$amount.' payment has been removed.');
+
+        return $this->index();
     }
 }

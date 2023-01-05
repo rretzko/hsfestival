@@ -282,6 +282,12 @@ Route::group([
     Route::get('/payments/delete/{payment}', [\App\Http\Controllers\Eventmanagement\PaymentController::class, 'destroy'])
         ->name('payments.delete');
 
+    /** PAYMENTS FOR SIGHTREADINGS */
+    Route::get('/sightreadingpayments', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'index'])
+        ->name('sightreadings.payments.index');
+    Route::post('/sightreadingpayments/store', [\App\Http\Controllers\Eventmanagement\Sightreadings\PaymentController::class, 'store'])
+        ->name('sightreadings.payments.store');
+
     /** REGISTRANTS */
     Route::get('/registrants/download', [\App\Http\Controllers\Eventmanagement\RegistrantController::class, 'download'])
         ->name('registrants.download');

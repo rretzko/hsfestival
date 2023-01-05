@@ -17,6 +17,11 @@ class SightreadingPayment extends Model
     protected $fillable = ['amount','school_id','vendor_id','user_id'];
     protected $with = ['school','sightreading','user'];
 
+    public function lastUpdateDateMmmDdYyyy(): string
+    {
+        return $this->updated_at;
+    }
+
     public function recordIPNPayment(array $dto): void
     {Log::info('***** Got to: '.__FUNCTION__);
         $user = User::find($dto['user_id']);

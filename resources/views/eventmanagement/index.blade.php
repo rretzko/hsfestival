@@ -37,8 +37,20 @@
                                 <a href="{{ route('eventmanagement.loginas.index') }}">Log In As...</a>
                             </li>
 
-                            <li>
-                                <a href="{{ route('eventmanagement.payments.index') }}">Payments</a>
+                            <li>Payments
+                                <ul class="ml-4 list-disc text-sm">
+                                    <li>
+                                        <a href="{{ route('eventmanagement.payments.index') }}">
+                                            Registrant Payments
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('eventmanagement.sightreadings.payments.index') }}">
+                                            Sight Reading Payments
+                                        </a>
+                                    </li>
+                                </ul>
+                                Payments</a>
                             </li>
 
                             <li>

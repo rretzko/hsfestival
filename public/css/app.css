@@ -1994,6 +1994,9 @@ select {
 .m-0 {
 	margin: 0px;
 }
+.m-auto {
+	margin: auto;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -2536,10 +2539,6 @@ select {
 .bg-green-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
-}
-.bg-gray-300 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
 }
 .bg-gray-400 {
 	--tw-bg-opacity: 1;

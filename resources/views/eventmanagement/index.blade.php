@@ -37,7 +37,8 @@
                                 <a href="{{ route('eventmanagement.loginas.index') }}">Log In As...</a>
                             </li>
 
-                            <li>Payments
+                            <li>
+                                <span class="text-gray-300">Payments</span>
                                 <ul class="ml-4 list-disc text-sm">
                                     <li>
                                         <a href="{{ route('eventmanagement.payments.index') }}">
@@ -50,7 +51,6 @@
                                         </a>
                                     </li>
                                 </ul>
-                                Payments</a>
                             </li>
 
                             <li>
@@ -58,16 +58,16 @@
                             </li>
 
                             <li>
-                                Reports
+                                <span class="text-gray-300">Reports</span>
                                 <ul style="margin-left: 1rem; font-size: smaller; list-style-type: disc;">
                                     <li>
                                         <a href="{{ route('eventmanagement.program.pdf') }}">Program PDF</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('eventmanagement.sightreading.pdf') }}">Sight Reading Orders</a>
+                                        <a href="{{ route('eventmanagement.sightreading.index') }}">Sight Reading Orders</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('eventmanagement.vaccinations.pdf') }}">Vaccinations</a>
+                                        <a href="{{ route('eventmanagement.vaccinations.pdf') }}">Vaccinations PDF</a>
                                     </li>
                                 </ul>
                             </li>

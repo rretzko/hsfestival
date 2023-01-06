@@ -16,6 +16,11 @@ class SightreadingOrder extends Model
     protected $fillable = ['school_id','sightreading_id','user_id'];
     protected $with = ['school','sightreading','user'];
 
+    public function lastUpdateDateMmmDdYYYY(): string
+    {
+        return $this->updated_at;
+    }
+
     public function school()
     {
         return $this->belongsTo(School::class);

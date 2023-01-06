@@ -17,17 +17,19 @@
         <tr>
             <th>###</th>
             <th>Name</th>
-            <th>Version</th>
-            <th>Mail to</th>
+            <th>School</th>
+            <th>Example</th>
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
         @forelse($orders AS $order)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $order['name'] }}</td>
-                <td>{{ $order['sightreading'] }}</td>
-                <td>{{ $order['school'] }}<br />{!! $order['school_address_block'] !!}</td>
+                <td>{{ $order->user->name }}</td>
+                <td>{{ $order->school->name }}</td>
+                <td style="text-align: center;">{{ $order->sightreading->year_of }}</td>
+                <td>{{ $order->updated_at }}</td>
             </tr>
         @empty
             <tr><td colspan="4">No sightreading orders found</td></tr>

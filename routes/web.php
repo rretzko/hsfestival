@@ -322,8 +322,12 @@ Route::group([
     /** REPORTS */
     Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
         ->name('program.pdf');
-    Route::get('/sightreading', [\App\Http\Controllers\Eventmanagement\Pdfs\SightreadingController::class, 'pdf'])
-        ->name('sightreading.pdf');
+    Route::get('/sightreading/index', [\App\Http\Controllers\Eventmanagement\Sightreadings\SightreadingController::class, 'index'])
+        ->name('sightreading.index');
+    Route::get('/sightreading/orders/export', [\App\Http\Controllers\Eventmanagement\Sightreadings\SightreadingController::class, 'export'])
+        ->name('sightreadings.orders.export');
+    Route::get('/sightreading.orders.pdf', [\App\Http\Controllers\Eventmanagement\Sightreadings\SightreadingController::class, 'pdf'])
+        ->name('sightreading.orders.pdf');
     Route::get('/vaccinations', [\App\Http\Controllers\Eventmanagement\Pdfs\VaccinationsController::class, 'pdf'])
         ->name('vaccinations.pdf');
 

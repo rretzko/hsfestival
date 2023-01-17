@@ -91,7 +91,7 @@
                                     </li>
                                     <li class="font-bold">Sight Reading
                                         <ul class="font-normal ml-2">
-                                            <li>{{ $sightreadingpackets->count() }} Packets @ $50 per packet</li>
+                                            <li>{{ $sightreadingpackets }} Packets @ $50 per packet</li>
                                         </ul></li>
                                 </ul>
                             </data>
@@ -100,7 +100,7 @@
                         <div class="category mt-4">
                             <label>Due:</label>
                             <data>
-                                ${{ number_format(auth()->user()->paymentDue, 2) }}
+                                ${{ number_format(auth()->user()->paymentDue + ($sightreadingpackets * 50), 2) }}
                             </data>
                         </div>
 
@@ -114,7 +114,7 @@
                         <div class="category">
                             <label>Balance:</label>
                             <data>
-                                ${{ number_format(auth()->user()->paymentBalance, 2) }}
+                                ${{ number_format(auth()->user()->paymentBalance + ($sightreadingpackets * 50), 2) }}
                             </data>
                         </div>
 

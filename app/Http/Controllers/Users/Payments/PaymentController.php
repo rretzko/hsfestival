@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Sightreading;
+use App\Models\Sightreadings\SightreadingOrder;
+use App\Models\Sightreadings\SightreadingPayment;
 use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,10 @@ class PaymentController extends Controller
     public function index()
     {
         $event = CurrentEvent::currentEvent();
-        $sightreadingpackets = auth()->user()->sightreadings()->wherePivot('event_id', $event->id)->get();
+        $sightreadingOrders = SightreadingOrder::where('user_id', auth()->id())->get()->count();
+        $sightreadingPayments = (SightreadingPayment::where('user_id', auth()->id())->sum('amount') / 50);
+        $sightreadingpackets = ($sightreadingOrders - $sightreadingPayments);
+        //$sightreadingpackets = auth()->user()->sightreadings()->wherePivot('event_id', $event->id)->get();
 
         return view('users.payments.index',
             compact('event','sightreadingpackets'));
@@ -32,14 +37,19 @@ class PaymentController extends Controller
      */
     public function download()
     {
-        $event = Event::currentEvent();
+        $event = CurrentEvent::currentEvent();
         $filename = 'hsf_invoice_'.date('Ymd_Gis',strtotime('NOW')).'.pdf';
         $schoolid = auth()->user()->school->id;
 
         $invoiceid = $event->id.'_'.auth()->id().'_'.$schoolid.'_hsf';
 
+        //sightreading packets outstanding
+        $sightreadingOrders = SightreadingOrder::where('user_id', auth()->id())->get()->count();
+        $sightreadingPayments = (SightreadingPayment::where('user_id', auth()->id())->sum('amount') / 50);
+        $sightreadingPackets = ($sightreadingOrders - $sightreadingPayments);
+
         $pdf = PDF::loadView('users.pdfs.invoice',
-            compact('invoiceid', 'event'))
+            compact('invoiceid', 'event', 'sightreadingPackets'))
             ->setPaper('letter','portrait');
 
         return $pdf->download($filename);

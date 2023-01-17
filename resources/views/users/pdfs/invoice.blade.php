@@ -65,6 +65,18 @@
                     </td>
                 </tr>
             @endforeach
+            @if($sightreadingPackets){
+                <tr>
+                    <td style="text-align: center; vertical-align: top:">{{ $sightreadingPackets }}</td>
+                    <td style="text-align: center; vertical-align: top;">Sight Reading Packets Outstanding</td>
+                    <td style="text-align: right;">
+                        ${{ number_format(($sightreadingPackets * 50), 2) }}
+                    </td>
+                    <td style="text-align: right;">
+                        ${{ number_format(($sightreadingPackets * 50), 2) }}
+                    </td>
+                </tr>
+            @endif
         </table>
     </div>
 
@@ -76,7 +88,7 @@
                         Total Due:
                     </td>
                     <td style="text-align: right; vertical-align: top; width: 20%;">
-                        ${{ number_format(auth()->user()->paymentDue, 2) }}
+                        ${{ number_format(auth()->user()->paymentDue + ($sightreadingPackets * 50), 2) }}
                     </td>
                 </tr>
                 <tr style="border-top: 1px solid black;">
@@ -92,7 +104,7 @@
                     Balance Due:
                 </td>
                 <td style="text-align: right; vertical-align: top;">
-                    ${{ number_format(auth()->user()->paymentBalance, 2) }}
+                    ${{ number_format(auth()->user()->paymentDue + ($sightreadingPackets * 50), 2) }}
                 </td>
             </tr>
 

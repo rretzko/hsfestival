@@ -130,7 +130,8 @@ class Ensemble extends Model
 
     public function getIsParticipatingAttribute() : bool
     {
-        return (bool)$this->events()->where('event_id', CurrentEvent::currentEvent()->id)->first();
+        //return (bool)$this->events()->where('event_id', CurrentEvent::currentEvent()->id)->first();
+        return $this->event_id == CurrentEvent::currentEvent()->id;
     }
 
     public function performanceOrder(Event $event)

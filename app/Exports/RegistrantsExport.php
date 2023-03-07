@@ -36,7 +36,8 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             'fourth date',
             'permissions',
             'plaque',
-            'ensembles',
+            'ensembles#',
+            'ensembles'
         ];
     }
 
@@ -46,7 +47,14 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
      */
     public function map($registrant): array
     {
-        return [
+        $ensembles = [];
+        foreach($registrant->ensembles AS $ensemble){
+            $ensembles[] = $ensemble->name;
+        }
+
+        sort($ensembles);
+
+        $a = [
             $registrant->name,
             $registrant->email,
             $registrant->phones->where('phonetype_id',1)->first() ? $registrant->phones->where('phonetype_id',1)->first()->formatPhone() : '',
@@ -63,5 +71,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             $registrant->userOptionPlaque ? 'Y' : 'N',
             $registrant->ensembleCount,
         ];
+
+        return array_merge($a, $ensembles);
     }
 }

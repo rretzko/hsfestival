@@ -61,7 +61,8 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function ensembles()
     {
-        return $this->hasMany(Ensemble::class);
+        return $this->hasMany(Ensemble::class)
+            ->where('event_id',CurrentEvent::currentEvent()->id);
     }
 
     /**

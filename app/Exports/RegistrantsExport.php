@@ -28,12 +28,22 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             'school',
             'first venue',
             'first date',
+            'second venue',
+            'second date',
+            'third venue',
+            'third date',
+            'fourth venue',
+            'fourth date',
             'permissions',
             'plaque',
             'ensembles',
         ];
     }
 
+    /**
+     * @param $registrant //User model
+     * @return array
+     */
     public function map($registrant): array
     {
         return [
@@ -43,6 +53,12 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             $registrant->school->name,
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->shortname : 'None found',
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->startDateMdy : 'None found',
+            $registrant->currentSecondChoiceVenue ? $registrant->currentSecondChoiceVenue->venue->shortname : 'None found',
+            $registrant->currentSecondChoiceVenue ? $registrant->currentSecondChoiceVenue->venue->startDateMdy : 'None found',
+            $registrant->currentThirdChoiceVenue ? $registrant->currentThirdChoiceVenue->venue->shortname : 'None found',
+            $registrant->currentThirdChoiceVenue ? $registrant->currentThirdChoiceVenue->venue->startDateMdy : 'None found',
+            $registrant->currentFourthChoiceVenue ? $registrant->currentFourthChoiceVenue->venue->shortname : 'None found',
+            $registrant->currentFourthChoiceVenue ? $registrant->currentFourthChoiceVenue->venue->startDateMdy : 'None found',
             $registrant->userOptionPermission ? 'Y' : 'N',
             $registrant->userOptionPlaque ? 'Y' : 'N',
             $registrant->ensembleCount,

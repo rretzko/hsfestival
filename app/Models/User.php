@@ -129,6 +129,30 @@ class User extends Authenticatable implements HasLocalePreference
                 ->first() ?? null;
     }
 
+    public function getCurrentSecondChoiceVenueAttribute()
+    {
+        return Useroptionsvenues::where('user_id', $this->id)
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('preference', 2)
+                ->first() ?? null;
+    }
+
+    public function getCurrentThirdChoiceVenueAttribute()
+    {
+        return Useroptionsvenues::where('user_id', $this->id)
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('preference', 3)
+                ->first() ?? null;
+    }
+
+    public function getCurrentFourthChoiceVenueAttribute()
+    {
+        return Useroptionsvenues::where('user_id', $this->id)
+                ->where('event_id', CurrentEvent::currentEvent()->id)
+                ->where('preference', 4)
+                ->first() ?? null;
+    }
+
     public function getEmailVerifiedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;

@@ -39,7 +39,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
         return [
             $registrant->name,
             $registrant->email,
-            $registrant->phones->where('phonetype_id',1)->first()->formatPhone(),
+            $registrant->phones->where('phonetype_id',1)->first() ? $registrant->phones->where('phonetype_id',1)->first()->formatPhone() : '',
             $registrant->school->name,
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->shortname : 'None found',
             $registrant->currentFirstChoiceVenue ? $registrant->currentFirstChoiceVenue->venue->startDateMdy : 'None found',

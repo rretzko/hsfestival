@@ -320,6 +320,10 @@ Route::group([
         ->name('repertoire.update');
 
     /** REPORTS */
+    Route::get('/plaques/index', [\App\Http\Controllers\Eventmanagement\Plaques\PlaquesController::class, 'index'])
+        ->name('plaques.index');
+    Route::get('/plaques/orders/export', [\App\Http\Controllers\Eventmanagement\Plaques\PlaquesController::class, 'export'])
+        ->name('plaques.orders.export');
     Route::get('/program', [\App\Http\Controllers\Eventmanagement\Pdfs\ProgramController::class, 'pdf'])
         ->name('program.pdf');
     Route::get('/sightreading/index', [\App\Http\Controllers\Eventmanagement\Sightreadings\SightreadingController::class, 'index'])

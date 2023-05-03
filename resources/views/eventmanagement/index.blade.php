@@ -67,6 +67,9 @@
                                         <a href="{{ route('eventmanagement.sightreading.index') }}">Sight Reading Orders</a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('eventmanagement.plaques.index') }}">Plaques Orders</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('eventmanagement.vaccinations.pdf') }}">Vaccinations PDF</a>
                                     </li>
                                 </ul>

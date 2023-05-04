@@ -22,45 +22,16 @@ class RegistrantController extends Controller
      */
     public function index(Venue $venue = null)
     {
+        $event = CurrentEvent::currentEvent();
+
         return view('eventmanagement.registrants.index',
             [
-                'event' => CurrentEvent::currentEvent(),
-                'users' => User::excludeBots($venue),
+                'event' => $event,
+                'users' => CurrentEvent::users(),
                 'venues' => Venue::orderBy('start')->get(),
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -81,32 +52,9 @@ class RegistrantController extends Controller
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function download()
     {
-        $registrants = User::excludeBots();
+        $registrants = CurrentEvent::users(); //User::excludeBots();
 
         $datetime = date('Ynd_Gis');
 

@@ -26,4 +26,22 @@ class CurrentEvent extends Model
         return self->hasMany(Venue::class)
             ->where('event_id', self::$id);
     }
+
+    /**
+     * Return collection of users who have options in the current event sorted by last name
+     * @return User|User[]|\LaravelIdea\Helper\App\Models\_IH_User_C|null
+     */
+    public static function users(): \Illuminate\Support\Collection
+    {
+        $optionIds = Option::where('event_id', CurrentEvent::currentEvent()->id)
+            ->pluck('id')
+            ->toArray();
+
+        $userIds = Useroption::whereIn('option_id', $optionIds)
+            ->distinct()
+            ->pluck('user_id')
+            ->toArray();
+
+        return User::find($userIds)->sortBy('last');
+    }
 }

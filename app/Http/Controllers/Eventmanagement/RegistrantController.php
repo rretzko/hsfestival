@@ -44,7 +44,7 @@ class RegistrantController extends Controller
         return view('eventmanagement.registrants.edit',
             [
                 'ensembletypes' => Ensembletype::all(),
-                'event' => Event::currentEvent(),
+                'event' => CurrentEvent::currentEvent(),//Event::currentEvent(),
                 'options' => Option::all(),
                 'user' => $user,
                 'useroptions' => $user->useroptions,

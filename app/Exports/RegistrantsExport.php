@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\CurrentEvent;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -16,7 +17,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return User::excludeBots();
+        return CurrentEvent::users();
     }
 
     public function headings(): array
@@ -35,7 +36,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             'fourth venue',
             'fourth date',
             'permissions',
-            'plaque',
+            //'plaque',
             'ensembles#',
             'ensembles'
         ];
@@ -68,7 +69,7 @@ class RegistrantsExport implements FromCollection, WithHeadings, WithMapping
             $registrant->currentFourthChoiceVenue ? $registrant->currentFourthChoiceVenue->venue->shortname : 'None found',
             $registrant->currentFourthChoiceVenue ? $registrant->currentFourthChoiceVenue->venue->startDateMdy : 'None found',
             $registrant->userOptionPermission ? 'Y' : 'N',
-            $registrant->userOptionPlaque ? 'Y' : 'N',
+            //$registrant->userOptionPlaque ? 'Y' : 'N',
             $registrant->ensembleCount,
         ];
 

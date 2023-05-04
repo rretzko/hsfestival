@@ -4,8 +4,7 @@
 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
         <div class="flex pr-4 space-x-2" style="justify-content: end; font-size: 0.8rem;">
-            <a href="{{ route('eventmanagement.sightreadings.orders.export') }}">CSV</a>
-            <a href="{{ route('eventmanagement.sightreading.orders.pdf') }}">PDF</a>
+            <a href="{{ route('eventmanagement.plaques.export') }}">CSV</a>
         </div>
         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <table class="min-w-full divide-y divide-gray-300">

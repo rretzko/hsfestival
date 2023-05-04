@@ -74,9 +74,9 @@
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School/Cell</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Venue</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Date</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plaque</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ensembles</th>
+                                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
+                                            {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plaque</th> --}}
+                                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ensembles</th>
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -104,7 +104,7 @@
                                                     {{ $user->currentFirstChoiceVenue ? $user->currentFirstChoiceVenue->venue->startDateMdy : 'none found'}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPermission ? 'Y' : 'N' }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPlaque ? 'Y' : 'N' }}</td>
+                                                {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->userOptionPlaque ? 'Y' : 'N' }}</td> --}}
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $user->ensembleCount }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500 font-medium ">
                                                     <a href="{{ route('eventmanagement.registrant.edit',['user' => $user]) }}"

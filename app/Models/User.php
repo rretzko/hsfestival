@@ -219,13 +219,17 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getUserOptionPermissionAttribute() : bool
     {
+        $eventId = CurrentEvent::currentEvent()->id;
+        $option = new Option;
+        $optionId = $option->optionIdPermissions();
+
         return Useroption::where('user_id', $this->id)
-            ->where('event_id', CurrentEvent::currentEvent()->id)
-            ->where('option_id', Optiontype::PERMISSION)
+            ->where('event_id', $eventId)
+            ->where('option_id', $optionId)
             ->exists()
             ? Useroption::where('user_id', $this->id)
-                ->where('event_id', CurrentEvent::currentEvent()->id)
-                ->where('option_id', Optiontype::PERMISSION)
+                ->where('event_id', $eventId)
+                ->where('option_id', $optionId)
                 ->first()
                 ->value
             : 0;

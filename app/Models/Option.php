@@ -52,6 +52,15 @@ class Option extends Model
         return $this->belongsTo(Optiontype::class);
     }
 
+    public function optionIdPermissions(): int
+    {
+        return Option::query()
+            ->where('descr', 'permissions')
+            ->where('event_id', CurrentEvent::currentEvent()->id)
+            ->first()
+            ->id;
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

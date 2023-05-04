@@ -31,7 +31,7 @@ class CurrentEvent extends Model
      * Return collection of users who have options in the current event sorted by last name
      * @return User|User[]|\LaravelIdea\Helper\App\Models\_IH_User_C|null
      */
-    public static function users(): \Illuminate\Support\Collection
+    public static function users(Venue $venue=null): \Illuminate\Support\Collection
     {
         $optionIds = Option::where('event_id', CurrentEvent::currentEvent()->id)
             ->pluck('id')
@@ -42,6 +42,18 @@ class CurrentEvent extends Model
             ->pluck('user_id')
             ->toArray();
 
-        return User::find($userIds)->sortBy('last');
+        $users = User::find($userIds)->sortBy('last');
+
+        return ($venue)
+            ? $users->filter(function($user) use($venue){
+                return Useroptionsvenues::query()
+                ->where('user_id', $user->id)
+                ->where('venue_id', $venue->id)
+                ->where('preference',1)
+                ->first();
+            })
+            : $users;
+
+        return  $users;
     }
 }

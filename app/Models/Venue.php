@@ -24,7 +24,7 @@ class Venue extends Model
         return DB::table('useroptionsvenues')
             ->where('event_id',CurrentEvent::currentEvent()->id)
             ->where('venue_id', $this->id)
-            ->where('preference', '>', 0)
+            ->where('preference', '=', 1)
             ->count('id');
     }
 

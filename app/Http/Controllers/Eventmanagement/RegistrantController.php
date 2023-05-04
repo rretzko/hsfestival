@@ -27,8 +27,8 @@ class RegistrantController extends Controller
         return view('eventmanagement.registrants.index',
             [
                 'event' => $event,
-                'users' => CurrentEvent::users(),
-                'venues' => Venue::orderBy('start')->get(),
+                'users' => CurrentEvent::users($venue),
+                'venues' => Venue::where('event_id', $event->id)->orderBy('start')->get(),
             ]);
     }
 

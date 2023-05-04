@@ -11,6 +11,8 @@ class Useroptionsvenues extends Model
 
     protected $fillable = ['event_id', 'preference', 'user_id', 'venue_id'];
 
+    protected $table = 'useroptionsvenues';
+
     public function event()
     {
         return $this->belongsTo(Event::class);

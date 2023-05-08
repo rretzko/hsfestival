@@ -10,43 +10,90 @@
             Performance Adjudictors
          </div>
 
-        {{-- NICOLE ALDRICH --}}
-        <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
-            <tbody>
-            <tr>
-                <td rowspan="2" style="vertical-align: top; width: 20%;">
-                    <img src="https://njacda.com/wp-content/uploads/2022/02/adrichNicole_headshot_square.png" width="100px">
-                </td>
-                <td style="font-size: 1.5rem; font-weight: bold;">
-                    Nicole Aldrich
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: justify;">
-                    Nicole Aldrich is Director of Chapel Music at Princeton University, where she directs the 70-voice Princeton University Chapel Choir and oversees a full calendar of concerts and other special musical events. Before coming to Princeton, she served as Director of Choral Activities at Washington University in St. Louis for 10 years and held teaching positions at the University of Delaware and University of Maryland. She has prepared choruses for Helmuth Rilling and Paul Goodwin, has conducted honor choirs in six states, and is a frequent guest clinician and lecturer, with special focus on the application of solo voice studio techniques to the ensemble rehearsal.
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-    {{-- HEATHER BUCHANAN --}}
+    {{-- CHRISTINE BASS --}}
     <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
         <tbody>
         <tr>
             <td rowspan="2" style="vertical-align: top; width: 20%;">
-                <img src="https://njacda.com/wp-content/uploads/2021/09/buchananHeather.jpg" width="100px">
+                <img src="https://njacda.com/wp-content/uploads/2022/10/bassChristine.jpeg" width="100px">
             </td>
             <td style="font-size: 1.5rem; font-weight: bold;">
-                Heather Buchanan
+                Christine Bass
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: justify;">
+                <p>Christine Bass is a distinguished choral director, guest conductor, and clinician, and the Choral Director for the Women's Choir at Temple University. A teacher for almost three decades, she has presented workshops on vocal technique, recruiting male singers, and differentiated instruction for NJEA, NJMEA and ACDA (American Choral Director's Association) high schools and universities. She was named New Jersey MENC Master Music Teacher and received the Governor's Award in Arts Education. She conducted All South Jersey Chorus, New Jersey All State Chorus and in 2009 Christine was honored to conduct the ACDA All National High School Honors Choir in Oklahoma City, and in 2010 South Carolina All-State Women's Chorus. She has served on the NJACDA Board as the Repertoire & Standards Chair for Male Choirs. Christine has been selected for Who's Who of American Teachers and Who's Who of American Women. She was featured in the September 2007 edition of "Choral Director" magazine. Christine currently has a vocal technique DVD, Vocal Transformation, published by Hal Leonard.</p>
+
+                <p>Her top choir, West Singers, performed at the 1999, 2003, and 2005 ACDA National Conventions and the 2001 MENC and 2004 ACDA Eastern Division Conventions. They have sung under the baton of Allen Gilbert, Julius Rudel, Rossen Milanov, with Philadelphia's Singing City Chorus and the Newark Boys Choir. Men of Note, her men's a cappella group, won the Best of High School A Cappella National Championships in 2006, 2007, and 2008.</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- PAGE BREAK --- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+<!-- PAGE BREAK --- PAGE BREAK -->
+
+<x-program.page-header />
+
+<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 1rem;">
+
+    <div style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black; background-color: rgba(0,0,0,0.1); padding-left: 0.5rem; margin-bottom: 0.5rem;">
+        Performance Adjudictors
+    </div>
+    {{-- VINROY BROWN --}}
+    <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
+        <tbody>
+        <tr>
+            <td rowspan="2" style="vertical-align: top; width: 20%;">
+                <img src="https://njacda.com/wp-content/uploads/2022/10/brownVinroy_2.jpg" width="100px">
+            </td>
+            <td style="font-size: 1.5rem; font-weight: bold;">
+                Vinroy Brown
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: justify;">
+                <p>VINROY D. BROWN, JR. holds credits in conducting, sacred music and music education. He is a member of the choral studies, music education and sacred music faculty at Westminster Choir College, where he conducts the Westminster Jubilee Singers and teaches African American Choral Literature and teaches in the Baccalaureate Honors Program. He was most previously  Lecturer of Music in the College of Communication & Fine Arts at Loyola Marymount University where he developed coursework related to music and social justice. A church musician, he is director of music & worship arts at Elmwood United Presbyterian Church. Maintaining an active conducting schedule, he is founder and artistic director of Elmwood Concert Singers and is artistic director and conductor of Capital Singers of Trenton.</p>
+                <p>In recent seasons he has conducted the Vaughan Williams Mass in G Minor, Faure Requiem in D Minor, Vivaldi Gloria, Ellington Sacred Concert, Moore Scenes from the Life of a Martyr, Powell The Cry of Jeremiah, Forrest Requiem for the Living and Brahms Ein deutsches Requiem. Ensembles under his direction have been featured in radio broadcast at Princeton Theological Seminary, performed at the historic Playhouse at Rodney Square and members of his ensembles at Carnegie Hall and at the Centennial Convention of the National Association of Negro Musicians, Inc. in Chicago, Illinois. Last season, he led Capital Singers of Trenton in performances of Handel’s Messiah, Dove’s The Passing of the Year and a commissioned work by Richard M. Loatman to commemorate the ensemble’s fifteenth anniversary. In addition, the Westminster Jubilee Singers performed at the New Jersey Music Education Conference in addition to performances locally and in Wilmington, Delaware as part of the Bent But Not Broken Choral Festival.</p>
+                <p>As a clinician, Professor Brown has headlined the Voices United Choir Festival for the New Jersey chapter of the American Choral Directors Association and the Harlem Classical Music Festival. He has presented for the National Conference of the American Choral Directors Association, New Jersey Education Association and music for Virginia, Georgia, Illinois and Maryland Music Education Association Conferences. He has lectured at the University of Miami, Millikin University, Kutztoen University and The College of New Jersey. He was previously Guest Artist at Pennsbury High School, guest conductor of the Morris Area High School Honor Choir and lectured for the Middlesex County Arts Institute and the National Collegiate Choral Organization. </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+<!-- PAGE BREAK --- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+<!-- PAGE BREAK --- PAGE BREAK -->
+
+<x-program.page-header />
+
+<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 1rem;">
+
+    <div style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black; background-color: rgba(0,0,0,0.1); padding-left: 0.5rem; margin-bottom: 0.5rem;">
+        Performance Adjudictors
+    </div>
+    {{-- VINROY BROWN --}}
+    <table style="padding-bottom: 1rem; border-bottom: 1px solid darkgrey; margin-bottom: 1rem;">
+        <tbody>
+        <tr>
+            <td rowspan="2" style="vertical-align: top; width: 20%;">
+                <img src="https://njacda.com/wp-content/uploads/2022/10/brownVinroy_2.jpg" width="100px">
+            </td>
+            <td style="font-size: 1.5rem; font-weight: bold;">
+                Vinroy Brown (con't)
             </td>
         </tr>
         <tr>
             <td style="text-align: justify;">
                 <p style="margin-top: -1rem;">
-                    Director of Choral Activities. Conductor of MSU choirs: curricular ensembles i) Chorale (mixed voice symphonic choir) and ii) University Singers (SATB elective flagship choir); extracurricular ensembles iii) Vocal Accord (SATB) and iv) Prima Voce (SSAA). Studio/private choral conducting instruction.
-                </p>
-
-                <p>Licensed Body Mapping Educator (LMBE) and specialist in somatic education applications for enhancing musicians' technical and musical facility. Passionate musicians' health advocate.</p>
+                    This academic year he will work with the University of Delaware Chorale, lecture at Yale and Princeton and conduct the CJMEA Region II Intermediate Treble Chorus.</p>
+                    <p>A noted baritone, Brown has sung on concert and opera stages across the country, as both soloist and chorister. Among his most notable engagements were the filming two PBS specials with the Vienna Chamber Orchestra and New York Philharmonic. He made his New York Lyric Opera Theatre debut at Carnegie Hall performing scenes from Massenet’s Manon and Mascagni’s Cavalleria Rusticana. The world premiere of David Lang’s The Mile-Long Opera: a biography of 7 o’clock marked his debut with the Mile-Long Opera Company and workshopped OMAR, a new opera on the life of Omar Ibn Said composed by Rhiannon Giddens with Spoleto Festival USA, and served as Chorus Conductor for the its premiere performances. He will serve as Cover and Chorus Conductor for the North Carolina premiere of OMAR in 2023.</p>
+                    <p>Professor Brown holds membership in the National Association for Music Education, National Alliance of Black School Educators, American Choral Directors Association, International Society for Black Musicians, National Collegiate Choral Organization and the National Association of Negro Musicians, Inc., for which he is Eastern Region Director and Chief Editor of EMERGENCE: Research & Performance Topics in Black Music, a scholarly publication which will be released in 2022. Brown is also a proud member of Alpha Phi Alpha Fraternity, Inc. and Phi Mu Alpha Sinfonia Fraternity, Inc. He holds the Master of Arts in Practical Theology degree from Regent University, and Bachelor of Music degrees in Sacred Music and Music Education from Westminster Choir College.</p>
             </td>
         </tr>
         </tbody>
@@ -66,32 +113,72 @@
         Performance Adjudictors
     </div>
 
-    {{-- DEBORAH MELLO --}}
+    {{-- HANNAH CARR --}}
     <table style="padding-bottom: 1rem; margin-bottom: 1rem;">
         <tbody>
         <tr>
             <td rowspan="2" style="vertical-align: top; width: 20%;">
-                <img src="https://njacda.com/wp-content/uploads/2022/05/DMelloColorHeadshot_square.png" width="100px">
+                <img src="https://njacda.com/wp-content/uploads/2022/10/carrHannah-180x180.jpg" width="100px">
             </td>
             <td style="font-size: 1.5rem; font-weight: bold;">
-                Deborah Mello
+                Hannah Carr
             </td>
         </tr>
         <tr>
             <td style="text-align: justify;">
                 <p style="margin-top: -1rem;">
-                    Founding and Artistic Director of The Children’s Chorus of Sussex County, Deborah Mello is the
-                    recipient of the Master Teacher Award from the New Jersey Music Educators Association, The New
-                    Jersey Governor’s Award for Arts in Education, and the New Jersey Symphony Orchestra Master Teacher
-                    Collaborative Award, sponsored by the Geraldine R. Dodge Foundation.She is former National Chair of the American Choral Director’s Association National Committee on Children & Youth Choirs and has served on state and divisional choral music boards for the American Choral Directors Association and the National Association for Music Education. Debbie has conducted honor choirs and presented numerous workshops on the child voice throughout the United States.
-                    As an Artist/Teacher for the Choral Music Education courses, founded by Doreen Rao, Deborah has taught choral conductors in the United States as well as throughout the British Isles and Sweden.
-                    Deborah and her husband Joseph were inaugural recipients of the Distinguished Music Educator Award from Yale University. Composer, Jill Gallina and Debbie collaborated on 2 songbook collections for young singers Songs America Likes to Sing and Where the Boys Are (songs that boys love to sing) that are geared for school, church and community choral programs. She has written numerous articles published in Tempo, the Music Education Journal and the Choral Journal. A music educator in the New Jersey public school system for 32 years Deborah taught choral music to students in pre-school through seniors in high school. Deborah is currently on the choral music education faculty at the John J. Cali School of Music at Montclair State University. A member of the Senior Choir, Christ Church, Newton, she also serves as Director of the Junior Choir and soprano soloist.
+                    Originally from Ireland. Hannah Carr is a DMA candidate in conducting at Rutgers Mason Gross School of Music, where she studies with Patrick Gardner, teaches undergraduate conducting and is director of The University Choir, a 100-voice mixed ensemble. She holds an MM in conducting from Yale University's Institute of Sacred Music, an Advanced Diploma from the Liszt Academy in Hungary and a BA in composition from Trinity College Dublin. At Yale, Hannah conducted The Yale Repertory Chorus, Recital Chorus, Yale Camerata and won The Director's Prize, awarded by The Institute of Sacred Music. Hannah has worked with youth choirs of all ages as choral director at Beaver Country Day School in Boston, The Dalton School, Diller-Quaille School of Music and Chapin School in New York. She has been invited to various international masterclasses, and was a semi-finalist in the 2017 ACDA National Graduate Conductor Competition in Minneapolis. Before moving to New Jersey, Hannah served as music director to the University Church at Yale in New Haven, CT and Stratford Street United Church in Boston, MA.
                 </p>
 
             </td>
         </tr>
         </tbody>
     </table>
+</section>
+
+<!-- PAGE BREAK --- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+<!-- PAGE BREAK --- PAGE BREAK -->
+
+<x-program.page-header />
+
+<section style="display: flex; flex-direction: column; border-bottom: 1px solid black;padding-bottom: 0.5rem; margin-bottom: 1rem;">
+
+    <div style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black; background-color: rgba(0,0,0,0.1); padding-left: 0.5rem; margin-bottom: 0.5rem;">
+        Performance Adjudictors
+    </div>
+
+    {{-- PAUL HEAD --}}
+    <table style="padding-bottom: 1rem; margin-bottom: 1rem;">
+        <tbody>
+        <tr>
+            <td rowspan="2" style="vertical-align: top; width: 20%;">
+                <img src="https://njacda.com/wp-content/uploads/2022/10/headPaul_2-180x180.jpg" width="100px">
+            </td>
+            <td style="font-size: 1.5rem; font-weight: bold;">
+                Paul Head
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: justify;">
+                <p style="margin-top: -1rem;">
+                    As director of choral studies at the University of Delaware, Paul D. Head directs the internationally renowned University of Delaware Chorale, the community-based Schola Cantorum and the UD Symphonic Chorus, which performs frequently with the Delaware Symphony Orchestra. Dr. Head is a native Californian where he taught in the public schools for eight years before completing his Master of Music in Conducting and Music Education at Westminster Choir College of Rider University and a Doctor of Musical Arts in Conducting from the University of Oklahoma. His choirs have toured extensively throughout the United States, Canada, Asia and Europe and have received consistently high acclaim for their musical artistry. Under his direction, the UD Chorale has taken first- and second-place honors at competitive choral festivals in Estonia, Spain and Hungary.
+                </p>
+                <p>
+                    Dr. Head maintains an active presence as conductor and guest clinician, having conducted All-State choirs in 18 states in addition to professional presentations and workshops throughout the United States. His choirs have made frequent appearances on American Choral Directors Association (ACDA) national (2005, 2013) and regional (2002, 2008, 2010) conventions. As an active researcher and pedagogue, he is published in several books and publications, is the co-editor of Case Studies in Music Education (GiA; 2005) and a contributing author in The School Choral Program (GIA; 2008). He is also the co-editor of the middle school choral volume of Teaching Music Through Performance (GIA; 2011), as well as the conductor for the accompanying CDs, recorded by members of the UD Chorale, and he is the co-editor of the Handbook for Choral Music Education, a compendium currently in the works for publication next year by Oxford University Press. Currently, Dr. Head is on sabbatical in France writing a book on the pedagogy of rehearsal as related to score preparation.
+                </p>
+                <p>
+                    In 2014, Dr. Head launched the University of Delaware Choral Academy Summer Symposium, in Provence, France. The Summer Symposium is a unique program for students (from the University of Delaware and elsewhere) and young professionals who are looking for a musically challenging and life-affirming experienc.e
+                </p>
+                <p>
+                    As an active member of the ACDA, Dr. Head has held various leadership positions at state, regional and national levels. He also holds membership in Phi Mu Alpha, and Pi Kappa Lambda (the National Music Honor Society). He currently resides in southeastern Pennsylvania with his wife of 25 years, and he is the father of three grown children.
+                </p>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 </section>
 
 <!-- PAGE BREAK --- PAGE BREAK -->

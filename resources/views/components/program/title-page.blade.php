@@ -13,13 +13,17 @@
     <div style="margin-top: 4rem; margin-bottom: 2rem;">
         <table style="width: 100%;">
             <tr>
+                <td style="width: 50%; text-align:center; font-weight: bold; font-size: 1.5rem;">
+                    May 23, 2023<br />
+                    Rowan University
+                </td>
                 <td style="width: 50%; text-align: center; font-weight: bold; font-size: 1.5rem;">
-                    May 24, 26, 27, 2022<br />
+                    May 24, 25, 2023<br />
                     Rutgers University
                 </td>
                 <td style="width: 50%; text-align:center; font-weight: bold; font-size: 1.5rem;">
-                    May 25, 2022<br />
-                    Rowan University
+                    May 26, 2023<br />
+                    Montclair University
                 </td>
             </tr>
         </table>
@@ -31,7 +35,9 @@
     <header style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">
         Co-sponsored by:
     </header>
-    <table id="cosponsors-table" style="text-align: center; font-size: 1.3rem;">
+
+
+    <table class="cosponsors-table" style="text-align: center; font-size: 1.3rem; width: 100%; margin-bottom: 2rem;">
         <tbody>
         <tr>
             <td style="width: 33%; vertical-align: top;">
@@ -57,11 +63,25 @@
                     Mr. Michael McCormick, Coordinator
                 </div>
             </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="cosponsors-table" style="text-align: center; font-size: 1.3rem; width: 100%;">
+        <tbody>
+        <tr>
             <td style="vertical-align: top;">
                 <header style="font-weight: bold;">
                     Rowan University
                 </header>
                 <div>Dr. Chris Thomas, Host</div>
+            </td>
+            <td style="vertical-align: top;">
+                <header style="font-weight: bold;">
+                    Montclair University
+                </header>
+                <div>Dr. Heather Buchanan, Host</div>
             </td>
         </tr>
         </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eventmanagement\Scheduling;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Ensemble;
 use App\Models\EnsembleVenueAssignment;
 use App\Models\Timeslot;
@@ -13,17 +14,21 @@ class TimeslotController extends Controller
 {
     public function index()
     {
+        $eventId = CurrentEvent::currentEvent()->id;
+
         return view('eventmanagement.scheduling.timeslots.index',
             [
-                'assignments' => EnsembleVenueAssignment::all(),
-                'ensembles' => Ensemble::all()->sortBy(['school.name','name']),
+                'assignments' => EnsembleVenueAssignment::where('event_id', $eventId)->get(),
+                'ensembles' => Ensemble::where('event_id')->get()->sortBy(['school.name','name']),
                 'timeslots' => Timeslot::where('duration',20)->orderBy('order_by')->get(),
-                'venues' => Venue::all()->sortBy('start'),
+                'venues' => Venue::where('event_id',$eventId)->get()->sortBy('start'),
             ]);
     }
 
     public function update(Request $request)
     {
+        $eventId = CurrentEvent::currentEvent()->id;
+
         $inputs = $request->validate([
             'ensemble_id' => ['required', 'numeric','exists:ensembles,id'],
             'venue_id' => ['required','numeric','exists:venues,id'],
@@ -34,6 +39,7 @@ class TimeslotController extends Controller
             [
                 'ensemble_id' => $inputs['ensemble_id'],
                 'venue_id' => $inputs['venue_id'],
+                'event_id' => $eventId,
             ],
             [
                 'timeslot_id' => $inputs['timeslot_id'],

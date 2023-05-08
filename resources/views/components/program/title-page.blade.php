@@ -36,7 +36,7 @@
         Co-sponsored by:
     </header>
 
-
+{{-- CHANGED TO TWO-TABLE Co-Sponsors TABLES --}}
     <table class="cosponsors-table" style="text-align: center; font-size: 1.3rem; width: 100%; margin-bottom: 2rem;">
         <tbody>
         <tr>

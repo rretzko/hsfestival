@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eventmanagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentEvent;
 use App\Models\Event;
 use App\Models\Payment;
 use App\Models\Paymenttype;
@@ -21,7 +22,9 @@ class PaymentController extends Controller
     {
         return view('eventmanagement.payments.index',
         [
-            'payments' => Payment::where('event_id', Event::currentEvent()->id)->orderByDesc('payment_date')->get(),
+            'payments' => Payment::where('event_id', CurrentEvent::currentEvent()->id)
+                ->orderByDesc('payment_date')
+                ->get(),
             'paymenttypes' => Paymenttype::all(),
             'users' => User::excludeBots(),
         ]);

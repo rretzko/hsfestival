@@ -9,13 +9,16 @@ class EnsembleVenueAssignment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ensemble_id','timeslot_id', 'venue_id'];
+    protected $fillable = ['ensemble_id','event_id', 'timeslot_id', 'venue_id'];
 
     protected $with = ['ensemble','timeslot', 'venue'];
 
     public function ensemble()
     {
-        return $this->belongsTo(Ensemble::class);
+        $currentEventId = CurrentEvent::currentEvent()->id;
+
+        return $this->belongsTo(Ensemble::class)
+            ->where('event_id', $currentEventId);
     }
 
     public function timeslot()

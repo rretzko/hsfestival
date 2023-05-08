@@ -173,7 +173,10 @@ class Ensemble extends Model
 
     public function useroptionsvenues()
     {
+        $eventId = CurrentEvent::currentEvent()->id;
+
         return Useroptionsvenues::where('user_id', $this->user_id)
+            ->where('event_id', $eventId)
             ->orderBy('preference')
             ->get();
     }

@@ -34,11 +34,11 @@
                                     @csrf
 
                                     <div class="input-group">
-                                        <label for="school_id">School</label>
+                                        <label for="school_id">School ({{ $schools->count() }})</label>
                                         <select name="school_id" autofocus>
                                             <option value="0">Select</option>
                                             @foreach($schools AS $school)
-                                                <option value="{{$school->id }}">{{$school->name }}</option>
+                                                <option value="{{$school->id }}">{{$school->name . ' (' . $school->id . ')' }}</option>
                                             @endforeach
                                         </select>
                                         @error('school_id')
@@ -47,11 +47,12 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <label for="ensemble_id">Ensemble</label>
+                                        <label for="ensemble_id">Ensemble ({{ $ensembles->count() }})</label>
                                         <select name="ensemble_id">
                                             <option value="0">Select</option>
                                             @foreach($ensembles AS $ensemble)
-                                                <option value="{{$ensemble->id }}">{{$ensemble->name }} ({{ $ensemble->school->name }})</option>
+                                                <option value="{{$ensemble->id }}">
+                                                    {{$ensemble->name }} ({{ $ensemble['school']->name }})</option>
                                             @endforeach
                                         </select>
                                         @error('ensemble_id')

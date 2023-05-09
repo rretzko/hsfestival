@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Recordingengineer;
 use App\Http\Controllers\Controller;
 use App\Models\Adjudication;
 use App\Models\Adjudicator;
+use App\Models\CurrentEvent;
 use App\Models\Ensemble;
 use App\Models\Event;
 use App\Models\School;
@@ -29,10 +30,12 @@ class RecordingengineerController extends Controller
      */
     public function create()
     {
-        $adjudications = Adjudication::where('event_id',Event::currentEvent()->id)->get();
-        $adjudicators = Adjudicator::orderBy('last')->orderBy('first')->get();
-        $ensembles = Ensemble::orderBy('name')->get();
-        $schools = School::orderBy('name')->get();
+        $event = CurrentEvent::currentEvent();
+
+        $adjudications = Adjudication::where('event_id',$event->id)->get();
+        $adjudicators = CurrentEvent::adjudicators();//Adjudicator::orderBy('last')->orderBy('first')->get();
+        $ensembles = CurrentEvent::ensembles();
+        $schools = CurrentEvent::schools();
 
         return view('recordingengineer.create',
             compact('adjudications', 'adjudicators', 'ensembles', 'schools'));

@@ -31,8 +31,8 @@ class CurrentEvent extends Model
 
         return Ensemble::with('school')
             ->where('event_id', $eventId)
-            ->orderBy('name')
-            ->get();
+            ->get()
+            ->sortBy(['school.name','name']);
     }
 
     public static function isRegistrationOpen() : bool

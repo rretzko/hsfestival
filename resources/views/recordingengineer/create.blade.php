@@ -52,7 +52,7 @@
                                             <option value="0">Select</option>
                                             @foreach($ensembles AS $ensemble)
                                                 <option value="{{$ensemble->id }}">
-                                                    {{$ensemble->name }} ({{ $ensemble['school']->name }})</option>
+                                                    {{ $ensemble['school']->name }}: {{$ensemble->name }} </option>
                                             @endforeach
                                         </select>
                                         @error('ensemble_id')

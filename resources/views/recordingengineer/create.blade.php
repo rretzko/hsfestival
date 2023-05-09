@@ -38,7 +38,7 @@
                                         <select name="school_id" autofocus>
                                             <option value="0">Select</option>
                                             @foreach($schools AS $school)
-                                                <option value="{{$school->id }}">{{$school->name . ' (' . $school->id . ')' }}</option>
+                                                <option value="{{$school->id }}">{{ $school->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('school_id')

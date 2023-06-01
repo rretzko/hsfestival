@@ -40,7 +40,6 @@
                 </div>
             </div>
 
-
             <div class="z-10">
                 @foreach($venues AS $venue)
                     <!-- This example requires Tailwind CSS v2.0+ -->

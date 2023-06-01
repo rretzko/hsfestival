@@ -19,7 +19,7 @@ class TimeslotController extends Controller
         return view('eventmanagement.scheduling.timeslots.index',
             [
                 'assignments' => EnsembleVenueAssignment::where('event_id', $eventId)->get(),
-                'ensembles' => Ensemble::where('event_id')->get()->sortBy(['school.name','name']),
+                'ensembles' => Ensemble::where('event_id',$eventId)->get()->sortBy(['school.name','name']),
                 'timeslots' => Timeslot::where('duration',20)->orderBy('order_by')->get(),
                 'venues' => Venue::where('event_id',$eventId)->get()->sortBy('start'),
             ]);

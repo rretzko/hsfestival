@@ -15,7 +15,7 @@ class ProgramController extends Controller
         $event = CurrentEvent::currentEvent();
         $ensemble = new Ensemble;
         $ensembles = $ensemble->performanceOrder($event);
-
+dd($ensemble->performanceOrder($event)->where('id',31));
         $pdf = PDF::loadView('eventmanagement.pdfs.program',
             compact('event','ensembles'));
 

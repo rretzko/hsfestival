@@ -78,7 +78,7 @@ class RecordingengineerController extends Controller
 
             \App\Models\Adjudication::create(
                 [
-                    'event_id' => Event::currentEvent()->id,
+                    'event_id' => CurrentEvent::currentEvent()->id,
                     'school_id' => $inputs['school_id'],
                     'ensemble_id' => $inputs['ensemble_id'],
                     'adjudicator_id' => $inputs['adjudicator_id'],

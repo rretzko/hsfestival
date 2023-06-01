@@ -295,7 +295,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{-- ROWS --}}
+                                            {{-- ROWS --}}{{ dd($ensemble) }}
                                             @forelse($ensemble->repertoire AS $rep)
                                                 <tr class="@if($loop->odd) bg-gray-100 @else bg-white @endif">
                                                     <td class="text-center text-sm">
